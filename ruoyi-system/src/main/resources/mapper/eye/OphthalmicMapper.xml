@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.eye.mapper.OphthalmicMapper">
+    
+    <resultMap type="Ophthalmic" id="OphthalmicResult">
+        <result property="studentId"    column="student_ID"    />
+        <result property="diagnosisTime"    column="diagnosis_time"    />
+        <result property="sightLeftNoglasses"    column="sight_left_noglasses"    />
+        <result property="sightRightNoglasses"    column="sight_right_noglasses"    />
+        <result property="sightLeftWithglasses"    column="sight_left_withglasses"    />
+        <result property="sightRightWithglasses"    column="sight_right_withglasses"    />
+        <result property="eyeIllness"    column="eye_illness"    />
+        <result property="colorVisionRed"    column="color_vision_red"    />
+        <result property="colorVisionGreen"    column="color_vision_green"    />
+        <result property="colorVisionPurple"    column="color_vision_purple"    />
+        <result property="colorVisionBlue"    column="color_vision_blue"    />
+        <result property="colorVisionYellow"    column="color_vision_yellow"    />
+        <result property="doctorOpinion"    column="doctor_opinion"    />
+        <result property="doctorId"    column="doctor_ID"    />
+        <result property="doctorAudit"    column="doctor_audit"    />
+        <result property="leaderAudit"    column="leader_audit"    />
+        <result property="submitTime"    column="submit_time"    />
+    </resultMap>
+
+    <sql id="selectOphthalmicVo">
+        select student_ID, diagnosis_time, sight_left_noglasses, sight_right_noglasses, sight_left_withglasses, sight_right_withglasses, eye_illness, color_vision_red, color_vision_green, color_vision_purple, color_vision_blue, color_vision_yellow, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from ophthalmic
+    </sql>
+
+    <select id="selectOphthalmicList" parameterType="Ophthalmic" resultMap="OphthalmicResult">
+        <include refid="selectOphthalmicVo"/>
+        <where>  
+            <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
+            <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
+            <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
+            <if test="submitTime != null "> and submit_time = #{submitTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectOphthalmicById" parameterType="String" resultMap="OphthalmicResult">
+        <include refid="selectOphthalmicVo"/>
+        where student_ID = #{studentId}
+    </select>
+        
+    <insert id="insertOphthalmic" parameterType="Ophthalmic">
+        insert into ophthalmic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_ID,</if>
+            <if test="diagnosisTime != null">diagnosis_time,</if>
+            <if test="sightLeftNoglasses != null">sight_left_noglasses,</if>
+            <if test="sightRightNoglasses != null">sight_right_noglasses,</if>
+            <if test="sightLeftWithglasses != null">sight_left_withglasses,</if>
+            <if test="sightRightWithglasses != null">sight_right_withglasses,</if>
+            <if test="eyeIllness != null">eye_illness,</if>
+            <if test="colorVisionRed != null">color_vision_red,</if>
+            <if test="colorVisionGreen != null">color_vision_green,</if>
+            <if test="colorVisionPurple != null">color_vision_purple,</if>
+            <if test="colorVisionBlue != null">color_vision_blue,</if>
+            <if test="colorVisionYellow != null">color_vision_yellow,</if>
+            <if test="doctorOpinion != null">doctor_opinion,</if>
+            <if test="doctorId != null">doctor_ID,</if>
+            <if test="doctorAudit != null">doctor_audit,</if>
+            <if test="leaderAudit != null">leader_audit,</if>
+            <if test="submitTime != null">submit_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="diagnosisTime != null">#{diagnosisTime},</if>
+            <if test="sightLeftNoglasses != null">#{sightLeftNoglasses},</if>
+            <if test="sightRightNoglasses != null">#{sightRightNoglasses},</if>
+            <if test="sightLeftWithglasses != null">#{sightLeftWithglasses},</if>
+            <if test="sightRightWithglasses != null">#{sightRightWithglasses},</if>
+            <if test="eyeIllness != null">#{eyeIllness},</if>
+            <if test="colorVisionRed != null">#{colorVisionRed},</if>
+            <if test="colorVisionGreen != null">#{colorVisionGreen},</if>
+            <if test="colorVisionPurple != null">#{colorVisionPurple},</if>
+            <if test="colorVisionBlue != null">#{colorVisionBlue},</if>
+            <if test="colorVisionYellow != null">#{colorVisionYellow},</if>
+            <if test="doctorOpinion != null">#{doctorOpinion},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="doctorAudit != null">#{doctorAudit},</if>
+            <if test="leaderAudit != null">#{leaderAudit},</if>
+            <if test="submitTime != null">#{submitTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOphthalmic" parameterType="Ophthalmic">
+        update ophthalmic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
+            <if test="sightLeftNoglasses != null">sight_left_noglasses = #{sightLeftNoglasses},</if>
+            <if test="sightRightNoglasses != null">sight_right_noglasses = #{sightRightNoglasses},</if>
+            <if test="sightLeftWithglasses != null">sight_left_withglasses = #{sightLeftWithglasses},</if>
+            <if test="sightRightWithglasses != null">sight_right_withglasses = #{sightRightWithglasses},</if>
+            <if test="eyeIllness != null">eye_illness = #{eyeIllness},</if>
+            <if test="colorVisionRed != null">color_vision_red = #{colorVisionRed},</if>
+            <if test="colorVisionGreen != null">color_vision_green = #{colorVisionGreen},</if>
+            <if test="colorVisionPurple != null">color_vision_purple = #{colorVisionPurple},</if>
+            <if test="colorVisionBlue != null">color_vision_blue = #{colorVisionBlue},</if>
+            <if test="colorVisionYellow != null">color_vision_yellow = #{colorVisionYellow},</if>
+            <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
+            <if test="doctorId != null">doctor_ID = #{doctorId},</if>
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+            <if test="submitTime != null">submit_time = #{submitTime},</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
+
+    <delete id="deleteOphthalmicById" parameterType="String">
+        delete from ophthalmic where student_ID = #{studentId}
+    </delete>
+
+    <delete id="deleteOphthalmicByIds" parameterType="String">
+        delete from ophthalmic where student_ID in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>

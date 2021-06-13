@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.exam.mapper.DoctorMapper">
+    
+    <resultMap type="Doctor" id="DoctorResult">
+        <result property="id"    column="ID"    />
+        <result property="department"    column="department"    />
+        <result property="name"    column="name"    />
+        <result property="userAccount"    column="user_account"    />
+        <result property="password"    column="password"    />
+        <result property="firstSignIn"    column="first_sign_in"    />
+    </resultMap>
+
+    <sql id="selectDoctorVo">
+        select ID, department, name, user_account, password, first_sign_in from doctor
+    </sql>
+
+    <select id="selectDoctorList" parameterType="Doctor" resultMap="DoctorResult">
+        <include refid="selectDoctorVo"/>
+        <where>  
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userAccount != null  and userAccount != ''"> and user_account = #{userAccount}</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="firstSignIn != null "> and first_sign_in = #{firstSignIn}</if>
+        </where>
+    </select>
+    
+    <select id="selectDoctorById" parameterType="String" resultMap="DoctorResult">
+        <include refid="selectDoctorVo"/>
+        where ID = #{id}
+    </select>
+        
+    <insert id="insertDoctor" parameterType="Doctor">
+        insert into doctor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="department != null">department,</if>
+            <if test="name != null">name,</if>
+            <if test="userAccount != null">user_account,</if>
+            <if test="password != null">password,</if>
+            <if test="firstSignIn != null">first_sign_in,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="department != null">#{department},</if>
+            <if test="name != null">#{name},</if>
+            <if test="userAccount != null">#{userAccount},</if>
+            <if test="password != null">#{password},</if>
+            <if test="firstSignIn != null">#{firstSignIn},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDoctor" parameterType="Doctor">
+        update doctor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="department != null">department = #{department},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="userAccount != null">user_account = #{userAccount},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="firstSignIn != null">first_sign_in = #{firstSignIn},</if>
+        </trim>
+        where ID = #{id}
+    </update>
+
+    <delete id="deleteDoctorById" parameterType="String">
+        delete from doctor where ID = #{id}
+    </delete>
+
+    <delete id="deleteDoctorByIds" parameterType="String">
+        delete from doctor where ID in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.health.mapper.PhysicalExaminationFormMapper">
+    
+    <resultMap type="PhysicalExaminationForm" id="PhysicalExaminationFormResult">
+        <result property="studentId"    column="student_ID"    />
+        <result property="inspectorTime"    column="inspector_time"    />
+        <result property="conclusions"    column="conclusions"    />
+        <result property="doctorAudit"    column="doctor_audit"    />
+        <result property="doctorId"    column="doctor_ID"    />
+        <result property="submitTimeDoctor"    column="submit_time_doctor"    />
+        <result property="hospitalOpinion"    column="hospital_opinion"    />
+        <result property="leaderAudit"    column="leader_audit"    />
+        <result property="leaderId"    column="leader_ID"    />
+        <result property="submitTimeLeader"    column="submit_time_leader"    />
+    </resultMap>
+
+    <sql id="selectPhysicalExaminationFormVo">
+        select student_ID, inspector_time, conclusions, doctor_audit, doctor_ID, submit_time_doctor, hospital_opinion, leader_audit, leader_ID, submit_time_leader from physical_examination_form
+    </sql>
+
+    <select id="selectPhysicalExaminationFormList" parameterType="PhysicalExaminationForm" resultMap="PhysicalExaminationFormResult">
+        <include refid="selectPhysicalExaminationFormVo"/>
+        <where>  
+            <if test="doctorId != null  and doctorId != ''"> and doctor_ID = #{doctorId}</if>
+            <if test="submitTimeDoctor != null "> and submit_time_doctor = #{submitTimeDoctor}</if>
+            <if test="leaderId != null  and leaderId != ''"> and leader_ID = #{leaderId}</if>
+            <if test="submitTimeLeader != null "> and submit_time_leader = #{submitTimeLeader}</if>
+        </where>
+    </select>
+    
+    <select id="selectPhysicalExaminationFormById" parameterType="String" resultMap="PhysicalExaminationFormResult">
+        <include refid="selectPhysicalExaminationFormVo"/>
+        where student_ID = #{studentId}
+    </select>
+        
+    <insert id="insertPhysicalExaminationForm" parameterType="PhysicalExaminationForm">
+        insert into physical_examination_form
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_ID,</if>
+            <if test="inspectorTime != null">inspector_time,</if>
+            <if test="conclusions != null">conclusions,</if>
+            <if test="doctorAudit != null">doctor_audit,</if>
+            <if test="doctorId != null">doctor_ID,</if>
+            <if test="submitTimeDoctor != null">submit_time_doctor,</if>
+            <if test="hospitalOpinion != null">hospital_opinion,</if>
+            <if test="leaderAudit != null">leader_audit,</if>
+            <if test="leaderId != null">leader_ID,</if>
+            <if test="submitTimeLeader != null">submit_time_leader,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="inspectorTime != null">#{inspectorTime},</if>
+            <if test="conclusions != null">#{conclusions},</if>
+            <if test="doctorAudit != null">#{doctorAudit},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="submitTimeDoctor != null">#{submitTimeDoctor},</if>
+            <if test="hospitalOpinion != null">#{hospitalOpinion},</if>
+            <if test="leaderAudit != null">#{leaderAudit},</if>
+            <if test="leaderId != null">#{leaderId},</if>
+            <if test="submitTimeLeader != null">#{submitTimeLeader},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePhysicalExaminationForm" parameterType="PhysicalExaminationForm">
+        update physical_examination_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="inspectorTime != null">inspector_time = #{inspectorTime},</if>
+            <if test="conclusions != null">conclusions = #{conclusions},</if>
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+            <if test="doctorId != null">doctor_ID = #{doctorId},</if>
+            <if test="submitTimeDoctor != null">submit_time_doctor = #{submitTimeDoctor},</if>
+            <if test="hospitalOpinion != null">hospital_opinion = #{hospitalOpinion},</if>
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+            <if test="leaderId != null">leader_ID = #{leaderId},</if>
+            <if test="submitTimeLeader != null">submit_time_leader = #{submitTimeLeader},</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
+
+    <delete id="deletePhysicalExaminationFormById" parameterType="String">
+        delete from physical_examination_form where student_ID = #{studentId}
+    </delete>
+
+    <delete id="deletePhysicalExaminationFormByIds" parameterType="String">
+        delete from physical_examination_form where student_ID in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>

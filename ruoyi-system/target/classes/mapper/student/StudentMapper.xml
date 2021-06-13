@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.student.mapper.StudentMapper">
+    
+    <resultMap type="Student" id="StudentResult">
+        <result property="id"    column="ID"    />
+        <result property="college"    column="college"    />
+        <result property="major"    column="major"    />
+        <result property="classroom"    column="classroom"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="name"    column="name"    />
+        <result property="gender"    column="gender"    />
+        <result property="birthDate"    column="birth_date"    />
+        <result property="age"    column="age"    />
+        <result property="degreeOfEducation"    column="degree_of_education"    />
+        <result property="nation"    column="nation"    />
+        <result property="occupation"    column="occupation"    />
+        <result property="nativePlace"    column="native_place"    />
+        <result property="address"    column="address"    />
+        <result property="draduationSchoolOrWorkUnit"    column="draduation_school_or_work_unit"    />
+        <result property="pastMedicalHistory"    column="past_medical_history"    />
+    </resultMap>
+
+    <sql id="selectStudentVo">
+        select ID, college, major, classroom, student_id, name, gender, birth_date, age, degree_of_education, nation, occupation, native_place, address, draduation_school_or_work_unit, past_medical_history from student
+    </sql>
+
+    <select id="selectStudentList" parameterType="Student" resultMap="StudentResult">
+        <include refid="selectStudentVo"/>
+        <where>  
+            <if test="college != null  and college != ''"> and college = #{college}</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="classroom != null  and classroom != ''"> and classroom = #{classroom}</if>
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="birthDate != null "> and birth_date = #{birthDate}</if>
+            <if test="age != null "> and age = #{age}</if>
+            <if test="degreeOfEducation != null  and degreeOfEducation != ''"> and degree_of_education = #{degreeOfEducation}</if>
+            <if test="nation != null  and nation != ''"> and nation = #{nation}</if>
+            <if test="occupation != null  and occupation != ''"> and occupation = #{occupation}</if>
+            <if test="nativePlace != null  and nativePlace != ''"> and native_place = #{nativePlace}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="draduationSchoolOrWorkUnit != null  and draduationSchoolOrWorkUnit != ''"> and draduation_school_or_work_unit = #{draduationSchoolOrWorkUnit}</if>
+            <if test="pastMedicalHistory != null  and pastMedicalHistory != ''"> and past_medical_history = #{pastMedicalHistory}</if>
+        </where>
+    </select>
+    
+    <select id="selectStudentById" parameterType="String" resultMap="StudentResult">
+        <include refid="selectStudentVo"/>
+        where ID = #{id}
+    </select>
+        
+    <insert id="insertStudent" parameterType="Student">
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="college != null">college,</if>
+            <if test="major != null">major,</if>
+            <if test="classroom != null">classroom,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="name != null">name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="birthDate != null">birth_date,</if>
+            <if test="age != null">age,</if>
+            <if test="degreeOfEducation != null">degree_of_education,</if>
+            <if test="nation != null">nation,</if>
+            <if test="occupation != null">occupation,</if>
+            <if test="nativePlace != null">native_place,</if>
+            <if test="address != null">address,</if>
+            <if test="draduationSchoolOrWorkUnit != null">draduation_school_or_work_unit,</if>
+            <if test="pastMedicalHistory != null">past_medical_history,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="college != null">#{college},</if>
+            <if test="major != null">#{major},</if>
+            <if test="classroom != null">#{classroom},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="birthDate != null">#{birthDate},</if>
+            <if test="age != null">#{age},</if>
+            <if test="degreeOfEducation != null">#{degreeOfEducation},</if>
+            <if test="nation != null">#{nation},</if>
+            <if test="occupation != null">#{occupation},</if>
+            <if test="nativePlace != null">#{nativePlace},</if>
+            <if test="address != null">#{address},</if>
+            <if test="draduationSchoolOrWorkUnit != null">#{draduationSchoolOrWorkUnit},</if>
+            <if test="pastMedicalHistory != null">#{pastMedicalHistory},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStudent" parameterType="Student">
+        update student
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="college != null">college = #{college},</if>
+            <if test="major != null">major = #{major},</if>
+            <if test="classroom != null">classroom = #{classroom},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birthDate != null">birth_date = #{birthDate},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="degreeOfEducation != null">degree_of_education = #{degreeOfEducation},</if>
+            <if test="nation != null">nation = #{nation},</if>
+            <if test="occupation != null">occupation = #{occupation},</if>
+            <if test="nativePlace != null">native_place = #{nativePlace},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="draduationSchoolOrWorkUnit != null">draduation_school_or_work_unit = #{draduationSchoolOrWorkUnit},</if>
+            <if test="pastMedicalHistory != null">past_medical_history = #{pastMedicalHistory},</if>
+        </trim>
+        where ID = #{id}
+    </update>
+
+    <delete id="deleteStudentById" parameterType="String">
+        delete from student where ID = #{id}
+    </delete>
+
+    <delete id="deleteStudentByIds" parameterType="String">
+        delete from student where ID in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
