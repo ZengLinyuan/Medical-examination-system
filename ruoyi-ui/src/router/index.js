@@ -132,6 +132,11 @@ export const constantRoutes = [
         meta: { title: '体检详情', icon: '' }
       }
     ]
+  },
+  {
+    path: '/exam_input',
+    component: (resolve) => require(['@/views/eye/ophthalmic/exam_input'], resolve),
+    hidden: true
   }
 ]
 
