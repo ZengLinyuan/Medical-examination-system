@@ -47,7 +47,7 @@ export default {
   mounted() {},
   methods: {
     submitForm() {
-      this.$router.push({ path:"/exam_input" || "/" }).catch(()=>{});
+      this.$router.push({ path:"/ophthalmic/exam_input" || "/" }).catch(()=>{});
       this.$refs['elForm'].validate(valid => {
         if (!valid) return
         // TODO 提交表单
