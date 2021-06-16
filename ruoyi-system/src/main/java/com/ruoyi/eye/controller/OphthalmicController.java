@@ -78,7 +78,6 @@ public class OphthalmicController extends BaseController
     @PostMapping(value = "/add")
     public AjaxResult add(@RequestBody Ophthalmic ophthalmic)
     {
-        ophthalmic.setDoctorId("1");
         Date date = new Date();//获取当前日期时间
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String now = df.format(date);//以格式处理date
@@ -90,18 +89,14 @@ public class OphthalmicController extends BaseController
             e.printStackTrace();
         }
         ophthalmic.setSubmitTime(date);
-
-        Date date1 = new Date();//获取当前日期时间
-        SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-        String now1 = df1.format(date1);//以格式处理date
-        System.err.println(now1);//打印处理的结果
-        date1 = null;//清空date对象
-        try {
-            date1 = df1.parse(now1);//按格式逆转化now
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        ophthalmic.setDiagnosisTime(date1);
+        ophthalmic.setDiagnosisTime(date);
+        ophthalmic.setColorVisionRed(ophthalmic.getColorVision()[0]);
+        ophthalmic.setColorVisionGreen(ophthalmic.getColorVision()[1]);
+        ophthalmic.setColorVisionPurple(ophthalmic.getColorVision()[2]);
+        ophthalmic.setColorVisionBlue(ophthalmic.getColorVision()[3]);
+        ophthalmic.setColorVisionYellow(ophthalmic.getColorVision()[4]);
+        ophthalmic.setDoctorAudit("审核中");
+        ophthalmic.setLeaderAudit("审核中");
         return toAjax(ophthalmicService.insertOphthalmic(ophthalmic));
     }
 
@@ -127,38 +122,4 @@ public class OphthalmicController extends BaseController
         return toAjax(ophthalmicService.deleteOphthalmicByIds(studentIds));
     }
 
-    /**
-     * 新增眼科
-     */
-    @PreAuthorize("@ss.hasPermi('eye:ophthalmic:entereye')")
-    @Log(title = "眼科", businessType = BusinessType.INSERT)
-    @PostMapping(value = "/entereye")
-    public AjaxResult load(@RequestBody Ophthalmic ophthalmic)
-    {
-        ophthalmic.setDoctorId("1");
-        Date date = new Date();//获取当前日期时间
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        String now = df.format(date);//以格式处理date
-        System.err.println(now);//打印处理的结果
-        date = null;//清空date对象
-        try {
-            date = df.parse(now);//按格式逆转化now
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        ophthalmic.setSubmitTime(date);
-
-        Date date1 = new Date();//获取当前日期时间
-        SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-        String now1 = df1.format(date1);//以格式处理date
-        System.err.println(now1);//打印处理的结果
-        date1 = null;//清空date对象
-        try {
-            date1 = df1.parse(now1);//按格式逆转化now
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        ophthalmic.setDiagnosisTime(date1);
-        return toAjax(ophthalmicService.insertOphthalmic(ophthalmic));
-    }
 }

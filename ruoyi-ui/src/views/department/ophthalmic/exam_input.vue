@@ -69,7 +69,6 @@
 import {addForm, updateForm} from "@/api/health/form";
 import {commitEyeForm} from "@/api/exam/input";
 import Cookies from "js-cookie";
-import user from "@/store/modules/user";
 
 export default {
   components: {},
@@ -78,7 +77,7 @@ export default {
     return {
       formData: {
           studentId:'',
-          userId:'',
+          doctorId:'',
           sightLeftNoglasses: undefined,
           sightRightNoglasses: undefined,
           sightLeftWithglasses: undefined,
@@ -310,13 +309,12 @@ export default {
   methods: {
     submitForm() {
       this.$refs['elForm'].validate(valid => {
-        //this.formData.userId = getToken().user.userId;
         if (valid) {
-          this.$store.dispatch("GetInfo").then(() => {
-            this.formData.userId = user.state.userId;
-          }).catch(() => {
-          });
-          this.formData.studentId = Cookies.get("studentId");
+            this.$store.dispatch("GetInfo").then(() => {
+              this.formData.doctorId = user.state.userId;
+            }).catch(() => {
+            });
+            this.formData.studentId = Cookies.get("studentId");
           commitEyeForm(this.formData).then(response => {
             this.msgSuccess("录入成功");
             Cookies.remove("studentId");
