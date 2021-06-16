@@ -1,6 +1,8 @@
 package com.ruoyi.student.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.RepeatSubmit;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,6 +67,7 @@ public class StudentController extends BaseController
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") String id)
     {
+        System.out.println(id);
         return AjaxResult.success(studentService.selectStudentById(id));
     }
 
@@ -93,6 +96,7 @@ public class StudentController extends BaseController
     /**
      * 删除学生
      */
+    @RepeatSubmit
     @PreAuthorize("@ss.hasPermi('student:student:remove')")
     @Log(title = "学生", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
@@ -101,3 +105,4 @@ public class StudentController extends BaseController
         return toAjax(studentService.deleteStudentByIds(ids));
     }
 }
+

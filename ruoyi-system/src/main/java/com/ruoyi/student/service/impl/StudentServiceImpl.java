@@ -28,6 +28,7 @@ public class StudentServiceImpl implements IStudentService
     @Override
     public Student selectStudentById(String id)
     {
+        System.out.println(id);
         return studentMapper.selectStudentById(id);
     }
 
