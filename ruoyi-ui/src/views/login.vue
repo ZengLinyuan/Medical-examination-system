@@ -127,7 +127,6 @@ export default {
             Cookies.remove("password");
             Cookies.remove('rememberMe');
           }
-          //Cookies.set("userId", this.loginForm.uuid, { expires: 30 });
           this.$store.dispatch("Login", this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
           }).catch(() => {
