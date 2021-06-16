@@ -309,7 +309,7 @@ export default {
     submitForm() {
       this.$refs['elForm'].validate(valid => {
         if (valid) {
-          this.formData.studentId = Cookies.get("studentId");
+          //this.formData.studentId = Cookies.get("studentId");
           commitEyeForm(this.formData).then(response => {
             this.msgSuccess("录入成功");
             Cookies.remove("studentId");
