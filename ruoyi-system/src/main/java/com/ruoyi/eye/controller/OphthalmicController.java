@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2021-06-10
  */
 @RestController
-@RequestMapping("/eye/ophthalmic")
+@RequestMapping("/department/ophthalmic")
 public class OphthalmicController extends BaseController
 {
     @Autowired

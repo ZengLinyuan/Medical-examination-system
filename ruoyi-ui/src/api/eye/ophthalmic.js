@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询眼科列表
 export function listOphthalmic(query) {
   return request({
-    url: '/eye/ophthalmic/list',
+    url: '/department/ophthalmic/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listOphthalmic(query) {
 // 查询眼科详细
 export function getOphthalmic(studentId) {
   return request({
-    url: '/eye/ophthalmic/' + studentId,
+    url: '/department/ophthalmic/' + studentId,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getOphthalmic(studentId) {
 // 新增眼科
 export function addOphthalmic(data) {
   return request({
-    url: '/eye/ophthalmic',
+    url: '/department/ophthalmic',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addOphthalmic(data) {
 // 修改眼科
 export function updateOphthalmic(data) {
   return request({
-    url: '/eye/ophthalmic',
+    url: '/department/ophthalmic',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateOphthalmic(data) {
 // 删除眼科
 export function delOphthalmic(studentId) {
   return request({
-    url: '/eye/ophthalmic/' + studentId,
+    url: '/department/ophthalmic/' + studentId,
     method: 'delete'
   })
 }
@@ -46,7 +46,7 @@ export function delOphthalmic(studentId) {
 // 导出眼科
 export function exportOphthalmic(query) {
   return request({
-    url: '/eye/ophthalmic/export',
+    url: '/department/ophthalmic/export',
     method: 'get',
     params: query
   })

@@ -140,7 +140,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'exam_input',
-        component: (resolve) => require(['@/views/department/eye/ophthalmic/exam_input'], resolve),
+        component: (resolve) => require(['@/views/department/ophthalmic/exam_input'], resolve),
         name: 'exam_input',
         meta: { title: '信息录入', icon: '' }
       },
