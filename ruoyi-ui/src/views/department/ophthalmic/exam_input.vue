@@ -44,7 +44,7 @@
         <el-col :span="21">
           <el-form-item label-width="121px" label="彩色图案及编码" prop="colorVision">
             <el-checkbox-group v-model="formData.colorVision" size="medium">
-              <el-checkbox v-for="(item, index) in field115Options" :key="index" :label="item.value"
+              <el-checkbox v-for="(item, index) in colorVisionOptions" :key="index" :label="item.value"
                            :disabled="item.disabled">{{item.label}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
@@ -76,14 +76,14 @@ export default {
   data() {
     return {
       formData: {
-        studentId:'',
-        sightLeftNoglasses: undefined,
-        sightRightNoglasses: undefined,
-        sightLeftWithglasses: undefined,
-        sightRightWithglasses: undefined,
-        eyeIllness: '无',
-        colorVision: [],
-        doctorOpinion: '无',
+          studentId:'',
+          sightLeftNoglasses: undefined,
+          sightRightNoglasses: undefined,
+          sightLeftWithglasses: undefined,
+          sightRightWithglasses: undefined,
+          eyeIllness: '无',
+          colorVision: [],
+          doctorOpinion: '无',
       },
       rules: {
         sightLeftNoglasses: [{
@@ -309,7 +309,7 @@ export default {
     submitForm() {
       this.$refs['elForm'].validate(valid => {
         if (valid) {
-          this.formData.doctorId = Cookies.get("studentId");
+          this.formData.studentId = Cookies.get("studentId");
           commitEyeForm(this.formData).then(response => {
             this.msgSuccess("录入成功");
             Cookies.remove("studentId");

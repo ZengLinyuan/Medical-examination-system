@@ -10,7 +10,7 @@ export function getStudent(id) {
 
 export function commitEyeForm(data) {
   return request({
-    url: '/eye/ophthalmic/load',
+    url: '/department/ophthalmic/add',
     method: 'post',
     data: data
   })

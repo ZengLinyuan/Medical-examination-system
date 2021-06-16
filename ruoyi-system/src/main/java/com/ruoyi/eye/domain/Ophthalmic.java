@@ -71,6 +71,16 @@ public class Ophthalmic extends BaseEntity
     /** 医生编号 */
     private String doctorId;
 
+    public int[] getColorVision() {
+        return colorVision;
+    }
+
+    public void setColorVision(int[] colorVision) {
+        this.colorVision = colorVision;
+    }
+
+    private int[] colorVision;
+
     /** 负责医生审查 */
     @Excel(name = "负责医生审查")
     private String doctorAudit;
