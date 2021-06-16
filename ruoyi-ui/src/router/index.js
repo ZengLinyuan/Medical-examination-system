@@ -146,7 +146,159 @@ export const constantRoutes = [
       },
       {
         path: 'input',
-        component: (resolve) => require(['@/views/department/input'], resolve),
+        component: (resolve) => require(['@/views/department/ophthalmic/input'], resolve),
+        name: 'input',
+        meta: { title: '学生信息录入', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/ent',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'exam_input',
+        component: (resolve) => require(['@/views/department/ent/exam_input'], resolve),
+        name: 'exam_input',
+        meta: { title: '信息录入', icon: '' }
+      },
+      {
+        path: 'input',
+        component: (resolve) => require(['@/views/department/ent/input'], resolve),
+        name: 'input',
+        meta: { title: '学生信息录入', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/dental',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'exam_input',
+        component: (resolve) => require(['@/views/department/dental/exam_input'], resolve),
+        name: 'exam_input',
+        meta: { title: '信息录入', icon: '' }
+      },
+      {
+        path: 'input',
+        component: (resolve) => require(['@/views/department/dental/input'], resolve),
+        name: 'input',
+        meta: { title: '学生信息录入', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/surgery',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'exam_input',
+        component: (resolve) => require(['@/views/department/surgery/exam_input'], resolve),
+        name: 'exam_input',
+        meta: { title: '信息录入', icon: '' }
+      },
+      {
+        path: 'input',
+        component: (resolve) => require(['@/views/department/surgery/input'], resolve),
+        name: 'input',
+        meta: { title: '学生信息录入', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/pulse',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'exam_input',
+        component: (resolve) => require(['@/views/department/pulse/exam_input'], resolve),
+        name: 'exam_input',
+        meta: { title: '信息录入', icon: '' }
+      },
+      {
+        path: 'input',
+        component: (resolve) => require(['@/views/department/pulse/input'], resolve),
+        name: 'input',
+        meta: { title: '学生信息录入', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/internal',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'exam_input',
+        component: (resolve) => require(['@/views/department/internal/exam_input'], resolve),
+        name: 'exam_input',
+        meta: { title: '信息录入', icon: '' }
+      },
+      {
+        path: 'input',
+        component: (resolve) => require(['@/views/department/internal/input'], resolve),
+        name: 'input',
+        meta: { title: '学生信息录入', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/laboratory',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'exam_input',
+        component: (resolve) => require(['@/views/department/laboratory/exam_input'], resolve),
+        name: 'exam_input',
+        meta: { title: '信息录入', icon: '' }
+      },
+      {
+        path: 'input',
+        component: (resolve) => require(['@/views/department/laboratory/input'], resolve),
+        name: 'input',
+        meta: { title: '学生信息录入', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/chest',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'exam_input',
+        component: (resolve) => require(['@/views/department/chest/exam_input'], resolve),
+        name: 'exam_input',
+        meta: { title: '信息录入', icon: '' }
+      },
+      {
+        path: 'input',
+        component: (resolve) => require(['@/views/department/chest/input'], resolve),
+        name: 'input',
+        meta: { title: '学生信息录入', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/other',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'exam_input',
+        component: (resolve) => require(['@/views/department/other/exam_input'], resolve),
+        name: 'exam_input',
+        meta: { title: '信息录入', icon: '' }
+      },
+      {
+        path: 'input',
+        component: (resolve) => require(['@/views/department/other/input'], resolve),
         name: 'input',
         meta: { title: '学生信息录入', icon: '' }
       }
