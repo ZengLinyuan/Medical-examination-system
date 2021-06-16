@@ -78,7 +78,6 @@ public class OphthalmicController extends BaseController
     @PostMapping(value = "/add")
     public AjaxResult add(@RequestBody Ophthalmic ophthalmic)
     {
-        ophthalmic.setDoctorId("1");
         Date date = new Date();//获取当前日期时间
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String now = df.format(date);//以格式处理date
