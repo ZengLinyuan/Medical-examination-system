@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.AdministratorsMapper">
+    
+    <resultMap type="Administrators" id="AdministratorsResult">
+        <result property="userName"    column="user_name"    />
+        <result property="password"    column="password"    />
+    </resultMap>
+
+    <sql id="selectAdministratorsVo">
+        select user_name, password from administrators
+    </sql>
+
+    <select id="selectAdministratorsList" parameterType="Administrators" resultMap="AdministratorsResult">
+        <include refid="selectAdministratorsVo"/>
+        <where>  
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+        </where>
+    </select>
+    
+    <select id="selectAdministratorsById" parameterType="String" resultMap="AdministratorsResult">
+        <include refid="selectAdministratorsVo"/>
+        where user_name = #{userName}
+    </select>
+        
+    <insert id="insertAdministrators" parameterType="Administrators">
+        insert into administrators
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null">user_name,</if>
+            <if test="password != null">password,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null">#{userName},</if>
+            <if test="password != null">#{password},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAdministrators" parameterType="Administrators">
+        update administrators
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="password != null">password = #{password},</if>
+        </trim>
+        where user_name = #{userName}
+    </update>
+
+    <delete id="deleteAdministratorsById" parameterType="String">
+        delete from administrators where user_name = #{userName}
+    </delete>
+
+    <delete id="deleteAdministratorsByIds" parameterType="String">
+        delete from administrators where user_name in 
+        <foreach item="userName" collection="array" open="(" separator="," close=")">
+            #{userName}
+        </foreach>
+    </delete>
+</mapper>
