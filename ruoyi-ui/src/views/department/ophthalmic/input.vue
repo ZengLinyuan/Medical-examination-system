@@ -47,7 +47,6 @@ export default {
     submitForm() {
       this.$refs['studentForm'].validate(valid => {
         if (valid) {
-          Cookies.set("studentId", this.formData.studentId, { expires: 30 });
           getStudent(this.formData.studentId).then(res => {
             if(res.data!= null){
               this.msgSuccess("检录成功");

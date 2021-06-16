@@ -4,54 +4,54 @@
       <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="108px"
                label-position="left">
         <el-col :span="12">
-          <el-form-item label="左眼视力" prop="field109">
-            <el-select v-model="formData.field109" placeholder="请选择左眼视力" clearable :style="{width: '50%'}">
-              <el-option v-for="(item, index) in field109Options" :key="index" :label="item.label"
+          <el-form-item label="左眼视力" prop="sightLeftNoglasses">
+            <el-select v-model="formData.sightLeftNoglasses" placeholder="请选择左眼视力" clearable :style="{width: '50%'}">
+              <el-option v-for="(item, index) in sightLeftNoglassesOptions" :key="index" :label="item.label"
                          :value="item.value" :disabled="item.disabled"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="右眼视力" prop="field110">
-            <el-select v-model="formData.field110" placeholder="请选择右眼视力" clearable :style="{width: '50%'}">
-              <el-option v-for="(item, index) in field110Options" :key="index" :label="item.label"
+          <el-form-item label="右眼视力" prop="sightRightNoglasses">
+            <el-select v-model="formData.sightRightNoglasses" placeholder="请选择右眼视力" clearable :style="{width: '50%'}">
+              <el-option v-for="(item, index) in sightRightNoglassesOptions" :key="index" :label="item.label"
                          :value="item.value" :disabled="item.disabled"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="左眼矫正视力" prop="field111">
-            <el-select v-model="formData.field111" placeholder="请选择左眼矫正视力" clearable :style="{width: '50%'}">
-              <el-option v-for="(item, index) in field111Options" :key="index" :label="item.label"
+          <el-form-item label="左眼矫正视力" prop="sightLeftWithglasses">
+            <el-select v-model="formData.sightLeftWithglasses" placeholder="请选择左眼矫正视力" clearable :style="{width: '50%'}">
+              <el-option v-for="(item, index) in sightLeftWithglassesOptions" :key="index" :label="item.label"
                          :value="item.value" :disabled="item.disabled"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="右眼矫正视力" prop="field112">
-            <el-select v-model="formData.field112" placeholder="请选择右眼矫正视力" clearable :style="{width: '50%'}">
-              <el-option v-for="(item, index) in field112Options" :key="index" :label="item.label"
+          <el-form-item label="右眼矫正视力" prop="sightRightWithglasses">
+            <el-select v-model="formData.sightRightWithglasses" placeholder="请选择右眼矫正视力" clearable :style="{width: '50%'}">
+              <el-option v-for="(item, index) in sightRightWithglassesOptions" :key="index" :label="item.label"
                          :value="item.value" :disabled="item.disabled"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="其他疾病" prop="field113">
-            <el-input v-model="formData.field113" placeholder="请输入其他疾病" clearable :style="{width: '100%'}">
+          <el-form-item label="其他疾病" prop="eyeIllness">
+            <el-input v-model="formData.eyeIllness" placeholder="请输入其他疾病" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="21">
-          <el-form-item label-width="121px" label="彩色图案及编码" prop="field115">
-            <el-checkbox-group v-model="formData.field115" size="medium">
+          <el-form-item label-width="121px" label="彩色图案及编码" prop="colorVision">
+            <el-checkbox-group v-model="formData.colorVision" size="medium">
               <el-checkbox v-for="(item, index) in field115Options" :key="index" :label="item.value"
                            :disabled="item.disabled">{{item.label}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
         </el-col>
         <el-col :span="21">
-          <el-form-item label="医生意见" prop="field117">
-            <el-input v-model="formData.field117" type="textarea" placeholder="请输入医生意见"
+          <el-form-item label="医生意见" prop="doctorOpinion">
+            <el-input v-model="formData.doctorOpinion" type="textarea" placeholder="请输入医生意见"
                       :autosize="{minRows: 4, maxRows: 4}" :style="{width: '100%'}"></el-input>
           </el-form-item>
         </el-col>
@@ -76,54 +76,54 @@ export default {
   data() {
     return {
       formData: {
-        field109: undefined,
-        field110: undefined,
-        field111: undefined,
-        field112: undefined,
-        field113: '无',
-        field115: [],
-        field117: '无',
-
+        studentId:'',
+        sightLeftNoglasses: undefined,
+        sightRightNoglasses: undefined,
+        sightLeftWithglasses: undefined,
+        sightRightWithglasses: undefined,
+        eyeIllness: '无',
+        colorVision: [],
+        doctorOpinion: '无',
       },
       rules: {
-        field109: [{
+        sightLeftNoglasses: [{
           required: true,
           message: '请选择左眼视力',
           trigger: 'change'
         }],
-        field110: [{
+        sightRightNoglasses: [{
           required: true,
           message: '请选择右眼视力',
           trigger: 'change'
         }],
-        field111: [{
+        sightLeftWithglasses: [{
           required: true,
           message: '请选择左眼矫正视力',
           trigger: 'change'
         }],
-        field112: [{
+        sightRightWithglasses: [{
           required: true,
           message: '请选择右眼矫正视力',
           trigger: 'change'
         }],
-        field113: [{
+        eyeIllness: [{
           required: true,
           message: '请输入其他疾病',
           trigger: 'blur'
         }],
-        field115: [{
+        colorVision: [{
           required: true,
           type: 'array',
           message: '请至少选择一个field115',
           trigger: 'change'
         }],
-        field117: [{
+        doctorOpinion: [{
           required: true,
           message: '请输入医生意见',
           trigger: 'blur'
         }],
       },
-      field109Options: [{
+      sightLeftNoglassesOptions: [{
         "label": "4.0",
         "value": 1
       }, {
@@ -131,39 +131,39 @@ export default {
         "value": 2
       }, {
         "label": "4.2",
-        "value": ""
+        "value": 3
       }, {
         "label": "4.3",
-        "value": ""
+        "value": 4
       }, {
         "label": "4.4",
-        "value": ""
+        "value": 5
       }, {
         "label": "4.5",
-        "value": ""
+        "value": 6
       }, {
         "label": "4.6",
-        "value": ""
+        "value": 7
       }, {
         "label": "4.7",
-        "value": ""
+        "value": 8
       }, {
         "label": "4.8",
-        "value": ""
+        "value": 9
       }, {
         "label": "4.9",
-        "value": ""
+        "value": 10
       }, {
         "label": "5.0",
-        "value": ""
+        "value": 11
       }, {
         "label": "5.1",
-        "value": ""
+        "value": 12
       }, {
         "label": "5.2",
-        "value": ""
+        "value": 13
       }],
-      field110Options: [{
+      sightRightNoglassesOptions: [{
         "label": "4.0",
         "value": 1
       }, {
@@ -171,39 +171,39 @@ export default {
         "value": 2
       }, {
         "label": "4.2",
-        "value": ""
+        "value": 3
       }, {
         "label": "4.3",
-        "value": ""
+        "value": 4
       }, {
         "label": "4.4",
-        "value": ""
+        "value": 5
       }, {
         "label": "4.5",
-        "value": ""
+        "value": 6
       }, {
         "label": "4.6",
-        "value": ""
+        "value": 7
       }, {
         "label": "4.7",
-        "value": ""
+        "value": 8
       }, {
         "label": "4.8",
-        "value": ""
+        "value": 9
       }, {
         "label": "4.9",
-        "value": ""
+        "value": 10
       }, {
         "label": "5.0",
-        "value": ""
+        "value": 11
       }, {
         "label": "5.1",
-        "value": ""
+        "value": 12
       }, {
         "label": "5.2",
-        "value": ""
+        "value": 13
       }],
-      field111Options: [{
+      sightLeftWithglassesOptions: [{
         "label": "4.0",
         "value": 1
       }, {
@@ -211,39 +211,39 @@ export default {
         "value": 2
       }, {
         "label": "4.2",
-        "value": ""
+        "value": 3
       }, {
         "label": "4.3",
-        "value": ""
+        "value": 4
       }, {
         "label": "4.4",
-        "value": ""
+        "value": 5
       }, {
         "label": "4.5",
-        "value": ""
+        "value": 6
       }, {
         "label": "4.6",
-        "value": ""
+        "value": 7
       }, {
         "label": "4.7",
-        "value": ""
+        "value": 8
       }, {
         "label": "4.8",
-        "value": ""
+        "value": 9
       }, {
         "label": "4.9",
-        "value": ""
+        "value": 10
       }, {
         "label": "5.0",
-        "value": ""
+        "value": 11
       }, {
         "label": "5.1",
-        "value": ""
+        "value": 12
       }, {
         "label": "5.2",
-        "value": ""
+        "value": 13
       }],
-      field112Options: [{
+      sightRightWithglassesOptions: [{
         "label": "4.0",
         "value": 1
       }, {
@@ -251,39 +251,39 @@ export default {
         "value": 2
       }, {
         "label": "4.2",
-        "value": ""
+        "value": 3
       }, {
         "label": "4.3",
-        "value": ""
+        "value": 4
       }, {
         "label": "4.4",
-        "value": ""
+        "value": 5
       }, {
         "label": "4.5",
-        "value": ""
+        "value": 6
       }, {
         "label": "4.6",
-        "value": ""
+        "value": 7
       }, {
         "label": "4.7",
-        "value": ""
+        "value": 8
       }, {
         "label": "4.8",
-        "value": ""
+        "value": 9
       }, {
         "label": "4.9",
-        "value": ""
+        "value": 10
       }, {
         "label": "5.0",
-        "value": ""
+        "value": 11
       }, {
         "label": "5.1",
-        "value": ""
+        "value": 12
       }, {
         "label": "5.2",
-        "value": ""
+        "value": 13
       }],
-      field115Options: [{
+      colorVisionOptions: [{
         "label": "红",
         "value": 1
       }, {
@@ -309,6 +309,7 @@ export default {
     submitForm() {
       this.$refs['elForm'].validate(valid => {
         if (valid) {
+          this.formData.doctorId = Cookies.get("studentId");
           commitEyeForm(this.formData).then(response => {
             this.msgSuccess("录入成功");
             Cookies.remove("studentId");
