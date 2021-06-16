@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.department.mapper.OtherMapper">
+    
+    <resultMap type="Other" id="OtherResult">
+        <result property="studentId"    column="student_ID"    />
+        <result property="diagnosisTime"    column="diagnosis_time"    />
+        <result property="otherExamination"    column="other_examination"    />
+        <result property="doctorOpinion"    column="doctor_opinion"    />
+        <result property="doctorId"    column="doctor_ID"    />
+        <result property="doctorAudit"    column="doctor_audit"    />
+        <result property="leaderAudit"    column="leader_audit"    />
+        <result property="submitTime"    column="submit_time"    />
+    </resultMap>
+
+    <sql id="selectOtherVo">
+        select student_ID, diagnosis_time, other_examination, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from other
+    </sql>
+
+    <select id="selectOtherList" parameterType="Other" resultMap="OtherResult">
+        <include refid="selectOtherVo"/>
+        <where>  
+            <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
+            <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
+            <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
+            <if test="submitTime != null "> and submit_time = #{submitTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectOtherById" parameterType="String" resultMap="OtherResult">
+        <include refid="selectOtherVo"/>
+        where student_ID = #{studentId}
+    </select>
+        
+    <insert id="insertOther" parameterType="Other">
+        insert into other
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_ID,</if>
+            <if test="diagnosisTime != null">diagnosis_time,</if>
+            <if test="otherExamination != null">other_examination,</if>
+            <if test="doctorOpinion != null">doctor_opinion,</if>
+            <if test="doctorId != null">doctor_ID,</if>
+            <if test="doctorAudit != null">doctor_audit,</if>
+            <if test="leaderAudit != null">leader_audit,</if>
+            <if test="submitTime != null">submit_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="diagnosisTime != null">#{diagnosisTime},</if>
+            <if test="otherExamination != null">#{otherExamination},</if>
+            <if test="doctorOpinion != null">#{doctorOpinion},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="doctorAudit != null">#{doctorAudit},</if>
+            <if test="leaderAudit != null">#{leaderAudit},</if>
+            <if test="submitTime != null">#{submitTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOther" parameterType="Other">
+        update other
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
+            <if test="otherExamination != null">other_examination = #{otherExamination},</if>
+            <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
+            <if test="doctorId != null">doctor_ID = #{doctorId},</if>
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+            <if test="submitTime != null">submit_time = #{submitTime},</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
+
+    <delete id="deleteOtherById" parameterType="String">
+        delete from other where student_ID = #{studentId}
+    </delete>
+
+    <delete id="deleteOtherByIds" parameterType="String">
+        delete from other where student_ID in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>

@@ -19,10 +19,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="院长审查" prop="leaderAudit">
+      <el-form-item label="领导审查" prop="leaderAudit">
         <el-input
           v-model="queryParams.leaderAudit"
-          placeholder="请输入院长审查"
+          placeholder="请输入领导审查"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -30,10 +30,10 @@
       </el-form-item>
       <el-form-item label="提交时间" prop="submitTime">
         <el-date-picker clearable size="small"
-          v-model="queryParams.submitTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择提交时间">
+                        v-model="queryParams.submitTime"
+                        type="date"
+                        value-format="yyyy-MM-dd"
+                        placeholder="选择提交时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -52,7 +52,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['eye:ophthalmic:edit']"
+          v-hasPermi="['department:other:edit']"
         >修改</el-button>
       </el-col>
 
@@ -62,30 +62,20 @@
           plain
           icon="el-icon-download"
           size="mini"
-		  :loading="exportLoading"
+          :loading="exportLoading"
           @click="handleExport"
-          v-hasPermi="['eye:ophthalmic:export']"
+          v-hasPermi="['department:other:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="ophthalmicList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="otherList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="学号" align="center" prop="studentId" />
-      <el-table-column label="体检时间" align="center" prop="diagnosisTime" />
-      <el-table-column label="左视力" align="center" prop="sightLeftNoglasses" />
-      <el-table-column label="右视力" align="center" prop="sightRightNoglasses" />
-      <el-table-column label="左矫正视力" align="center" prop="sightLeftWithglasses" />
-      <el-table-column label="右矫正视力" align="center" prop="sightRightWithglasses" />
-      <el-table-column label="其他眼病" align="center" prop="eyeIllness" />
-      <el-table-column label="红色色觉" align="center" prop="colorVisionRed" />
-      <el-table-column label="绿色色觉" align="center" prop="colorVisionGreen" />
-      <el-table-column label="紫色色觉" align="center" prop="colorVisionPurple" />
-      <el-table-column label="蓝色色觉" align="center" prop="colorVisionBlue" />
-      <el-table-column label="黄色色觉" align="center" prop="colorVisionYellow" />
+      <el-table-column label="诊断时间" align="center" prop="diagnosisTime" />
       <el-table-column label="负责医生审查" align="center" prop="doctorAudit" />
-      <el-table-column label="院长审查" align="center" prop="leaderAudit" />
+      <el-table-column label="领导审查" align="center" prop="leaderAudit" />
       <el-table-column label="提交时间" align="center" prop="submitTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.submitTime, '{y}-{m}-{d}') }}</span>
@@ -98,15 +88,9 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['eye:ophthalmic:edit']"
+            v-hasPermi="['department:other:edit']"
           >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['eye:ophthalmic:remove']"
-          >删除</el-button>
+
         </template>
       </el-table-column>
     </el-table>
@@ -119,57 +103,30 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改眼科对话框 -->
+    <!-- 添加或修改其他科对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="左视力" prop="sightLeftNoglasses">
-          <el-input v-model="form.sightLeftNoglasses" placeholder="请输入左视力" />
-        </el-form-item>
-        <el-form-item label="右视力" prop="sightRightNoglasses">
-          <el-input v-model="form.sightRightNoglasses" placeholder="请输入右视力" />
-        </el-form-item>
-        <el-form-item label="左矫正视力" prop="sightLeftWithglasses">
-          <el-input v-model="form.sightLeftWithglasses" placeholder="请输入左矫正视力" />
-        </el-form-item>
-        <el-form-item label="右矫正视力" prop="sightRightWithglasses">
-          <el-input v-model="form.sightRightWithglasses" placeholder="请输入右矫正视力" />
-        </el-form-item>
-        <el-form-item label="其他眼病" prop="eyeIllness">
-          <el-input v-model="form.eyeIllness" placeholder="请输入其他眼病" />
-        </el-form-item>
-        <el-form-item label="红色色觉" prop="colorVisionRed">
-          <el-input v-model="form.colorVisionRed" placeholder="请输入红色色觉" />
-        </el-form-item>
-        <el-form-item label="绿色色觉" prop="colorVisionGreen">
-          <el-input v-model="form.colorVisionGreen" placeholder="请输入绿色色觉" />
-        </el-form-item>
-        <el-form-item label="紫色色觉" prop="colorVisionPurple">
-          <el-input v-model="form.colorVisionPurple" placeholder="请输入紫色色觉" />
-        </el-form-item>
-        <el-form-item label="蓝色色觉" prop="colorVisionBlue">
-          <el-input v-model="form.colorVisionBlue" placeholder="请输入蓝色色觉" />
-        </el-form-item>
-        <el-form-item label="黄色色觉" prop="colorVisionYellow">
-          <el-input v-model="form.colorVisionYellow" placeholder="请输入黄色色觉" />
+        <el-form-item label="其他检查" prop="otherExamination">
+          <el-input v-model="form.otherExamination" placeholder="请输入其他检查" />
         </el-form-item>
         <el-form-item label="医生意见" prop="doctorOpinion">
           <el-input v-model="form.doctorOpinion" placeholder="请输入医生意见" />
         </el-form-item>
-        <el-form-item label="医生编号" prop="doctorId">
-          <el-input v-model="form.doctorId" placeholder="请输入医生编号" />
-        </el-form-item>
-        <el-form-item label="负责医生审查" prop="doctorAudit">
-          <el-input v-model="form.doctorAudit" placeholder="请输入负责医生审查" />
-        </el-form-item>
-        <el-form-item label="院长审查" prop="leaderAudit">
-          <el-input v-model="form.leaderAudit" placeholder="请输入院长审查" />
-        </el-form-item>
+<!--        <el-form-item label="负责医生编号" prop="doctorId">-->
+<!--          <el-input v-model="form.doctorId" placeholder="请输入负责医生编号" />-->
+<!--        </el-form-item>-->
+<!--        <el-form-item label="负责医生审查" prop="doctorAudit">-->
+<!--          <el-input v-model="form.doctorAudit" placeholder="请输入负责医生审查" />-->
+<!--        </el-form-item>-->
+<!--        <el-form-item label="领导审查" prop="leaderAudit">-->
+<!--          <el-input v-model="form.leaderAudit" placeholder="请输入领导审查" />-->
+<!--        </el-form-item>-->
         <el-form-item label="提交时间" prop="submitTime">
           <el-date-picker clearable size="small"
-            v-model="form.submitTime"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="选择提交时间">
+                          v-model="form.submitTime"
+                          type="date"
+                          value-format="yyyy-MM-dd"
+                          placeholder="选择提交时间">
           </el-date-picker>
         </el-form-item>
       </el-form>
@@ -182,10 +139,10 @@
 </template>
 
 <script>
-import { listOphthalmic, getOphthalmic, delOphthalmic, addOphthalmic, updateOphthalmic, exportOphthalmic } from "@/api/eye/ophthalmic";
+import { listOther, getOther, delOther, addOther, updateOther, exportOther } from "@/api/department/other";
 
 export default {
-  name: "Ophthalmic",
+  name: "Other",
   components: {
   },
   data() {
@@ -204,8 +161,8 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 眼科表格数据
-      ophthalmicList: [],
+      // 其他科表格数据
+      otherList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -230,11 +187,11 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询眼科列表 */
+    /** 查询其他科列表 */
     getList() {
       this.loading = true;
-      listOphthalmic(this.queryParams).then(response => {
-        this.ophthalmicList = response.rows;
+      listOther(this.queryParams).then(response => {
+        this.otherList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
@@ -249,16 +206,7 @@ export default {
       this.form = {
         studentId: null,
         diagnosisTime: null,
-        sightLeftNoglasses: null,
-        sightRightNoglasses: null,
-        sightLeftWithglasses: null,
-        sightRightWithglasses: null,
-        eyeIllness: null,
-        colorVisionRed: null,
-        colorVisionGreen: null,
-        colorVisionPurple: null,
-        colorVisionBlue: null,
-        colorVisionYellow: null,
+        otherExamination: null,
         doctorOpinion: null,
         doctorId: null,
         doctorAudit: null,
@@ -287,16 +235,16 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加眼科";
+      this.title = "添加其他科";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const studentId = row.studentId || this.ids
-      getOphthalmic(studentId).then(response => {
+      getOther(studentId).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改眼科";
+        this.title = "修改其他科";
       });
     },
     /** 提交按钮 */
@@ -304,13 +252,13 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.studentId != null) {
-            updateOphthalmic(this.form).then(response => {
+            updateOther(this.form).then(response => {
               this.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addOphthalmic(this.form).then(response => {
+            addOther(this.form).then(response => {
               this.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -322,31 +270,31 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const studentIds = row.studentId || this.ids;
-      this.$confirm('是否确认删除眼科编号为"' + studentIds + '"的数据项?', "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }).then(function() {
-          return delOphthalmic(studentIds);
-        }).then(() => {
-          this.getList();
-          this.msgSuccess("删除成功");
-        }).catch(() => {});
+      this.$confirm('是否确认删除其他科编号为"' + studentIds + '"的数据项?', "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(function() {
+        return delOther(studentIds);
+      }).then(() => {
+        this.getList();
+        this.msgSuccess("删除成功");
+      }).catch(() => {});
     },
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有眼科数据项?', "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }).then(() => {
-          this.exportLoading = true;
-          return exportOphthalmic(queryParams);
-        }).then(response => {
-          this.download(response.msg);
-          this.exportLoading = false;
-        }).catch(() => {});
+      this.$confirm('是否确认导出所有其他科数据项?', "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.exportLoading = true;
+        return exportOther(queryParams);
+      }).then(response => {
+        this.download(response.msg);
+        this.exportLoading = false;
+      }).catch(() => {});
     }
   }
 };
