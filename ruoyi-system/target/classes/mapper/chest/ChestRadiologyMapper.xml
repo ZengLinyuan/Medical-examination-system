@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ChestRadiologyMapper">
+    
+    <resultMap type="ChestRadiology" id="ChestRadiologyResult">
+        <result property="studentId"    column="student_ID"    />
+        <result property="diagnosisTime"    column="diagnosis_time"    />
+        <result property="chestRadiography"    column="chest_radiography"    />
+        <result property="doctorOpinion"    column="doctor_opinion"    />
+        <result property="doctorId"    column="doctor_ID"    />
+        <result property="doctorAudit"    column="doctor_audit"    />
+        <result property="leaderAudit"    column="leader_audit"    />
+        <result property="submitTime"    column="submit_time"    />
+    </resultMap>
+
+    <sql id="selectChestRadiologyVo">
+        select student_ID, diagnosis_time, chest_radiography, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from chest_radiology
+    </sql>
+
+    <select id="selectChestRadiologyList" parameterType="ChestRadiology" resultMap="ChestRadiologyResult">
+        <include refid="selectChestRadiologyVo"/>
+        <where>  
+            <if test="chestRadiography != null  and chestRadiography != ''"> and chest_radiography = #{chestRadiography}</if>
+            <if test="doctorOpinion != null  and doctorOpinion != ''"> and doctor_opinion = #{doctorOpinion}</if>
+            <if test="doctorId != null  and doctorId != ''"> and doctor_ID = #{doctorId}</if>
+            <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
+            <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
+            <if test="submitTime != null "> and submit_time = #{submitTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectChestRadiologyById" parameterType="String" resultMap="ChestRadiologyResult">
+        <include refid="selectChestRadiologyVo"/>
+        where student_ID = #{studentId}
+    </select>
+        
+    <insert id="insertChestRadiology" parameterType="ChestRadiology">
+        insert into chest_radiology
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_ID,</if>
+            <if test="diagnosisTime != null">diagnosis_time,</if>
+            <if test="chestRadiography != null">chest_radiography,</if>
+            <if test="doctorOpinion != null">doctor_opinion,</if>
+            <if test="doctorId != null">doctor_ID,</if>
+            <if test="doctorAudit != null">doctor_audit,</if>
+            <if test="leaderAudit != null">leader_audit,</if>
+            <if test="submitTime != null">submit_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="diagnosisTime != null">#{diagnosisTime},</if>
+            <if test="chestRadiography != null">#{chestRadiography},</if>
+            <if test="doctorOpinion != null">#{doctorOpinion},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="doctorAudit != null">#{doctorAudit},</if>
+            <if test="leaderAudit != null">#{leaderAudit},</if>
+            <if test="submitTime != null">#{submitTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateChestRadiology" parameterType="ChestRadiology">
+        update chest_radiology
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
+            <if test="chestRadiography != null">chest_radiography = #{chestRadiography},</if>
+            <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
+            <if test="doctorId != null">doctor_ID = #{doctorId},</if>
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+            <if test="submitTime != null">submit_time = #{submitTime},</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
+
+    <delete id="deleteChestRadiologyById" parameterType="String">
+        delete from chest_radiology where student_ID = #{studentId}
+    </delete>
+
+    <delete id="deleteChestRadiologyByIds" parameterType="String">
+        delete from chest_radiology where student_ID in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>
