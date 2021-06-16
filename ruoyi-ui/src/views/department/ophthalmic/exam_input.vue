@@ -77,6 +77,7 @@ export default {
     return {
       formData: {
           studentId:'',
+          userId:'',
           sightLeftNoglasses: undefined,
           sightRightNoglasses: undefined,
           sightLeftWithglasses: undefined,
@@ -309,6 +310,7 @@ export default {
     submitForm() {
       this.$refs['elForm'].validate(valid => {
         if (valid) {
+          this.formData.userId = getToken().user.userId;
           this.formData.studentId = Cookies.get("studentId");
           commitEyeForm(this.formData).then(response => {
             this.msgSuccess("录入成功");
