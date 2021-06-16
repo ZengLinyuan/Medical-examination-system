@@ -66,6 +66,10 @@
   </div>
 </template>
 <script>
+import {addForm, updateForm} from "@/api/health/form";
+import {commitEyeForm} from "@/api/exam/input";
+import Cookies from "js-cookie";
+
 export default {
   components: {},
   props: [],
@@ -79,6 +83,7 @@ export default {
         field113: '无',
         field115: [],
         field117: '无',
+
       },
       rules: {
         field109: [{
@@ -302,10 +307,16 @@ export default {
   mounted() {},
   methods: {
     submitForm() {
-      this.$router.push({ path:"/ophthalmic/input" || "/" }).catch(()=>{});
       this.$refs['elForm'].validate(valid => {
-        if (!valid) return
-        // TODO 提交表单
+        if (valid) {
+          commitEyeForm(this.formData).then(response => {
+            this.msgSuccess("录入成功");
+            Cookies.remove("studentId");
+            this.$router.push({ path:"/ophthalmic/input" || "/" }).catch(()=>{});
+          }).catch(() => {
+            this.getCode();
+          });
+        }
       })
     },
     resetForm() {

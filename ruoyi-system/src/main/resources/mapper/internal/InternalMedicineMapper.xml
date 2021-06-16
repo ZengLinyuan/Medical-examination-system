@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.InternalMedicineMapper">
+    
+    <resultMap type="InternalMedicine" id="InternalMedicineResult">
+        <result property="studentId"    column="student_ID"    />
+        <result property="diagnosisTime"    column="diagnosis_time"    />
+        <result property="developmentalNutrition"    column="developmental_nutrition"    />
+        <result property="nervesAndSpirits"    column="nerves_and_spirits"    />
+        <result property="lungAndRespiratoryTract"    column="lung_and_respiratory_tract"    />
+        <result property="heartAndBloodVessels"    column="heart_and_blood_vessels"    />
+        <result property="liver"    column="liver"    />
+        <result property="spleen"    column="spleen"    />
+        <result property="other"    column="other"    />
+        <result property="doctorOpinion"    column="doctor_opinion"    />
+        <result property="doctorId"    column="doctor_ID"    />
+        <result property="doctorAudit"    column="doctor_audit"    />
+        <result property="leaderAudit"    column="leader_audit"    />
+        <result property="submitTime"    column="submit_time"    />
+    </resultMap>
+
+    <sql id="selectInternalMedicineVo">
+        select student_ID, diagnosis_time, developmental_nutrition, nerves_and_spirits, lung_and_respiratory_tract, heart_and_blood_vessels, liver, spleen, other, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from internal_medicine
+    </sql>
+
+    <select id="selectInternalMedicineList" parameterType="InternalMedicine" resultMap="InternalMedicineResult">
+        <include refid="selectInternalMedicineVo"/>
+        <where>  
+            <if test="developmentalNutrition != null  and developmentalNutrition != ''"> and developmental_nutrition = #{developmentalNutrition}</if>
+            <if test="nervesAndSpirits != null  and nervesAndSpirits != ''"> and nerves_and_spirits = #{nervesAndSpirits}</if>
+            <if test="lungAndRespiratoryTract != null  and lungAndRespiratoryTract != ''"> and lung_and_respiratory_tract = #{lungAndRespiratoryTract}</if>
+            <if test="heartAndBloodVessels != null  and heartAndBloodVessels != ''"> and heart_and_blood_vessels = #{heartAndBloodVessels}</if>
+            <if test="liver != null  and liver != ''"> and liver = #{liver}</if>
+            <if test="spleen != null  and spleen != ''"> and spleen = #{spleen}</if>
+            <if test="other != null  and other != ''"> and other = #{other}</if>
+            <if test="doctorOpinion != null  and doctorOpinion != ''"> and doctor_opinion = #{doctorOpinion}</if>
+            <if test="doctorId != null  and doctorId != ''"> and doctor_ID = #{doctorId}</if>
+            <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
+            <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
+            <if test="submitTime != null "> and submit_time = #{submitTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectInternalMedicineById" parameterType="String" resultMap="InternalMedicineResult">
+        <include refid="selectInternalMedicineVo"/>
+        where student_ID = #{studentId}
+    </select>
+        
+    <insert id="insertInternalMedicine" parameterType="InternalMedicine">
+        insert into internal_medicine
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_ID,</if>
+            <if test="diagnosisTime != null">diagnosis_time,</if>
+            <if test="developmentalNutrition != null">developmental_nutrition,</if>
+            <if test="nervesAndSpirits != null">nerves_and_spirits,</if>
+            <if test="lungAndRespiratoryTract != null">lung_and_respiratory_tract,</if>
+            <if test="heartAndBloodVessels != null">heart_and_blood_vessels,</if>
+            <if test="liver != null">liver,</if>
+            <if test="spleen != null">spleen,</if>
+            <if test="other != null">other,</if>
+            <if test="doctorOpinion != null">doctor_opinion,</if>
+            <if test="doctorId != null">doctor_ID,</if>
+            <if test="doctorAudit != null">doctor_audit,</if>
+            <if test="leaderAudit != null">leader_audit,</if>
+            <if test="submitTime != null">submit_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="diagnosisTime != null">#{diagnosisTime},</if>
+            <if test="developmentalNutrition != null">#{developmentalNutrition},</if>
+            <if test="nervesAndSpirits != null">#{nervesAndSpirits},</if>
+            <if test="lungAndRespiratoryTract != null">#{lungAndRespiratoryTract},</if>
+            <if test="heartAndBloodVessels != null">#{heartAndBloodVessels},</if>
+            <if test="liver != null">#{liver},</if>
+            <if test="spleen != null">#{spleen},</if>
+            <if test="other != null">#{other},</if>
+            <if test="doctorOpinion != null">#{doctorOpinion},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="doctorAudit != null">#{doctorAudit},</if>
+            <if test="leaderAudit != null">#{leaderAudit},</if>
+            <if test="submitTime != null">#{submitTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateInternalMedicine" parameterType="InternalMedicine">
+        update internal_medicine
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
+            <if test="developmentalNutrition != null">developmental_nutrition = #{developmentalNutrition},</if>
+            <if test="nervesAndSpirits != null">nerves_and_spirits = #{nervesAndSpirits},</if>
+            <if test="lungAndRespiratoryTract != null">lung_and_respiratory_tract = #{lungAndRespiratoryTract},</if>
+            <if test="heartAndBloodVessels != null">heart_and_blood_vessels = #{heartAndBloodVessels},</if>
+            <if test="liver != null">liver = #{liver},</if>
+            <if test="spleen != null">spleen = #{spleen},</if>
+            <if test="other != null">other = #{other},</if>
+            <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
+            <if test="doctorId != null">doctor_ID = #{doctorId},</if>
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+            <if test="submitTime != null">submit_time = #{submitTime},</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
+
+    <delete id="deleteInternalMedicineById" parameterType="String">
+        delete from internal_medicine where student_ID = #{studentId}
+    </delete>
+
+    <delete id="deleteInternalMedicineByIds" parameterType="String">
+        delete from internal_medicine where student_ID in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>

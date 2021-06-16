@@ -7,3 +7,11 @@ export function getStudent(id) {
     method: 'get',
   })
 }
+
+export function commitEyeForm(data) {
+  return request({
+    url: '/health/form',
+    method: 'put',
+    data: data
+  })
+}
