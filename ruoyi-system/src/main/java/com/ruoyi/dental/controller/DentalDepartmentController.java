@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2021-06-15
  */
 @RestController
-@RequestMapping("/system/department")
+@RequestMapping("/system/dentaldepartment")
 public class DentalDepartmentController extends BaseController
 {
     @Autowired
