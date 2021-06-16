@@ -90,6 +90,13 @@ public class OphthalmicController extends BaseController
         }
         ophthalmic.setSubmitTime(date);
         ophthalmic.setDiagnosisTime(date);
+        ophthalmic.setColorVisionRed(ophthalmic.getColorVision()[0]);
+        ophthalmic.setColorVisionGreen(ophthalmic.getColorVision()[1]);
+        ophthalmic.setColorVisionPurple(ophthalmic.getColorVision()[2]);
+        ophthalmic.setColorVisionBlue(ophthalmic.getColorVision()[3]);
+        ophthalmic.setColorVisionYellow(ophthalmic.getColorVision()[4]);
+        ophthalmic.setDoctorAudit("审核中");
+        ophthalmic.setLeaderAudit("审核中");
         return toAjax(ophthalmicService.insertOphthalmic(ophthalmic));
     }
 
