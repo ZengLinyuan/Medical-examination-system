@@ -102,18 +102,18 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <router-link to="/detail"><el-button
+        <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
-
+            @click="handleUpdate(scope.row)"
             v-hasPermi="['eye:ophthalmic:edit']"
-          >查看</el-button> </router-link>
+          >查看</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
+            @click="handleBack(scope.row)"
             v-hasPermi="['eye:ophthalmic:remove']"
           >驳回</el-button>
         </template>
@@ -129,64 +129,25 @@
     />
 
     <!-- 添加或修改眼科对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="左视力" prop="sightLeftNoglasses">
-          <el-input v-model="form.sightLeftNoglasses" placeholder="请输入左视力" />
-        </el-form-item>
-        <el-form-item label="右视力" prop="sightRightNoglasses">
-          <el-input v-model="form.sightRightNoglasses" placeholder="请输入右视力" />
-        </el-form-item>
-        <el-form-item label="左矫正视力" prop="sightLeftWithglasses">
-          <el-input v-model="form.sightLeftWithglasses" placeholder="请输入左矫正视力" />
-        </el-form-item>
-        <el-form-item label="右矫正视力" prop="sightRightWithglasses">
-          <el-input v-model="form.sightRightWithglasses" placeholder="请输入右矫正视力" />
-        </el-form-item>
-        <el-form-item label="其他眼病" prop="eyeIllness">
-          <el-input v-model="form.eyeIllness" placeholder="请输入其他眼病" />
-        </el-form-item>
-        <el-form-item label="红色色觉" prop="colorVisionRed">
-          <el-input v-model="form.colorVisionRed" placeholder="请输入红色色觉" />
-        </el-form-item>
-        <el-form-item label="绿色色觉" prop="colorVisionGreen">
-          <el-input v-model="form.colorVisionGreen" placeholder="请输入绿色色觉" />
-        </el-form-item>
-        <el-form-item label="紫色色觉" prop="colorVisionPurple">
-          <el-input v-model="form.colorVisionPurple" placeholder="请输入紫色色觉" />
-        </el-form-item>
-        <el-form-item label="蓝色色觉" prop="colorVisionBlue">
-          <el-input v-model="form.colorVisionBlue" placeholder="请输入蓝色色觉" />
-        </el-form-item>
-        <el-form-item label="黄色色觉" prop="colorVisionYellow">
-          <el-input v-model="form.colorVisionYellow" placeholder="请输入黄色色觉" />
-        </el-form-item>
-        <el-form-item label="医生意见" prop="doctorOpinion">
-          <el-input v-model="form.doctorOpinion" placeholder="请输入医生意见" />
-        </el-form-item>
-        <el-form-item label="医生编号" prop="doctorId">
-          <el-input v-model="form.doctorId" placeholder="请输入医生编号" />
-        </el-form-item>
-        <el-form-item label="负责医生审查" prop="doctorAudit">
-          <el-input v-model="form.doctorAudit" placeholder="请输入负责医生审查" />
-        </el-form-item>
-        <el-form-item label="院长审查" prop="leaderAudit">
-          <el-input v-model="form.leaderAudit" placeholder="请输入院长审查" />
-        </el-form-item>
-        <el-form-item label="提交时间" prop="submitTime">
-          <el-date-picker clearable size="small"
-                          v-model="form.submitTime"
-                          type="date"
-                          value-format="yyyy-MM-dd"
-                          placeholder="选择提交时间">
-          </el-date-picker>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
-      </div>
-    </el-dialog>
+<!--    <el-dialog   >-->
+      <el-dialog :title="title" :visible.sync="openDept"  width="500px" append-to-body >
+        <el-row :gutter="15">
+          <el-form ref="elForm"  :rules="rules" size="medium" label-width="100px">
+            <el-col :span="12">
+              <el-form-item label="科室" prop="dept_name">
+                <el-select placeholder="请选择科室" clearable :style="{width: '100%'}">
+                  <el-option v-for="(item, index) in dept_nameOptions" :key="index" :label="item.label"
+                             :value="item.value" :disabled="item.disabled"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-form>
+        </el-row>
+        <div slot="footer">
+          <el-button @click="close">取消</el-button>
+          <el-button type="primary" @click="handelConfirm">确定</el-button>
+        </div>
+      </el-dialog>
   </div>
 </template>
 
@@ -198,11 +159,11 @@ import {
   addOphthalmic,
   updateOphthalmic,
 } from "@/api/eye/ophthalmic";
+import {getRole} from "@/api/system/role";
 
 export default {
   name: "Ophthalmic",
-  components: {
-  },
+  components: {},
   data() {
     return {
       // 遮罩层
@@ -224,7 +185,36 @@ export default {
       // 弹出层标题
       title: "",
       // 是否显示弹出层
-      open: false,
+      openDept: false,
+      dept_nameOptions: [{
+        "label": "眼科",
+        "value": 101
+      }, {
+        "label": "耳鼻喉科",
+        "value": 103
+      }, {
+        "label": "口腔科",
+        "value": 105
+      }, {
+        "label": "外科",
+        "value": 104
+      }, {
+        "label": "血压脉搏科",
+        "value": 107
+      }, {
+        "label": "内科",
+        "value": 106
+      }, {
+        "label": "化验科",
+        "value": 102
+      }, {
+        "label": "胸部放射科",
+        "value": 108
+      }, {
+        "label": "其他科",
+        "value": 109
+      }],
+
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -234,11 +224,11 @@ export default {
         leaderAudit: null,
         submitTime: null
       },
+
       // 表单参数
       form: {},
       // 表单校验
-      rules: {
-      }
+      rules: {}
     };
   },
   created() {
@@ -295,7 +285,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.studentId)
-      this.single = selection.length!==1
+      this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
@@ -304,13 +294,14 @@ export default {
       const studentId = row.studentId || this.ids
       getOphthalmic(studentId).then(response => {
         this.$router.push({
-          path: '/leader/form',
-          name: 'Detail1',
+          path: '/leader/leader-detail',
+          name: "Detail",
           params: {
             studentId: studentId,
           }
+        }).catch(() => {
         });
-      });
+      })
     },
     /** 提交按钮 */
     submitForm() {
@@ -333,19 +324,25 @@ export default {
       });
     },
     /** 删除按钮操作 */
-    handleDelete(row) {
+    handleBack(row) {
       const studentIds = row.studentId || this.ids;
-      this.$confirm('是否确认删除眼科编号为"' + studentIds + '"的数据项?', "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(function() {
-        return delOphthalmic(studentIds);
-      }).then(() => {
-        this.getList();
-        this.msgSuccess("删除成功");
-      }).catch(() => {});
-    },
+      this.openDept = true;
+      getTable(row.studentId).then(response => {
+        this.openDept = true;
+        this.title = "选择驳回部门";
+      })
+      //   this.$confirm('是否确认删除眼科编号为"' + studentIds + '"的数据项?', "警告", {
+      //     confirmButtonText: "确定",
+      //     cancelButtonText: "取消",
+      //     type: "warning"
+      //   }).then(function() {
+      //     return delOphthalmic(studentIds);
+      //   }).then(() => {
+      //     this.getList();
+      //     this.msgSuccess("删除成功");
+      //   }).catch(() => {});
+      // },
+    }
   }
 };
 </script>

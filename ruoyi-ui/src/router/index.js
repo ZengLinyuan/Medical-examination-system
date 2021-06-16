@@ -126,9 +126,9 @@ export const constantRoutes = [
     hidden: true,
     children: [
       {
-        path: 'form/:studentId(\\d+)',
-        component: (resolve) => require(['@/views/leader/detail1'], resolve),
-        name: 'Detail1',
+        path: 'leader-detail/:studentId(\\d+)',
+        component: (resolve) => require(['@/views/leader/leader/leader-detail'], resolve),
+        name: 'Detail',
         meta: { title: '体检详情', icon: '' }
       }
     ]
@@ -301,6 +301,19 @@ export const constantRoutes = [
         component: (resolve) => require(['@/views/department/other/input'], resolve),
         name: 'input',
         meta: { title: '学生信息录入', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/leader',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        component: (resolve) => require(['@/views/leader/leader/index'], resolve),
+        name: 'Detail',
+        meta: { title: '审查', icon: '' }
       }
     ]
   }
