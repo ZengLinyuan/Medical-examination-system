@@ -1,22 +1,56 @@
 <template>
-  <div class="app-container">
+  <div>
     <el-row :gutter="15">
-      <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="undefinedpx"
+      <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="108px"
                label-position="left">
         <el-col :span="12">
+          <el-form-item label="左耳听力" prop="hearingLeft">
+            <el-input v-model="formData.hearingLeft" placeholder="请输入左耳听力" clearable :style="{width: '100%'}">
+              <template slot="append">公尺</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="右耳听力" prop="hearingRight">
+            <el-input v-model="formData.hearingRight" placeholder="请输入右耳听力" clearable :style="{width: '100%'}">
+              <template slot="append">公尺</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="耳疾" prop="earIllness">
+            <el-input v-model="formData.earIllness" placeholder="请输入耳疾" clearable :style="{width: '100%'}">
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="嗅觉" prop="smellSense">
+            <el-input v-model="formData.smellSense" placeholder="请输入嗅觉" clearable :style="{width: '100%'}">
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="鼻及鼻窦疾病" prop="noseIllness">
+            <el-input v-model="formData.noseIllness" placeholder="请输入鼻及鼻窦疾病" clearable :style="{width: '100%'}">
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
           <el-form-item label="咽喉" prop="throat">
-            <el-input v-model="formData.throat" clearable :style="{width: '50%'}"></el-input>
+            <el-input v-model="formData.throat" placeholder="请输入咽喉" clearable :style="{width: '100%'}">
+            </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="口吃" prop="stutter">
-            <el-input v-model="formData.stutter" clearable :style="{width: '50%'}"></el-input>
+            <el-input v-model="formData.stutter" placeholder="请输入口吃" clearable :style="{width: '100%'}">
+            </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item label-width="100px" label="医生意见" prop="doctorAdvice">
-            <el-input v-model="formData.doctorAdvice" type="textarea" placeholder="请输入医生意见"
-                      :autosize="{minRows: 4, maxRows: 4}" :style="{width: '50%'}"></el-input>
+          <el-form-item label="医生意见" prop="doctorOpinion">
+            <el-input v-model="formData.doctorOpinion" type="textarea" placeholder="请输入医生意见"
+                      :autosize="{minRows: 4, maxRows: 4}" :style="{width: '100%'}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
@@ -30,28 +64,60 @@
   </div>
 </template>
 <script>
+import Cookies from "js-cookie";
+import {commitEntForm} from "@/api/exam/input";
 export default {
   components: {},
   props: [],
   data() {
     return {
       formData: {
+        hearingLeft: undefined,
+        hearingRight: undefined,
+        earIllness: '无',
+        smellSense: '正常',
+        noseIllness: '无',
         throat: '正常',
         stutter: '正常',
-        doctorAdvice: '正常',
+        doctorOpinion: '正常',
       },
       rules: {
+        hearingLeft: [{
+          required: true,
+          message: '请输入左耳听力',
+          trigger: 'blur'
+        }],
+        hearingRight: [{
+          required: true,
+          message: '请输入右耳听力',
+          trigger: 'blur'
+        }],
+        earIllness: [{
+          required: true,
+          message: '请输入耳疾',
+          trigger: 'blur'
+        }],
+        smellSense: [{
+          required: true,
+          message: '请输入嗅觉',
+          trigger: 'blur'
+        }],
+        noseIllness: [{
+          required: true,
+          message: '请输入鼻及鼻窦疾病',
+          trigger: 'blur'
+        }],
         throat: [{
           required: true,
-          message: '',
+          message: '请输入咽喉',
           trigger: 'blur'
         }],
         stutter: [{
           required: true,
-          message: '',
+          message: '请输入口吃',
           trigger: 'blur'
         }],
-        doctorAdvice: [{
+        doctorOpinion: [{
           required: true,
           message: '请输入医生意见',
           trigger: 'blur'
@@ -65,10 +131,21 @@ export default {
   mounted() {},
   methods: {
     submitForm() {
-      this.$router.push({ path:"/ent/input" || "/" }).catch(()=>{});
       this.$refs['elForm'].validate(valid => {
-        if (!valid) return
-        // TODO 提交表单
+        if (valid) {
+          this.$store.dispatch("GetInfo").then(() => {
+            //this.formData.doctorId = user.state.userId;
+          }).catch(() => {
+          });
+          this.formData.doctorId = Cookies.get("userId")
+          this.formData.studentId = Cookies.get("studentId");
+          commitEntForm(this.formData).then(response => {
+            this.msgSuccess("录入成功");
+            Cookies.remove("studentId");
+            this.$router.push({ path:"/ent/input" || "/" }).catch(()=>{});
+          }).catch(() => {
+          });
+        }
       })
     },
     resetForm() {
