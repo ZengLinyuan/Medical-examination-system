@@ -10,10 +10,18 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="负责医生审查" prop="doctorAudit">
+      <el-form-item label="诊断时间" prop="diagnosisTime">
+        <el-date-picker clearable size="small"
+          v-model="queryParams.diagnosisTime"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="选择诊断时间">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="医生审查" prop="doctorAudit">
         <el-input
           v-model="queryParams.doctorAudit"
-          placeholder="请输入负责医生审查"
+          placeholder="请输入医生审查"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -30,10 +38,10 @@
       </el-form-item>
       <el-form-item label="提交时间" prop="submitTime">
         <el-date-picker clearable size="small"
-                        v-model="queryParams.submitTime"
-                        type="date"
-                        value-format="yyyy-MM-dd"
-                        placeholder="选择提交时间">
+          v-model="queryParams.submitTime"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="选择提交时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -43,7 +51,16 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-
+      <el-col :span="1.5">
+        <el-button
+          type="primary"
+          plain
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['department:ent:add']"
+        >新增</el-button>
+      </el-col>
       <el-col :span="1.5">
         <el-button
           type="success"
@@ -52,29 +69,43 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['department:chest:edit']"
+          v-hasPermi="['department:ent:edit']"
         >修改</el-button>
       </el-col>
-
+      <el-col :span="1.5">
+        <el-button
+          type="danger"
+          plain
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['department:ent:remove']"
+        >删除</el-button>
+      </el-col>
       <el-col :span="1.5">
         <el-button
           type="warning"
           plain
           icon="el-icon-download"
           size="mini"
-          :loading="exportLoading"
+		  :loading="exportLoading"
           @click="handleExport"
-          v-hasPermi="['department:chest:export']"
+          v-hasPermi="['department:ent:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="chestList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="entList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="学号" align="center" prop="studentId" />
-      <el-table-column label="诊断时间" align="center" prop="diagnosisTime" />
-      <el-table-column label="负责医生审查" align="center" prop="doctorAudit" />
+      <el-table-column label="诊断时间" align="center" prop="diagnosisTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.diagnosisTime, '{y}-{m}-{d}') }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="医生审查" align="center" prop="doctorAudit" />
       <el-table-column label="领导审查" align="center" prop="leaderAudit" />
       <el-table-column label="提交时间" align="center" prop="submitTime" width="180">
         <template slot-scope="scope">
@@ -88,13 +119,19 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['department:chest:edit']"
+            v-hasPermi="['department:ent:edit']"
           >修改</el-button>
-
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['department:ent:remove']"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-
+    
     <pagination
       v-show="total>0"
       :total="total"
@@ -103,21 +140,56 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改胸部放射检查对话框 -->
+    <!-- 添加或修改耳鼻喉科对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="胸部放射检查" prop="chestRadiography">
-          <el-input v-model="form.chestRadiography" placeholder="请输入胸部放射检查" />
+        <el-form-item label="诊断时间" prop="diagnosisTime">
+          <el-date-picker clearable size="small"
+            v-model="form.diagnosisTime"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择诊断时间">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="左耳听力" prop="hearingLeft">
+          <el-input v-model="form.hearingLeft" placeholder="请输入左耳听力" />
+        </el-form-item>
+        <el-form-item label="右耳听力" prop="hearingRight">
+          <el-input v-model="form.hearingRight" placeholder="请输入右耳听力" />
+        </el-form-item>
+        <el-form-item label="耳疾" prop="earIllness">
+          <el-input v-model="form.earIllness" placeholder="请输入耳疾" />
+        </el-form-item>
+        <el-form-item label="嗅觉" prop="smellSense">
+          <el-input v-model="form.smellSense" placeholder="请输入嗅觉" />
+        </el-form-item>
+        <el-form-item label="鼻及鼻窦疾病" prop="noseIllness">
+          <el-input v-model="form.noseIllness" placeholder="请输入鼻及鼻窦疾病" />
+        </el-form-item>
+        <el-form-item label="咽喉" prop="throat">
+          <el-input v-model="form.throat" placeholder="请输入咽喉" />
+        </el-form-item>
+        <el-form-item label="口吃" prop="stutter">
+          <el-input v-model="form.stutter" placeholder="请输入口吃" />
         </el-form-item>
         <el-form-item label="医生意见" prop="doctorOpinion">
           <el-input v-model="form.doctorOpinion" placeholder="请输入医生意见" />
         </el-form-item>
+        <el-form-item label="医生编号" prop="doctorId">
+          <el-input v-model="form.doctorId" placeholder="请输入医生编号" />
+        </el-form-item>
+        <el-form-item label="医生审查" prop="doctorAudit">
+          <el-input v-model="form.doctorAudit" placeholder="请输入医生审查" />
+        </el-form-item>
+        <el-form-item label="领导审查" prop="leaderAudit">
+          <el-input v-model="form.leaderAudit" placeholder="请输入领导审查" />
+        </el-form-item>
         <el-form-item label="提交时间" prop="submitTime">
           <el-date-picker clearable size="small"
-                          v-model="form.submitTime"
-                          type="date"
-                          value-format="yyyy-MM-dd"
-                          placeholder="选择提交时间">
+            v-model="form.submitTime"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择提交时间">
           </el-date-picker>
         </el-form-item>
       </el-form>
@@ -130,10 +202,10 @@
 </template>
 
 <script>
-import { listChest, getChest, delChest, addChest, updateChest, exportChest } from "@/api/department/chest";
+import { listEnt, getEnt, delEnt, addEnt, updateEnt, exportEnt } from "@/api/department/ent";
 
 export default {
-  name: "Chest",
+  name: "Ent",
   components: {
   },
   data() {
@@ -152,8 +224,8 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 胸部放射检查表格数据
-      chestList: [],
+      // 耳鼻喉科表格数据
+      entList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -163,6 +235,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         studentId: null,
+        diagnosisTime: null,
         doctorAudit: null,
         leaderAudit: null,
         submitTime: null
@@ -171,6 +244,9 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        diagnosisTime: [
+          { required: true, message: "诊断时间不能为空", trigger: "blur" }
+        ],
       }
     };
   },
@@ -178,11 +254,11 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询胸部放射检查列表 */
+    /** 查询耳鼻喉科列表 */
     getList() {
       this.loading = true;
-      listChest(this.queryParams).then(response => {
-        this.chestList = response.rows;
+      listEnt(this.queryParams).then(response => {
+        this.entList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
@@ -197,7 +273,13 @@ export default {
       this.form = {
         studentId: null,
         diagnosisTime: null,
-        chestRadiography: null,
+        hearingLeft: null,
+        hearingRight: null,
+        earIllness: null,
+        smellSense: null,
+        noseIllness: null,
+        throat: null,
+        stutter: null,
         doctorOpinion: null,
         doctorId: null,
         doctorAudit: null,
@@ -226,16 +308,16 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加胸部放射检查";
+      this.title = "添加耳鼻喉科";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const studentId = row.studentId || this.ids
-      getChest(studentId).then(response => {
+      getEnt(studentId).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改胸部放射检查";
+        this.title = "修改耳鼻喉科";
       });
     },
     /** 提交按钮 */
@@ -243,13 +325,13 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.studentId != null) {
-            updateChest(this.form).then(response => {
+            updateEnt(this.form).then(response => {
               this.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addChest(this.form).then(response => {
+            addEnt(this.form).then(response => {
               this.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -261,31 +343,31 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const studentIds = row.studentId || this.ids;
-      this.$confirm('是否确认删除胸部放射检查编号为"' + studentIds + '"的数据项?', "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(function() {
-        return delChest(studentIds);
-      }).then(() => {
-        this.getList();
-        this.msgSuccess("删除成功");
-      }).catch(() => {});
+      this.$confirm('是否确认删除耳鼻喉科编号为"' + studentIds + '"的数据项?', "警告", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }).then(function() {
+          return delEnt(studentIds);
+        }).then(() => {
+          this.getList();
+          this.msgSuccess("删除成功");
+        }).catch(() => {});
     },
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有胸部放射检查数据项?', "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(() => {
-        this.exportLoading = true;
-        return exportChest(queryParams);
-      }).then(response => {
-        this.download(response.msg);
-        this.exportLoading = false;
-      }).catch(() => {});
+      this.$confirm('是否确认导出所有耳鼻喉科数据项?', "警告", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }).then(() => {
+          this.exportLoading = true;
+          return exportEnt(queryParams);
+        }).then(response => {
+          this.download(response.msg);
+          this.exportLoading = false;
+        }).catch(() => {});
     }
   }
 };

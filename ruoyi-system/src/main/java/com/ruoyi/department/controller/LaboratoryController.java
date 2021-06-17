@@ -107,6 +107,7 @@ public class LaboratoryController extends BaseController
         return toAjax(laboratoryService.updateLaboratory(laboratory));
     }
 
+
     /**
      * 删除化验科
      */

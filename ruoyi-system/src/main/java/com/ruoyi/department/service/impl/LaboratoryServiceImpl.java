@@ -1,5 +1,6 @@
 package com.ruoyi.department.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,4 +91,6 @@ public class LaboratoryServiceImpl implements ILaboratoryService
     {
         return laboratoryMapper.deleteLaboratoryById(studentId);
     }
+
+
 }

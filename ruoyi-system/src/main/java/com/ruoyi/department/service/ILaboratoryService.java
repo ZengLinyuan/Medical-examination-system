@@ -1,5 +1,6 @@
 package com.ruoyi.department.service;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.department.domain.Laboratory;
 
@@ -58,4 +59,5 @@ public interface ILaboratoryService
      * @return 结果
      */
     public int deleteLaboratoryById(String studentId);
+
 }

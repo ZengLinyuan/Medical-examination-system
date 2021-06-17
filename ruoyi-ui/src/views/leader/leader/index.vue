@@ -88,7 +88,7 @@
     </el-row>
 
     <el-table v-loading="loading" :data="ophthalmicList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column type="selection" width="50" align="center" />
       <el-table-column label="学号" align="center" prop="studentId" />
       <el-table-column label="姓名" align="center" prop="name" />
       <el-table-column label="学院" align="center" prop="college" />
@@ -135,7 +135,7 @@
           <el-form ref="elForm"  :rules="rules" size="medium" label-width="100px">
             <el-col :span="12">
               <el-form-item label="科室" prop="dept_name">
-                <el-select placeholder="请选择科室" clearable :style="{width: '100%'}">
+                <el-select v-model="formData.dept_name" placeholder="请选择科室" clearable :style="{width: '100%'}">
                   <el-option v-for="(item, index) in dept_nameOptions" :key="index" :label="item.label"
                              :value="item.value" :disabled="item.disabled"></el-option>
                 </el-select>
@@ -150,6 +150,8 @@
       </el-dialog>
   </div>
 </template>
+
+
 
 <script>
 import {
@@ -186,6 +188,9 @@ export default {
       title: "",
       // 是否显示弹出层
       openDept: false,
+      formData: {
+        dept_name: '',
+      },
       dept_nameOptions: [{
         "label": "眼科",
         "value": 101
@@ -220,6 +225,9 @@ export default {
         pageNum: 1,
         pageSize: 10,
         studentId: null,
+        name:null,
+        college:null,
+        major:null,
         doctorAudit: null,
         leaderAudit: null,
         submitTime: null
