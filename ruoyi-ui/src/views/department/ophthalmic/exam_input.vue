@@ -311,9 +311,10 @@ export default {
       this.$refs['elForm'].validate(valid => {
         if (valid) {
             this.$store.dispatch("GetInfo").then(() => {
-              this.formData.doctorId = user.state.userId;
+              //this.formData.doctorId = user.state.userId;
             }).catch(() => {
             });
+            this.formData.doctorId = Cookies.get("userId")
             this.formData.studentId = Cookies.get("studentId");
           commitEyeForm(this.formData).then(response => {
             this.msgSuccess("录入成功");

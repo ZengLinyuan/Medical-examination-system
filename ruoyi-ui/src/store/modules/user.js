@@ -1,5 +1,6 @@
 import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import Cookies from "js-cookie";
 
 const user = {
   state: {
@@ -65,6 +66,7 @@ const user = {
           commit('SET_NAME', user.userName)
           commit('SET_AVATAR', avatar)
           commit('SET_USERID', user.userId)
+          Cookies.set("userId", user.userId, { expires: 30 });
           resolve(res)
         }).catch(error => {
           reject(error)
