@@ -183,7 +183,8 @@ public class PhysicalExaminationFormController extends BaseController
      * 修改各科
      */
     @PreAuthorize("@ss.hasPermi('health:form:editDepartment')")
-    @GetMapping("/editDepartment")
+    @Log(title = "各科表", businessType = BusinessType.UPDATE)
+    @PostMapping("/editDepartment")
     public AjaxResult editDepartment(@RequestBody Reject reject)
     {
         System.out.println("进入驳回操作");
@@ -211,7 +212,7 @@ public class PhysicalExaminationFormController extends BaseController
 //                break;
             case 108:
                 ChestRadiology chestRadiology = new ChestRadiology();
-                chestRadiology.setStudentId(reject.getStundetId());
+                chestRadiology.setStudentId(reject.getStudentId());
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date newTime = null;
                 try {

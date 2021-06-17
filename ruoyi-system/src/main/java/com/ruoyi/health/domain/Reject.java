@@ -3,15 +3,15 @@ package com.ruoyi.health.domain;
 import java.util.Date;
 
 public class Reject {
-    private String stundetId;
-
-    public String getStundetId() {
-        return stundetId;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setStundetId(String stundetId) {
-        this.stundetId = stundetId;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
+
+    private String studentId;
 
     public void setDiagnosisTime(String diagnosisTime) {
         this.diagnosisTime = diagnosisTime;

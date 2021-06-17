@@ -159,6 +159,7 @@ import {
 } from "@/api/eye/ophthalmic";
 import {getRole} from "@/api/system/role";
 import {backStuForm, getStuForm} from "@/api/health/form";
+import {editDepartment} from "../../../api/leader/leader";
 
 export default {
   name: "Ophthalmic",
@@ -312,7 +313,7 @@ export default {
     },
     /** 提交按钮 */
     submitForm() {
-      editDepartment(this.formData.studentId).then(response => {
+      editDepartment(this.formData).then(response => {
         this.msgSuccess("驳回成功");
         this.openDept = false;
         this.getList();

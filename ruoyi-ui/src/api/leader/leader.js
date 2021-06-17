@@ -39,7 +39,7 @@ export function delForm(studentId) {
 export function editDepartment(formdata){
   return request({
     url: '/health/form/editDepartment',
-    method: 'get',
-    params:formdata
+    method: 'post',
+    data:formdata
   })
 }
