@@ -17,6 +17,9 @@
   </div>
 </template>
 <script>
+import Cookies from "js-cookie";
+import {commitOtherForm} from "@/api/exam/input";
+
 export default {
   components: {},
   props: [],
@@ -46,10 +49,21 @@ export default {
   mounted() {},
   methods: {
     submitForm() {
-      this.$router.push({ path:"/other/input" || "/" }).catch(()=>{});
       this.$refs['elForm'].validate(valid => {
-        if (!valid) return
-        // TODO 提交表单
+        if (valid) {
+          this.$store.dispatch("GetInfo").then(() => {
+            //this.formData.doctorId = user.state.userId;
+          }).catch(() => {
+          });
+          this.formData.doctorId = Cookies.get("userId")
+          this.formData.studentId = Cookies.get("studentId");
+          commitOtherForm(this.formData).then(response => {
+            this.msgSuccess("录入成功");
+            Cookies.remove("studentId");
+            this.$router.push({ path:"/other/input" || "/" }).catch(()=>{});
+          }).catch(() => {
+          });
+        }
       })
     },
     resetForm() {

@@ -76,7 +76,7 @@ public class ChestRadiologyController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('department:chest:add')")
     @Log(title = "胸部放射检查", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping(value = "/add")
     public AjaxResult add(@RequestBody ChestRadiology chestRadiology)
     {
         Date date = new Date();//获取当前日期时间

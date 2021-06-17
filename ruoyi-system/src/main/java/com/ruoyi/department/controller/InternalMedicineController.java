@@ -76,7 +76,7 @@ public class InternalMedicineController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('department:internal:add')")
     @Log(title = "内科", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping(value = "/add")
     public AjaxResult add(@RequestBody InternalMedicine internalMedicine)
     {
         Date date = new Date();//获取当前日期时间

@@ -18,6 +18,10 @@
   </div>
 </template>
 <script>
+
+import {commitLaboratoryForm} from "@/api/exam/input";
+import Cookies from "js-cookie";
+
 export default {
   components: {},
   props: [],
@@ -47,10 +51,21 @@ export default {
   mounted() {},
   methods: {
     submitForm() {
-      this.$router.push({ path:"/laboratory/input" || "/" }).catch(()=>{});
       this.$refs['elForm'].validate(valid => {
-        if (!valid) return
-        // TODO 提交表单
+        if (valid) {
+          this.$store.dispatch("GetInfo").then(() => {
+            //this.formData.doctorId = user.state.userId;
+          }).catch(() => {
+          });
+          this.formData.doctorId = Cookies.get("userId")
+          this.formData.studentId = Cookies.get("studentId");
+          commitLaboratoryForm(this.formData).then(response => {
+            this.msgSuccess("录入成功");
+            Cookies.remove("studentId");
+            this.$router.push({ path:"/laboratory/input" || "/" }).catch(()=>{});
+          }).catch(() => {
+          });
+        }
       })
     },
     resetForm() {
