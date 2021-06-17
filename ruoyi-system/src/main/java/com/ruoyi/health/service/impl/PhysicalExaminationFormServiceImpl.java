@@ -90,4 +90,11 @@ public class PhysicalExaminationFormServiceImpl implements IPhysicalExaminationF
     {
         return physicalExaminationFormMapper.deletePhysicalExaminationFormById(studentId);
     }
+
+
+    @Override
+    public List<PhysicalExaminationForm> selectAllPhysicalExaminationFormList()
+    {
+        return physicalExaminationFormMapper.selectAllPhysicalExaminationFormList();
+    }
 }

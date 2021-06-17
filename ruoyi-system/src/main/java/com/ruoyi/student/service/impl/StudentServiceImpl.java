@@ -91,4 +91,6 @@ public class StudentServiceImpl implements IStudentService
     {
         return studentMapper.deleteStudentById(id);
     }
+
+    public List<Student> selectAllStudentList(){ return studentMapper.selectAllStudentList();}
 }

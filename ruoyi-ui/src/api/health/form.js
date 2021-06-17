@@ -51,3 +51,21 @@ export function exportForm(query) {
     params: query
   })
 }
+
+//获得体检信息
+export function getStuForm(query){
+    return request({
+      url: '/health/form/stuList',
+      method: 'get',
+      params:query
+    })
+}
+
+//驳回体检信息
+export function editDepartment(data){
+  return request({
+    url: '/health/form/stuList',
+    method: 'get',
+    params:data
+  })
+}

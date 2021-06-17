@@ -1,5 +1,6 @@
 package com.ruoyi.department.service;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.department.domain.ChestRadiology;
 
@@ -58,4 +59,6 @@ public interface IChestRadiologyService
      * @return 结果
      */
     public int deleteChestRadiologyById(String studentId);
+
+    public int updateChestRadiologyLeaderAudit(ChestRadiology chestRadiology);
 }
