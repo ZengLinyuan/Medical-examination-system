@@ -69,6 +69,7 @@
 import {addForm, updateForm} from "@/api/health/form";
 import {commitEyeForm} from "@/api/exam/input";
 import Cookies from "js-cookie";
+import user from "@/store/modules/user";
 
 export default {
   components: {},
@@ -126,163 +127,163 @@ export default {
       },
       sightLeftNoglassesOptions: [{
         "label": "4.0",
-        "value": 1
+        "value": 4.0
       }, {
         "label": "4.1",
-        "value": 2
+        "value": 4.1
       }, {
         "label": "4.2",
-        "value": 3
+        "value": 4.2
       }, {
         "label": "4.3",
-        "value": 4
+        "value": 4.3
       }, {
         "label": "4.4",
-        "value": 5
+        "value": 4.4
       }, {
         "label": "4.5",
-        "value": 6
+        "value": 4.5
       }, {
         "label": "4.6",
-        "value": 7
+        "value": 4.6
       }, {
         "label": "4.7",
-        "value": 8
+        "value": 4.7
       }, {
         "label": "4.8",
-        "value": 9
+        "value": 4.8
       }, {
         "label": "4.9",
-        "value": 10
+        "value": 4.9
       }, {
         "label": "5.0",
-        "value": 11
+        "value": 5.0
       }, {
         "label": "5.1",
-        "value": 12
+        "value": 5.1
       }, {
         "label": "5.2",
-        "value": 13
+        "value": 5.2
       }],
-      sightRightNoglassesOptions: [{
+      sightRightNoglassesOptions:[{
         "label": "4.0",
-        "value": 1
+        "value": 4.0
       }, {
         "label": "4.1",
-        "value": 2
+        "value": 4.1
       }, {
         "label": "4.2",
-        "value": 3
+        "value": 4.2
       }, {
         "label": "4.3",
-        "value": 4
+        "value": 4.3
       }, {
         "label": "4.4",
-        "value": 5
+        "value": 4.4
       }, {
         "label": "4.5",
-        "value": 6
+        "value": 4.5
       }, {
         "label": "4.6",
-        "value": 7
+        "value": 4.6
       }, {
         "label": "4.7",
-        "value": 8
+        "value": 4.7
       }, {
         "label": "4.8",
-        "value": 9
+        "value": 4.8
       }, {
         "label": "4.9",
-        "value": 10
+        "value": 4.9
       }, {
         "label": "5.0",
-        "value": 11
+        "value": 5.0
       }, {
         "label": "5.1",
-        "value": 12
+        "value": 5.1
       }, {
         "label": "5.2",
-        "value": 13
+        "value": 5.2
       }],
       sightLeftWithglassesOptions: [{
         "label": "4.0",
-        "value": 1
+        "value": 4.0
       }, {
         "label": "4.1",
-        "value": 2
+        "value": 4.1
       }, {
         "label": "4.2",
-        "value": 3
+        "value": 4.2
       }, {
         "label": "4.3",
-        "value": 4
+        "value": 4.3
       }, {
         "label": "4.4",
-        "value": 5
+        "value": 4.4
       }, {
         "label": "4.5",
-        "value": 6
+        "value": 4.5
       }, {
         "label": "4.6",
-        "value": 7
+        "value": 4.6
       }, {
         "label": "4.7",
-        "value": 8
+        "value": 4.7
       }, {
         "label": "4.8",
-        "value": 9
+        "value": 4.8
       }, {
         "label": "4.9",
-        "value": 10
+        "value": 4.9
       }, {
         "label": "5.0",
-        "value": 11
+        "value": 5.0
       }, {
         "label": "5.1",
-        "value": 12
+        "value": 5.1
       }, {
         "label": "5.2",
-        "value": 13
+        "value": 5.2
       }],
       sightRightWithglassesOptions: [{
         "label": "4.0",
-        "value": 1
+        "value": 4.0
       }, {
         "label": "4.1",
-        "value": 2
+        "value": 4.1
       }, {
         "label": "4.2",
-        "value": 3
+        "value": 4.2
       }, {
         "label": "4.3",
-        "value": 4
+        "value": 4.3
       }, {
         "label": "4.4",
-        "value": 5
+        "value": 4.4
       }, {
         "label": "4.5",
-        "value": 6
+        "value": 4.5
       }, {
         "label": "4.6",
-        "value": 7
+        "value": 4.6
       }, {
         "label": "4.7",
-        "value": 8
+        "value": 4.7
       }, {
         "label": "4.8",
-        "value": 9
+        "value": 4.8
       }, {
         "label": "4.9",
-        "value": 10
+        "value": 4.9
       }, {
         "label": "5.0",
-        "value": 11
+        "value": 5.0
       }, {
         "label": "5.1",
-        "value": 12
+        "value": 5.1
       }, {
         "label": "5.2",
-        "value": 13
+        "value": 5.2
       }],
       colorVisionOptions: [{
         "label": "红",
@@ -321,7 +322,6 @@ export default {
             Cookies.remove("studentId");
             this.$router.push({ path:"/ophthalmic/input" || "/" }).catch(()=>{});
           }).catch(() => {
-            this.getCode();
           });
         }
       })
