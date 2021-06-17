@@ -81,7 +81,7 @@ public class OphthalmicController extends BaseController
         Date date = new Date();//获取当前日期时间
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String now = df.format(date);//以格式处理date
-        System.err.println(now);//打印处理的结果
+        //System.err.println(now);//打印处理的结果
         date = null;//清空date对象
         try {
             date = df.parse(now);//按格式逆转化now
@@ -90,7 +90,6 @@ public class OphthalmicController extends BaseController
         }
         ophthalmic.setSubmitTime(date);
         ophthalmic.setDiagnosisTime(date);
-
         ophthalmic.setColorVisionRed(0);
         ophthalmic.setColorVisionGreen(0);
         ophthalmic.setColorVisionPurple(0);
@@ -110,7 +109,6 @@ public class OphthalmicController extends BaseController
                 ophthalmic.setColorVisionYellow(1);
             }
         }
-        System.out.println("医生id：" + ophthalmic.getDoctorId());
         ophthalmic.setDoctorAudit("审核中");
         ophthalmic.setLeaderAudit("审核中");
         return toAjax(ophthalmicService.insertOphthalmic(ophthalmic));

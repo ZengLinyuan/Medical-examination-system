@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.department.mapper.SurgeryMapper">
+    
+    <resultMap type="Surgery" id="SurgeryResult">
+        <result property="studentId"    column="student_ID"    />
+        <result property="diagnosisTime"    column="diagnosis_time"    />
+        <result property="height"    column="height"    />
+        <result property="waist"    column="waist"    />
+        <result property="weight"    column="weight"    />
+        <result property="skin"    column="skin"    />
+        <result property="lymph"    column="lymph"    />
+        <result property="thyroid"    column="thyroid"    />
+        <result property="spine"    column="spine"    />
+        <result property="limb"    column="limb"    />
+        <result property="joint"    column="joint"    />
+        <result property="flatFeet"    column="flat_feet"    />
+        <result property="other"    column="other"    />
+        <result property="doctorOpinion"    column="doctor_opinion"    />
+        <result property="doctorId"    column="doctor_ID"    />
+        <result property="doctorAudit"    column="doctor_audit"    />
+        <result property="leaderAudit"    column="leader_audit"    />
+        <result property="submitTime"    column="submit_time"    />
+    </resultMap>
+
+    <sql id="selectSurgeryVo">
+        select student_ID, diagnosis_time, height, waist, weight, skin, lymph, thyroid, spine, limb, joint, flat_feet, other, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from surgery
+    </sql>
+
+    <select id="selectSurgeryList" parameterType="Surgery" resultMap="SurgeryResult">
+        <include refid="selectSurgeryVo"/>
+        <where>  
+            <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
+            <if test="diagnosisTime != null "> and diagnosis_time = #{diagnosisTime}</if>
+            <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
+            <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
+            <if test="submitTime != null "> and submit_time = #{submitTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectSurgeryById" parameterType="String" resultMap="SurgeryResult">
+        <include refid="selectSurgeryVo"/>
+        where student_ID = #{studentId}
+    </select>
+        
+    <insert id="insertSurgery" parameterType="Surgery" useGeneratedKeys="true" keyProperty="studentId">
+        insert into surgery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="diagnosisTime != null">diagnosis_time,</if>
+            <if test="height != null">height,</if>
+            <if test="waist != null">waist,</if>
+            <if test="weight != null">weight,</if>
+            <if test="skin != null">skin,</if>
+            <if test="lymph != null">lymph,</if>
+            <if test="thyroid != null">thyroid,</if>
+            <if test="spine != null">spine,</if>
+            <if test="limb != null">limb,</if>
+            <if test="joint != null">joint,</if>
+            <if test="flatFeet != null">flat_feet,</if>
+            <if test="other != null">other,</if>
+            <if test="doctorOpinion != null">doctor_opinion,</if>
+            <if test="doctorId != null">doctor_ID,</if>
+            <if test="doctorAudit != null">doctor_audit,</if>
+            <if test="leaderAudit != null">leader_audit,</if>
+            <if test="submitTime != null">submit_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="diagnosisTime != null">#{diagnosisTime},</if>
+            <if test="height != null">#{height},</if>
+            <if test="waist != null">#{waist},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="skin != null">#{skin},</if>
+            <if test="lymph != null">#{lymph},</if>
+            <if test="thyroid != null">#{thyroid},</if>
+            <if test="spine != null">#{spine},</if>
+            <if test="limb != null">#{limb},</if>
+            <if test="joint != null">#{joint},</if>
+            <if test="flatFeet != null">#{flatFeet},</if>
+            <if test="other != null">#{other},</if>
+            <if test="doctorOpinion != null">#{doctorOpinion},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="doctorAudit != null">#{doctorAudit},</if>
+            <if test="leaderAudit != null">#{leaderAudit},</if>
+            <if test="submitTime != null">#{submitTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSurgery" parameterType="Surgery">
+        update surgery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
+            <if test="height != null">height = #{height},</if>
+            <if test="waist != null">waist = #{waist},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="skin != null">skin = #{skin},</if>
+            <if test="lymph != null">lymph = #{lymph},</if>
+            <if test="thyroid != null">thyroid = #{thyroid},</if>
+            <if test="spine != null">spine = #{spine},</if>
+            <if test="limb != null">limb = #{limb},</if>
+            <if test="joint != null">joint = #{joint},</if>
+            <if test="flatFeet != null">flat_feet = #{flatFeet},</if>
+            <if test="other != null">other = #{other},</if>
+            <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
+            <if test="doctorId != null">doctor_ID = #{doctorId},</if>
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+            <if test="submitTime != null">submit_time = #{submitTime},</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
+
+    <delete id="deleteSurgeryById" parameterType="String">
+        delete from surgery where student_ID = #{studentId}
+    </delete>
+
+    <delete id="deleteSurgeryByIds" parameterType="String">
+        delete from surgery where student_ID in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>

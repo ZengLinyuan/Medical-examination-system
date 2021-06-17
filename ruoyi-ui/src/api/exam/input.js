@@ -15,3 +15,35 @@ export function commitEyeForm(data) {
     data: data
   })
 }
+
+export function commitChestForm(data) {
+  return request({
+    url: '/department/chest/add',
+    method: 'post',
+    data: data
+  })
+}
+
+export function commitInternalForm(data) {
+  return request({
+    url: '/department/internal/add',
+    method: 'post',
+    data: data
+  })
+}
+
+export function commitLaboratoryForm(data) {
+  return request({
+    url: '/department/laboratory/add',
+    method: 'post',
+    data: data
+  })
+}
+
+export function commitOtherForm(data) {
+  return request({
+    url: '/department/other/add',
+    method: 'post',
+    data: data
+  })
+}

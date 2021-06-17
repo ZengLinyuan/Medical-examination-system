@@ -76,7 +76,7 @@ public class OtherController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('department:other:add')")
     @Log(title = "其他科", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping(value = "/add")
     public AjaxResult add(@RequestBody Other other)
     {
         Date date = new Date();//获取当前日期时间

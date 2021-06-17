@@ -158,12 +158,6 @@
         <el-form-item label="医生编号" prop="doctorId">
           <el-input v-model="form.doctorId" placeholder="请输入医生编号" />
         </el-form-item>
-        <el-form-item label="负责医生审查" prop="doctorAudit">
-          <el-input v-model="form.doctorAudit" placeholder="请输入负责医生审查" />
-        </el-form-item>
-        <el-form-item label="院长审查" prop="leaderAudit">
-          <el-input v-model="form.leaderAudit" placeholder="请输入院长审查" />
-        </el-form-item>
         <el-form-item label="提交时间" prop="submitTime">
           <el-date-picker clearable size="small"
             v-model="form.submitTime"
