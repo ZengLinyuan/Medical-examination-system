@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.department.mapper.LaboratoryMapper">
+    
+    <resultMap type="Laboratory" id="LaboratoryResult">
+        <result property="studentId"    column="student_ID"    />
+        <result property="diagnosisTime"    column="diagnosis_time"    />
+        <result property="laboratoryExamination"    column="laboratory_examination"    />
+        <result property="doctorOpinion"    column="doctor_opinion"    />
+        <result property="doctorId"    column="doctor_ID"    />
+        <result property="doctorAudit"    column="doctor_audit"    />
+        <result property="leaderAudit"    column="leader_audit"    />
+        <result property="submitTime"    column="submit_time"    />
+    </resultMap>
+
+    <sql id="selectLaboratoryVo">
+        select student_ID, diagnosis_time, laboratory_examination, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from laboratory
+    </sql>
+
+    <select id="selectLaboratoryList" parameterType="Laboratory" resultMap="LaboratoryResult">
+        <include refid="selectLaboratoryVo"/>
+        <where>  
+            <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
+            <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
+            <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
+            <if test="submitTime != null "> and submit_time = #{submitTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectLaboratoryById" parameterType="String" resultMap="LaboratoryResult">
+        <include refid="selectLaboratoryVo"/>
+        where student_ID = #{studentId}
+    </select>
+        
+    <insert id="insertLaboratory" parameterType="Laboratory">
+        insert into laboratory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_ID,</if>
+            <if test="diagnosisTime != null">diagnosis_time,</if>
+            <if test="laboratoryExamination != null">laboratory_examination,</if>
+            <if test="doctorOpinion != null">doctor_opinion,</if>
+            <if test="doctorId != null">doctor_ID,</if>
+            <if test="doctorAudit != null">doctor_audit,</if>
+            <if test="leaderAudit != null">leader_audit,</if>
+            <if test="submitTime != null">submit_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="diagnosisTime != null">#{diagnosisTime},</if>
+            <if test="laboratoryExamination != null">#{laboratoryExamination},</if>
+            <if test="doctorOpinion != null">#{doctorOpinion},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="doctorAudit != null">#{doctorAudit},</if>
+            <if test="leaderAudit != null">#{leaderAudit},</if>
+            <if test="submitTime != null">#{submitTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLaboratory" parameterType="Laboratory">
+        update laboratory
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
+            <if test="laboratoryExamination != null">laboratory_examination = #{laboratoryExamination},</if>
+            <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
+            <if test="doctorId != null">doctor_ID = #{doctorId},</if>
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+            <if test="submitTime != null">submit_time = #{submitTime},</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
+
+    <delete id="deleteLaboratoryById" parameterType="String">
+        delete from laboratory where student_ID = #{studentId}
+    </delete>
+
+    <delete id="deleteLaboratoryByIds" parameterType="String">
+        delete from laboratory where student_ID in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>
