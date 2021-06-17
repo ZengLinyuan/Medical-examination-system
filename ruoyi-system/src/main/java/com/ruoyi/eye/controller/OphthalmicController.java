@@ -90,11 +90,27 @@ public class OphthalmicController extends BaseController
         }
         ophthalmic.setSubmitTime(date);
         ophthalmic.setDiagnosisTime(date);
-        ophthalmic.setColorVisionRed(ophthalmic.getColorVision()[0]);
-        ophthalmic.setColorVisionGreen(ophthalmic.getColorVision()[1]);
-        ophthalmic.setColorVisionPurple(ophthalmic.getColorVision()[2]);
-        ophthalmic.setColorVisionBlue(ophthalmic.getColorVision()[3]);
-        ophthalmic.setColorVisionYellow(ophthalmic.getColorVision()[4]);
+
+        ophthalmic.setColorVisionRed(0);
+        ophthalmic.setColorVisionGreen(0);
+        ophthalmic.setColorVisionPurple(0);
+        ophthalmic.setColorVisionBlue(0);
+        ophthalmic.setColorVisionYellow(0);
+        int[] color = ophthalmic.getColorVision();
+        for(int i = 0;i < color.length;i++){
+            if(color[i] == 1){
+                ophthalmic.setColorVisionRed(1);
+            }else if(color[i] == 2){
+                ophthalmic.setColorVisionGreen(1);
+            }else if(color[i] == 3){
+                ophthalmic.setColorVisionPurple(1);
+            }else if(color[i] == 4){
+                ophthalmic.setColorVisionBlue(1);
+            }else if(color[i] == 5){
+                ophthalmic.setColorVisionYellow(1);
+            }
+        }
+        System.out.println("医生id：" + ophthalmic.getDoctorId());
         ophthalmic.setDoctorAudit("审核中");
         ophthalmic.setLeaderAudit("审核中");
         return toAjax(ophthalmicService.insertOphthalmic(ophthalmic));
