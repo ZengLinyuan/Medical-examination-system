@@ -1,5 +1,7 @@
 package com.ruoyi.health.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -123,7 +125,7 @@ public class PhysicalExaminationFormController extends BaseController
         List<StuPhyForm> stuPhyList = new ArrayList<StuPhyForm>();
         for(PhysicalExaminationForm physicalExaminationForm : phyList){
             for(Student student : stuList){
-                if(physicalExaminationForm.getStudentId().equals(student.getStudentId())){
+                if(physicalExaminationForm.getStudentId().equals(student.getId())){
                     StuPhyForm tempstuPhyForm = new StuPhyForm();
                     tempstuPhyForm.setId(student.getId());
                     tempstuPhyForm.setName(student.getName());
@@ -131,7 +133,10 @@ public class PhysicalExaminationFormController extends BaseController
                     tempstuPhyForm.setMajor(student.getMajor());
                     tempstuPhyForm.setDoctorAudit(physicalExaminationForm.getDoctorAudit());
                     tempstuPhyForm.setLeaderAudit(physicalExaminationForm.getLeaderAudit());
-                    tempstuPhyForm.setSubmitTimeLeader(new Date());
+                    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                    String time = sdf.format(physicalExaminationForm.getInspectorTime());
+                    tempstuPhyForm.setSubmitTimeLeader(time);
+                    stuPhyList.add(tempstuPhyForm);
                 }
             }
         }

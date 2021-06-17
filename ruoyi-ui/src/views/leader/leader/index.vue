@@ -89,17 +89,13 @@
 
     <el-table v-loading="loading" :data="ophthalmicList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50" align="center" />
-      <el-table-column label="学号" align="center" prop="studentId" />
+      <el-table-column label="学号" align="center" prop="id" />
+      <el-table-column label="体检时间" align="center" prop="submitTimeLeader" type="date" format="yyyy-MM-dd" width="180" />
       <el-table-column label="姓名" align="center" prop="name" />
       <el-table-column label="学院" align="center" prop="college" />
       <el-table-column label="专业" align="center" prop="major" />
       <el-table-column label="负责医生审查" align="center" prop="doctorAudit" />
       <el-table-column label="院长审查" align="center" prop="leaderAudit" />
-      <el-table-column label="提交时间" align="center" prop="submitTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.submitTime, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
         <el-button
@@ -135,7 +131,7 @@
           <el-form ref="elForm"  :rules="rules" size="medium" label-width="100px">
             <el-col :span="12">
               <el-form-item label="科室" prop="dept_name">
-                <el-select v-model="formData.dept_name" placeholder="请选择科室" clearable :style="{width: '100%'}">
+                <el-select v-model="dept_name" placeholder="请选择科室" clearable :style="{width: '100%'}">
                   <el-option v-for="(item, index) in dept_nameOptions" :key="index" :label="item.label"
                              :value="item.value" :disabled="item.disabled"></el-option>
                 </el-select>
@@ -144,7 +140,7 @@
           </el-form>
         </el-row>
         <div slot="footer">
-          <el-button @click="close">取消</el-button>
+          <el-button @click="cancel">取消</el-button>
           <el-button type="primary" @click="handelConfirm">确定</el-button>
         </div>
       </el-dialog>
@@ -162,6 +158,7 @@ import {
   updateOphthalmic,
 } from "@/api/eye/ophthalmic";
 import {getRole} from "@/api/system/role";
+import {getStuForm} from "@/api/health/form";
 
 export default {
   name: "Ophthalmic",
@@ -188,9 +185,9 @@ export default {
       title: "",
       // 是否显示弹出层
       openDept: false,
-      formData: {
-        dept_name: '',
-      },
+      studentId:'',
+      diagnosisTime:'',
+      dept_name: '',
       dept_nameOptions: [{
         "label": "眼科",
         "value": 101
@@ -224,13 +221,13 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        studentId: null,
+        id: null,
+        submitTimeLeader: null,
         name:null,
         college:null,
         major:null,
         doctorAudit: null,
         leaderAudit: null,
-        submitTime: null
       },
 
       // 表单参数
@@ -246,7 +243,7 @@ export default {
     /** 查询眼科列表 */
     getList() {
       this.loading = true;
-      listOphthalmic(this.queryParams).then(response => {
+      getStuForm(this.queryParams).then(response => {
         this.ophthalmicList = response.rows;
         this.total = response.total;
         this.loading = false;
@@ -254,7 +251,7 @@ export default {
     },
     // 取消按钮
     cancel() {
-      this.open = false;
+      this.openDept = false;
       this.reset();
     },
     // 表单重置
@@ -296,7 +293,7 @@ export default {
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
-    /** 修改按钮操作 */
+    /** 查看按钮操作 */
     handleUpdate(row) {
       this.reset();
       const studentId = row.studentId || this.ids
@@ -331,7 +328,7 @@ export default {
         }
       });
     },
-    /** 删除按钮操作 */
+    /** 驳回按钮操作 */
     handleBack(row) {
       const studentIds = row.studentId || this.ids;
       this.openDept = true;

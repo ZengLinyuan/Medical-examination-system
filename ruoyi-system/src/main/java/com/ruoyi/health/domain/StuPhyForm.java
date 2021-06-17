@@ -76,15 +76,15 @@ public class StuPhyForm {
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private String leaderAudit;
 
-    public Date getSubmitTimeLeader() {
-        return submitTimeLeader;
+    public void setSubmitTimeLeader(String submitTimeLeader) {
+        this.submitTimeLeader = submitTimeLeader;
     }
 
-    public void setSubmitTimeLeader(Date submitTimeLeader) {
-        this.submitTimeLeader = submitTimeLeader;
+    public String getSubmitTimeLeader() {
+        return submitTimeLeader;
     }
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Date submitTimeLeader;
+    private String submitTimeLeader;
 }
