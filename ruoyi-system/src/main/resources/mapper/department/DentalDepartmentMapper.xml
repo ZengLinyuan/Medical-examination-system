@@ -2,12 +2,15 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.department.mapper.LaboratoryMapper">
+<mapper namespace="com.ruoyi.department.mapper.DentalDepartmentMapper">
     
-    <resultMap type="Laboratory" id="LaboratoryResult">
+    <resultMap type="DentalDepartment" id="DentalDepartmentResult">
         <result property="studentId"    column="student_ID"    />
         <result property="diagnosisTime"    column="diagnosis_time"    />
-        <result property="laboratoryExamination"    column="laboratory_examination"    />
+        <result property="dentalCaries"    column="dental_caries"    />
+        <result property="missingTeeth"    column="missing_teeth"    />
+        <result property="alveolar"    column="alveolar"    />
+        <result property="other"    column="other"    />
         <result property="doctorOpinion"    column="doctor_opinion"    />
         <result property="doctorId"    column="doctor_ID"    />
         <result property="doctorAudit"    column="doctor_audit"    />
@@ -15,31 +18,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="submitTime"    column="submit_time"    />
     </resultMap>
 
-    <sql id="selectLaboratoryVo">
-        select student_ID, diagnosis_time, laboratory_examination, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from laboratory
+    <sql id="selectDentalDepartmentVo">
+        select student_ID, diagnosis_time, dental_caries, missing_teeth, alveolar, other, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from dental_department
     </sql>
 
-    <select id="selectLaboratoryList" parameterType="Laboratory" resultMap="LaboratoryResult">
-        <include refid="selectLaboratoryVo"/>
+    <select id="selectDentalDepartmentList" parameterType="DentalDepartment" resultMap="DentalDepartmentResult">
+        <include refid="selectDentalDepartmentVo"/>
         <where>  
-            <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
+            <if test="studentId != null "> and student_ID = #{studentId}</if>
+            <if test="diagnosisTime != null "> and diagnosis_time = #{diagnosisTime}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
         </where>
     </select>
     
-    <select id="selectLaboratoryById" parameterType="String" resultMap="LaboratoryResult">
-        <include refid="selectLaboratoryVo"/>
+    <select id="selectDentalDepartmentById" parameterType="Long" resultMap="DentalDepartmentResult">
+        <include refid="selectDentalDepartmentVo"/>
         where student_ID = #{studentId}
     </select>
         
-    <insert id="insertLaboratory" parameterType="Laboratory">
-        insert into laboratory
+    <insert id="insertDentalDepartment" parameterType="DentalDepartment" useGeneratedKeys="true" keyProperty="studentId">
+        insert into dental_department
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="studentId != null">student_ID,</if>
             <if test="diagnosisTime != null">diagnosis_time,</if>
-            <if test="laboratoryExamination != null">laboratory_examination,</if>
+            <if test="dentalCaries != null">dental_caries,</if>
+            <if test="missingTeeth != null">missing_teeth,</if>
+            <if test="alveolar != null">alveolar,</if>
+            <if test="other != null">other,</if>
             <if test="doctorOpinion != null">doctor_opinion,</if>
             <if test="doctorId != null">doctor_ID,</if>
             <if test="doctorAudit != null">doctor_audit,</if>
@@ -47,9 +53,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="submitTime != null">submit_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="studentId != null">#{studentId},</if>
             <if test="diagnosisTime != null">#{diagnosisTime},</if>
-            <if test="laboratoryExamination != null">#{laboratoryExamination},</if>
+            <if test="dentalCaries != null">#{dentalCaries},</if>
+            <if test="missingTeeth != null">#{missingTeeth},</if>
+            <if test="alveolar != null">#{alveolar},</if>
+            <if test="other != null">#{other},</if>
             <if test="doctorOpinion != null">#{doctorOpinion},</if>
             <if test="doctorId != null">#{doctorId},</if>
             <if test="doctorAudit != null">#{doctorAudit},</if>
@@ -58,11 +66,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateLaboratory" parameterType="Laboratory">
-        update laboratory
+    <update id="updateDentalDepartment" parameterType="DentalDepartment">
+        update dental_department
         <trim prefix="SET" suffixOverrides=",">
             <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
-            <if test="laboratoryExamination != null">laboratory_examination = #{laboratoryExamination},</if>
+            <if test="dentalCaries != null">dental_caries = #{dentalCaries},</if>
+            <if test="missingTeeth != null">missing_teeth = #{missingTeeth},</if>
+            <if test="alveolar != null">alveolar = #{alveolar},</if>
+            <if test="other != null">other = #{other},</if>
             <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
             <if test="doctorId != null">doctor_ID = #{doctorId},</if>
             <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
@@ -72,22 +83,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where student_ID = #{studentId}
     </update>
 
-    <update id="updateLaboratoryDoctorAudit" parameterType="Laboratory">
-        update laboratory
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
-            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
-            <if test="submitTime != null">submit_time = #{diagnosisTime},</if>
-        </trim>
-        where student_ID = #{studentId}
-    </update>
-
-    <delete id="deleteLaboratoryById" parameterType="String">
-        delete from laboratory where student_ID = #{studentId}
+    <delete id="deleteDentalDepartmentById" parameterType="Long">
+        delete from dental_department where student_ID = #{studentId}
     </delete>
 
-    <delete id="deleteLaboratoryByIds" parameterType="String">
-        delete from laboratory where student_ID in 
+    <delete id="deleteDentalDepartmentByIds" parameterType="String">
+        delete from dental_department where student_ID in 
         <foreach item="studentId" collection="array" open="(" separator="," close=")">
             #{studentId}
         </foreach>

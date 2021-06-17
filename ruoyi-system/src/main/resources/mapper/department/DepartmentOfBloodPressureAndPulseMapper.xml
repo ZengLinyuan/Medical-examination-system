@@ -2,12 +2,14 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.department.mapper.LaboratoryMapper">
+<mapper namespace="com.ruoyi.department.mapper.DepartmentOfBloodPressureAndPulseMapper">
     
-    <resultMap type="Laboratory" id="LaboratoryResult">
+    <resultMap type="DepartmentOfBloodPressureAndPulse" id="DepartmentOfBloodPressureAndPulseResult">
         <result property="studentId"    column="student_ID"    />
         <result property="diagnosisTime"    column="diagnosis_time"    />
-        <result property="laboratoryExamination"    column="laboratory_examination"    />
+        <result property="bloodPressureHigh"    column="blood_pressure_high"    />
+        <result property="bloodPressureLow"    column="blood_pressure_low"    />
+        <result property="pulse"    column="pulse"    />
         <result property="doctorOpinion"    column="doctor_opinion"    />
         <result property="doctorId"    column="doctor_ID"    />
         <result property="doctorAudit"    column="doctor_audit"    />
@@ -15,31 +17,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="submitTime"    column="submit_time"    />
     </resultMap>
 
-    <sql id="selectLaboratoryVo">
-        select student_ID, diagnosis_time, laboratory_examination, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from laboratory
+    <sql id="selectDepartmentOfBloodPressureAndPulseVo">
+        select student_ID, diagnosis_time, blood_pressure_high, blood_pressure_low, pulse, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from department_of_blood_pressure_and_pulse
     </sql>
 
-    <select id="selectLaboratoryList" parameterType="Laboratory" resultMap="LaboratoryResult">
-        <include refid="selectLaboratoryVo"/>
+    <select id="selectDepartmentOfBloodPressureAndPulseList" parameterType="DepartmentOfBloodPressureAndPulse" resultMap="DepartmentOfBloodPressureAndPulseResult">
+        <include refid="selectDepartmentOfBloodPressureAndPulseVo"/>
         <where>  
             <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
+            <if test="diagnosisTime != null "> and diagnosis_time = #{diagnosisTime}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
         </where>
     </select>
     
-    <select id="selectLaboratoryById" parameterType="String" resultMap="LaboratoryResult">
-        <include refid="selectLaboratoryVo"/>
+    <select id="selectDepartmentOfBloodPressureAndPulseById" parameterType="String" resultMap="DepartmentOfBloodPressureAndPulseResult">
+        <include refid="selectDepartmentOfBloodPressureAndPulseVo"/>
         where student_ID = #{studentId}
     </select>
         
-    <insert id="insertLaboratory" parameterType="Laboratory">
-        insert into laboratory
+    <insert id="insertDepartmentOfBloodPressureAndPulse" parameterType="DepartmentOfBloodPressureAndPulse" useGeneratedKeys="true" keyProperty="studentId">
+        insert into department_of_blood_pressure_and_pulse
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="studentId != null">student_ID,</if>
             <if test="diagnosisTime != null">diagnosis_time,</if>
-            <if test="laboratoryExamination != null">laboratory_examination,</if>
+            <if test="bloodPressureHigh != null">blood_pressure_high,</if>
+            <if test="bloodPressureLow != null">blood_pressure_low,</if>
+            <if test="pulse != null">pulse,</if>
             <if test="doctorOpinion != null">doctor_opinion,</if>
             <if test="doctorId != null">doctor_ID,</if>
             <if test="doctorAudit != null">doctor_audit,</if>
@@ -47,9 +51,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="submitTime != null">submit_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="studentId != null">#{studentId},</if>
             <if test="diagnosisTime != null">#{diagnosisTime},</if>
-            <if test="laboratoryExamination != null">#{laboratoryExamination},</if>
+            <if test="bloodPressureHigh != null">#{bloodPressureHigh},</if>
+            <if test="bloodPressureLow != null">#{bloodPressureLow},</if>
+            <if test="pulse != null">#{pulse},</if>
             <if test="doctorOpinion != null">#{doctorOpinion},</if>
             <if test="doctorId != null">#{doctorId},</if>
             <if test="doctorAudit != null">#{doctorAudit},</if>
@@ -58,11 +63,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateLaboratory" parameterType="Laboratory">
-        update laboratory
+    <update id="updateDepartmentOfBloodPressureAndPulse" parameterType="DepartmentOfBloodPressureAndPulse">
+        update department_of_blood_pressure_and_pulse
         <trim prefix="SET" suffixOverrides=",">
             <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
-            <if test="laboratoryExamination != null">laboratory_examination = #{laboratoryExamination},</if>
+            <if test="bloodPressureHigh != null">blood_pressure_high = #{bloodPressureHigh},</if>
+            <if test="bloodPressureLow != null">blood_pressure_low = #{bloodPressureLow},</if>
+            <if test="pulse != null">pulse = #{pulse},</if>
             <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
             <if test="doctorId != null">doctor_ID = #{doctorId},</if>
             <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
@@ -72,22 +79,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where student_ID = #{studentId}
     </update>
 
-    <update id="updateLaboratoryDoctorAudit" parameterType="Laboratory">
-        update laboratory
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
-            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
-            <if test="submitTime != null">submit_time = #{diagnosisTime},</if>
-        </trim>
-        where student_ID = #{studentId}
-    </update>
-
-    <delete id="deleteLaboratoryById" parameterType="String">
-        delete from laboratory where student_ID = #{studentId}
+    <delete id="deleteDepartmentOfBloodPressureAndPulseById" parameterType="String">
+        delete from department_of_blood_pressure_and_pulse where student_ID = #{studentId}
     </delete>
 
-    <delete id="deleteLaboratoryByIds" parameterType="String">
-        delete from laboratory where student_ID in 
+    <delete id="deleteDepartmentOfBloodPressureAndPulseByIds" parameterType="String">
+        delete from department_of_blood_pressure_and_pulse where student_ID in 
         <foreach item="studentId" collection="array" open="(" separator="," close=")">
             #{studentId}
         </foreach>

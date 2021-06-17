@@ -116,7 +116,8 @@ public class LaboratoryController extends BaseController
     public AjaxResult modify(@PathVariable("studentId") String student,
                              @PathVariable("diagnosis_time") Date diagnosis_time)
     {
-        return toAjax(laboratoryService.updateLaboratoryAudit(student,diagnosis_time));
+        Laboratory laboratory = new Laboratory();
+        return toAjax(laboratoryService.updateLaboratoryAudit(laboratory));
     }
     /**
      * 删除化验科
