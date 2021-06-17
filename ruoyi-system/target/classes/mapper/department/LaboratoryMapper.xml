@@ -72,16 +72,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where student_ID = #{studentId}
     </update>
 
-    <update id="updateLaboratoryDoctorAudit" parameterType="Laboratory">
-        update laboratory
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
-            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
-            <if test="submitTime != null">submit_time = #{diagnosisTime},</if>
-        </trim>
-        where student_ID = #{studentId}
-    </update>
-
     <delete id="deleteLaboratoryById" parameterType="String">
         delete from laboratory where student_ID = #{studentId}
     </delete>

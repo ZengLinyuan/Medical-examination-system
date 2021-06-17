@@ -108,6 +108,17 @@ public class LaboratoryController extends BaseController
     }
 
     /**
+     * 修改化验科
+     */
+    @PreAuthorize("@ss.hasPermi('department:laboratory:modify')")
+    @Log(title = "化验科", businessType = BusinessType.UPDATE)
+    @PutMapping("/modify")
+    public AjaxResult modify(@PathVariable("studentId") String student,
+                             @PathVariable("diagnosis_time") Date diagnosis_time)
+    {
+        return toAjax(laboratoryService.updateLaboratoryAudit(student,diagnosis_time));
+    }
+    /**
      * 删除化验科
      */
     @PreAuthorize("@ss.hasPermi('department:laboratory:remove')")
