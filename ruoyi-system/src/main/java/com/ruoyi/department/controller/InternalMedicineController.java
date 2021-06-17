@@ -91,6 +91,8 @@ public class InternalMedicineController extends BaseController
         }
         internalMedicine.setSubmitTime(date);
         internalMedicine.setDiagnosisTime(date);
+        internalMedicine.setDoctorAudit("审核中");
+        internalMedicine.setLeaderAudit("审核中");
         return toAjax(internalMedicineService.insertInternalMedicine(internalMedicine));
     }
 
