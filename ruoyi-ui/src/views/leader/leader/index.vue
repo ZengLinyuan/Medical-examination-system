@@ -80,7 +80,7 @@
           icon="el-icon-delete"
           size="mini"
           :disabled="multiple"
-          @click="handleDelete"
+          @click="handleBack"
           v-hasPermi="['eye:ophthalmic:remove']"
         >驳回</el-button>
       </el-col>
@@ -131,7 +131,7 @@
           <el-form ref="elForm"  :rules="rules" size="medium" label-width="100px">
             <el-col :span="12">
               <el-form-item label="科室" prop="dept_name">
-                <el-select v-model="this.formData.deptName" placeholder="请选择科室" clearable :style="{width: '100%'}">
+                <el-select v-model="formData.deptName" placeholder="请选择科室" clearable :style="{width: '100%'}">
                   <el-option v-for="(item, index) in deptNameOptions" :key="index" :label="item.label"
                              :value="item.value" :disabled="item.disabled"></el-option>
                 </el-select>
@@ -141,7 +141,7 @@
         </el-row>
         <div slot="footer">
           <el-button @click="cancel">取消</el-button>
-          <el-button type="primary" @click="handelConfirm">确定</el-button>
+          <el-button type="primary" @click="submitForm">确定</el-button>
         </div>
       </el-dialog>
   </div>
@@ -298,7 +298,7 @@ export default {
     /** 查看按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const studentId = row.studentId || this.ids
+      const studentId = row.id || this.ids
       getOphthalmic(studentId).then(response => {
         this.$router.push({
           path: '/leader/leader-detail',
@@ -313,8 +313,8 @@ export default {
     /** 提交按钮 */
     submitForm() {
       editDepartment(this.formData).then(response => {
-        this.msgSuccess("修改成功");
-        this.open = false;
+        this.msgSuccess("驳回成功");
+        this.openDept = false;
         this.getList();
       });
       /*this.$refs["form"].validate(valid => {
@@ -339,11 +339,8 @@ export default {
     handleBack(row) {
       this.formData.studentId = row.id;
       this.formData.diagnosisTime = row.submitTimeLeader;
-      this.formData.openDept = true;
-      getTable(row.id).then(response => {
-        this.openDept = true;
-        this.title = "选择驳回部门";
-      })
+      this.openDept = true;
+      this.title = "选择驳回部门";
     }
   }
 };

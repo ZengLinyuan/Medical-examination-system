@@ -182,11 +182,12 @@ public class PhysicalExaminationFormController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('health:form:editDepart')")
     @Log(title = "各科表", businessType = BusinessType.UPDATE)
-    @PutMapping(value = "editDepartment")
+    @PutMapping(value = "/editDepartment")
     public AjaxResult editDepartment(@PathVariable("studentId") String studentId,
                                      @PathVariable("diagnosisTime") String diagnosisTime,
                                      @PathVariable("deptName") int department)
     {
+        System.out.println("进入驳回操作");
         switch(department){
 //            case 101:
 //                ophthalmicService.updateOphthalmic();

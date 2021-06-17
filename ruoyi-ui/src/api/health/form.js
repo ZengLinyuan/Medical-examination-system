@@ -61,11 +61,3 @@ export function getStuForm(query){
     })
 }
 
-//驳回体检信息
-export function editDepartment(data){
-  return request({
-    url: '/health/form/stuList',
-    method: 'get',
-    params:data
-  })
-}
