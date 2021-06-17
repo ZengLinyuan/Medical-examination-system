@@ -115,7 +115,7 @@ public class PhysicalExaminationFormController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('health:form:list')")
     @GetMapping("/stuList")
-    public TableDataInfo stuList()
+    public TableDataInfo stuList(StuPhyForm stuPhyForm)
     {
         startPage();
         List<PhysicalExaminationForm> phyList = physicalExaminationFormService.selectAllPhysicalExaminationFormList();
@@ -124,14 +124,14 @@ public class PhysicalExaminationFormController extends BaseController
         for(PhysicalExaminationForm physicalExaminationForm : phyList){
             for(Student student : stuList){
                 if(physicalExaminationForm.getStudentId().equals(student.getStudentId())){
-                    StuPhyForm stuPhyForm = new StuPhyForm();
-                    stuPhyForm.setId(student.getId());
-                    stuPhyForm.setName(student.getName());
-                    stuPhyForm.setCollege(student.getCollege());
-                    stuPhyForm.setMajor(student.getMajor());
-                    stuPhyForm.setDoctorAudit(physicalExaminationForm.getDoctorAudit());
-                    stuPhyForm.setLeaderAudit(physicalExaminationForm.getLeaderAudit());
-                    stuPhyForm.setSubmitTimeLeader(new Date());
+                    StuPhyForm tempstuPhyForm = new StuPhyForm();
+                    tempstuPhyForm.setId(student.getId());
+                    tempstuPhyForm.setName(student.getName());
+                    tempstuPhyForm.setCollege(student.getCollege());
+                    tempstuPhyForm.setMajor(student.getMajor());
+                    tempstuPhyForm.setDoctorAudit(physicalExaminationForm.getDoctorAudit());
+                    tempstuPhyForm.setLeaderAudit(physicalExaminationForm.getLeaderAudit());
+                    tempstuPhyForm.setSubmitTimeLeader(new Date());
                 }
             }
         }

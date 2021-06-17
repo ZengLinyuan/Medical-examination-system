@@ -50,11 +50,11 @@ export function exportForm(query) {
     method: 'get',
     params: query
   })
-
-export function getStuForm(){
+}
+export function getStuForm(query){
     return request({
       url: '/health/form/stuList',
-      method: 'get'
+      method: 'get',
+      params:query
     })
-}
 }
