@@ -3,30 +3,30 @@
     <el-row :gutter="15">
       <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="100px">
         <el-col :span="12">
-          <el-form-item label="龋齿" prop="field101">
-            <el-input v-model="formData.field101" clearable :style="{width: '100%'}"></el-input>
+          <el-form-item label="龋齿" prop="dentalCaries">
+            <el-input v-model="formData.dentalCaries" clearable :style="{width: '100%'}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="缺齿" prop="field102">
-            <el-input v-model="formData.field102" placeholder="请输入缺齿" clearable :style="{width: '100%'}">
+          <el-form-item label="缺齿" prop="missingTeeth">
+            <el-input v-model="formData.missingTeeth" placeholder="请输入缺齿" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="齿槽" prop="field103">
-            <el-input v-model="formData.field103" clearable :style="{width: '100%'}"></el-input>
+          <el-form-item label="齿槽" prop="alveolar">
+            <el-input v-model="formData.alveolar" clearable :style="{width: '100%'}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="其它" prop="field104">
-            <el-input v-model="formData.field104" placeholder="其它" clearable :style="{width: '100%'}">
+          <el-form-item label="其它" prop="other">
+            <el-input v-model="formData.other" placeholder="其它" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="医生意见" prop="field101">
-            <el-input v-model="formData.field101" type="textarea" :autosize="{minRows: 4, maxRows: 4}"
+          <el-form-item label="医生意见" prop="doctorOpinion">
+            <el-input v-model="formData.doctorOpinion" type="textarea" :autosize="{minRows: 4, maxRows: 4}"
                       :style="{width: '100%'}"></el-input>
           </el-form-item>
         </el-col>
@@ -41,40 +41,44 @@
   </div>
 </template>
 <script>
+import {commitDentalForm} from "@/api/exam/input";
+import Cookies from "js-cookie";
+import {addForm, updateForm} from "@/api/health/form";
+import user from "@/store/modules/user";
 export default {
   components: {},
   props: [],
   data() {
     return {
       formData: {
-        field101: '正常',
-        field102: '正常',
-        field103: '正常',
-        field104: '正常',
-        field101: '正常',
+        dentalCaries: '正常',
+        missingTeeth: '正常',
+        alveolar: '正常',
+        other: '正常',
+        doctorOpinion: '正常',
       },
       rules: {
-        field101: [{
+        dentalCaries: [{
           required: true,
           message: '',
           trigger: 'blur'
         }],
-        field102: [{
+        missingTeeth: [{
           required: true,
           message: '请输入缺齿',
           trigger: 'blur'
         }],
-        field103: [{
+        alveolar: [{
           required: true,
           message: '',
           trigger: 'blur'
         }],
-        field104: [{
+        other: [{
           required: true,
           message: '其它',
           trigger: 'blur'
         }],
-        field101: [{
+        doctorOpinion: [{
           required: true,
           message: '',
           trigger: 'blur'
@@ -88,10 +92,21 @@ export default {
   mounted() {},
   methods: {
     submitForm() {
-      this.$router.push({ path:"/dental/input" || "/" }).catch(()=>{});
       this.$refs['elForm'].validate(valid => {
-        if (!valid) return
-        // TODO 提交表单
+        if (valid) {
+          this.$store.dispatch("GetInfo").then(() => {
+            //this.formData.doctorId = user.state.userId;
+          }).catch(() => {
+          });
+          this.formData.doctorId = Cookies.get("userId")
+          this.formData.studentId = Cookies.get("studentId");
+          commitDentalForm(this.formData).then(response => {
+            this.msgSuccess("录入成功");
+            Cookies.remove("studentId");
+            this.$router.push({ path:"/dental/input" || "/" }).catch(()=>{});
+          }).catch(() => {
+          });
+        }
       })
     },
     resetForm() {

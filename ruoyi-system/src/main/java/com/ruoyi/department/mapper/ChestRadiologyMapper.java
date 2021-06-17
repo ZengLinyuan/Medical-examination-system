@@ -1,5 +1,6 @@
 package com.ruoyi.department.mapper;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.department.domain.ChestRadiology;
 
@@ -58,4 +59,6 @@ public interface ChestRadiologyMapper
      * @return 结果
      */
     public int deleteChestRadiologyByIds(String[] studentIds);
+
+    public int updateChestRadiologyLeaderAudit(ChestRadiology chestRadiology);
 }

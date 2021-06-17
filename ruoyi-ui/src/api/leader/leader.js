@@ -33,3 +33,13 @@ export function delForm(studentId) {
     method: 'delete',
   })
 }
+
+
+//驳回体检信息
+export function editDepartment(data){
+  return request({
+    url: '/health/form/editDepartment',
+    method: 'put',
+    params:data
+  })
+}

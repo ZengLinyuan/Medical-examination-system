@@ -58,4 +58,6 @@ public interface StudentMapper
      * @return 结果
      */
     public int deleteStudentByIds(String[] ids);
+
+    public List<Student> selectAllStudentList();
 }

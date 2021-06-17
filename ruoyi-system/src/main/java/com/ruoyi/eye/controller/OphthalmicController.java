@@ -8,6 +8,8 @@ import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.student.domain.Student;
+import com.ruoyi.student.service.IStudentService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +36,9 @@ public class OphthalmicController extends BaseController
 {
     @Autowired
     private IOphthalmicService ophthalmicService;
+
+    @Autowired
+    private IStudentService studentService;
 
     /**
      * 查询眼科列表
@@ -68,6 +73,25 @@ public class OphthalmicController extends BaseController
     public AjaxResult getInfo(@PathVariable("studentId") String studentId)
     {
         return AjaxResult.success(ophthalmicService.selectOphthalmicById(studentId));
+    }
+
+    /**
+     * 获取眼科详细信息
+     */
+    @PreAuthorize("@ss.hasPermi('eye:ophthalmic:querystudent')")
+    @PostMapping( "/querystudent")
+    public AjaxResult getStuInfo(@PathVariable("studentId") String studentId)
+    {
+        Student student = new Student();
+        Ophthalmic ophthalmic = new Ophthalmic();
+        student = studentService.selectStudentById(studentId);
+        ophthalmic = ophthalmicService.selectOphthalmicById(studentId);
+        AjaxResult ajax = new AjaxResult();
+        ajax.put("name",student.getName());
+        ajax.put("college",student.getCollege());
+        ajax.put("major",student.getMajor());
+        ajax.put("diagnosisTime",ophthalmic.getDiagnosisTime());
+        return ajax;
     }
 
     /**
@@ -135,5 +159,6 @@ public class OphthalmicController extends BaseController
     {
         return toAjax(ophthalmicService.deleteOphthalmicByIds(studentIds));
     }
+
 
 }

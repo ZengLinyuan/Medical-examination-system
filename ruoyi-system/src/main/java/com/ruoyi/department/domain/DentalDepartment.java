@@ -19,7 +19,7 @@ public class DentalDepartment extends BaseEntity
 
     /** 学号 */
     @Excel(name = "学号")
-    private Long studentId;
+    private String studentId;
 
     /** 诊断时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -57,12 +57,12 @@ public class DentalDepartment extends BaseEntity
     @Excel(name = "提交时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date submitTime;
 
-    public void setStudentId(Long studentId) 
+    public void setStudentId(String studentId)
     {
         this.studentId = studentId;
     }
 
-    public Long getStudentId() 
+    public String getStudentId()
     {
         return studentId;
     }
