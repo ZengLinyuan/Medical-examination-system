@@ -91,6 +91,8 @@ public class ChestRadiologyController extends BaseController
         }
         chestRadiology.setSubmitTime(date);
         chestRadiology.setDiagnosisTime(date);
+        chestRadiology.setDoctorAudit("审核中");
+        chestRadiology.setLeaderAudit("审核中");
         return toAjax(chestRadiologyService.insertChestRadiology(chestRadiology));
     }
 

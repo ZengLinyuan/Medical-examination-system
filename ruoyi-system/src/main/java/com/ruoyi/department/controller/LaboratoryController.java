@@ -91,6 +91,8 @@ public class LaboratoryController extends BaseController
         }
         laboratory.setSubmitTime(date);
         laboratory.setDiagnosisTime(date);
+        laboratory.setDoctorAudit("审核中");
+        laboratory.setLeaderAudit("审核中");
         return toAjax(laboratoryService.insertLaboratory(laboratory));
     }
 
@@ -105,6 +107,17 @@ public class LaboratoryController extends BaseController
         return toAjax(laboratoryService.updateLaboratory(laboratory));
     }
 
+    /**
+     * 修改化验科
+     */
+    @PreAuthorize("@ss.hasPermi('department:laboratory:modify')")
+    @Log(title = "化验科", businessType = BusinessType.UPDATE)
+    @PutMapping("/modify")
+    public AjaxResult modify(@PathVariable("studentId") String student,
+                             @PathVariable("diagnosis_time") Date diagnosis_time)
+    {
+        return toAjax(laboratoryService.updateLaboratoryAudit(student,diagnosis_time));
+    }
     /**
      * 删除化验科
      */

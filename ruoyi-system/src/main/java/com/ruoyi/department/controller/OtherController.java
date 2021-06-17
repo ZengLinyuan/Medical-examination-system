@@ -91,6 +91,8 @@ public class OtherController extends BaseController
         }
         other.setSubmitTime(date);
         other.setDiagnosisTime(date);
+        other.setDoctorAudit("审核中");
+        other.setLeaderAudit("审核中");
         return toAjax(otherService.insertOther(other));
     }
 
