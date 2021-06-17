@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.department.mapper.EntDepartmentMapper">
+    
+    <resultMap type="EntDepartment" id="EntDepartmentResult">
+        <result property="studentId"    column="student_ID"    />
+        <result property="diagnosisTime"    column="diagnosis_time"    />
+        <result property="hearingLeft"    column="hearing_left"    />
+        <result property="hearingRight"    column="hearing_right"    />
+        <result property="earIllness"    column="ear_illness"    />
+        <result property="smellSense"    column="smell_sense"    />
+        <result property="noseIllness"    column="nose_illness"    />
+        <result property="throat"    column="throat"    />
+        <result property="stutter"    column="stutter"    />
+        <result property="doctorOpinion"    column="doctor_opinion"    />
+        <result property="doctorId"    column="doctor_ID"    />
+        <result property="doctorAudit"    column="doctor_audit"    />
+        <result property="leaderAudit"    column="leader_audit"    />
+        <result property="submitTime"    column="submit_time"    />
+    </resultMap>
+
+    <sql id="selectEntDepartmentVo">
+        select student_ID, diagnosis_time, hearing_left, hearing_right, ear_illness, smell_sense, nose_illness, throat, stutter, doctor_opinion, doctor_ID, doctor_audit, leader_audit, submit_time from ent_department
+    </sql>
+
+    <select id="selectEntDepartmentList" parameterType="EntDepartment" resultMap="EntDepartmentResult">
+        <include refid="selectEntDepartmentVo"/>
+        <where>  
+            <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
+            <if test="diagnosisTime != null "> and diagnosis_time = #{diagnosisTime}</if>
+            <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
+            <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
+            <if test="submitTime != null "> and submit_time = #{submitTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectEntDepartmentById" parameterType="String" resultMap="EntDepartmentResult">
+        <include refid="selectEntDepartmentVo"/>
+        where student_ID = #{studentId}
+    </select>
+        
+    <insert id="insertEntDepartment" parameterType="EntDepartment" useGeneratedKeys="true" keyProperty="studentId">
+        insert into ent_department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="diagnosisTime != null">diagnosis_time,</if>
+            <if test="hearingLeft != null">hearing_left,</if>
+            <if test="hearingRight != null">hearing_right,</if>
+            <if test="earIllness != null">ear_illness,</if>
+            <if test="smellSense != null">smell_sense,</if>
+            <if test="noseIllness != null">nose_illness,</if>
+            <if test="throat != null">throat,</if>
+            <if test="stutter != null">stutter,</if>
+            <if test="doctorOpinion != null">doctor_opinion,</if>
+            <if test="doctorId != null">doctor_ID,</if>
+            <if test="doctorAudit != null">doctor_audit,</if>
+            <if test="leaderAudit != null">leader_audit,</if>
+            <if test="submitTime != null">submit_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="diagnosisTime != null">#{diagnosisTime},</if>
+            <if test="hearingLeft != null">#{hearingLeft},</if>
+            <if test="hearingRight != null">#{hearingRight},</if>
+            <if test="earIllness != null">#{earIllness},</if>
+            <if test="smellSense != null">#{smellSense},</if>
+            <if test="noseIllness != null">#{noseIllness},</if>
+            <if test="throat != null">#{throat},</if>
+            <if test="stutter != null">#{stutter},</if>
+            <if test="doctorOpinion != null">#{doctorOpinion},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="doctorAudit != null">#{doctorAudit},</if>
+            <if test="leaderAudit != null">#{leaderAudit},</if>
+            <if test="submitTime != null">#{submitTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEntDepartment" parameterType="EntDepartment">
+        update ent_department
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="diagnosisTime != null">diagnosis_time = #{diagnosisTime},</if>
+            <if test="hearingLeft != null">hearing_left = #{hearingLeft},</if>
+            <if test="hearingRight != null">hearing_right = #{hearingRight},</if>
+            <if test="earIllness != null">ear_illness = #{earIllness},</if>
+            <if test="smellSense != null">smell_sense = #{smellSense},</if>
+            <if test="noseIllness != null">nose_illness = #{noseIllness},</if>
+            <if test="throat != null">throat = #{throat},</if>
+            <if test="stutter != null">stutter = #{stutter},</if>
+            <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
+            <if test="doctorId != null">doctor_ID = #{doctorId},</if>
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+            <if test="submitTime != null">submit_time = #{submitTime},</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
+
+    <delete id="deleteEntDepartmentById" parameterType="String">
+        delete from ent_department where student_ID = #{studentId}
+    </delete>
+
+    <delete id="deleteEntDepartmentByIds" parameterType="String">
+        delete from ent_department where student_ID in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+</mapper>
