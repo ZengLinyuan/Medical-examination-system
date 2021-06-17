@@ -33,3 +33,4 @@ export function delForm(studentId) {
     method: 'delete',
   })
 }
+

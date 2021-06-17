@@ -131,8 +131,8 @@
           <el-form ref="elForm"  :rules="rules" size="medium" label-width="100px">
             <el-col :span="12">
               <el-form-item label="科室" prop="dept_name">
-                <el-select v-model="dept_name" placeholder="请选择科室" clearable :style="{width: '100%'}">
-                  <el-option v-for="(item, index) in dept_nameOptions" :key="index" :label="item.label"
+                <el-select v-model="this.formData.deptName" placeholder="请选择科室" clearable :style="{width: '100%'}">
+                  <el-option v-for="(item, index) in deptNameOptions" :key="index" :label="item.label"
                              :value="item.value" :disabled="item.disabled"></el-option>
                 </el-select>
               </el-form-item>
@@ -158,7 +158,7 @@ import {
   updateOphthalmic,
 } from "@/api/eye/ophthalmic";
 import {getRole} from "@/api/system/role";
-import {getStuForm} from "@/api/health/form";
+import {backStuForm, getStuForm} from "@/api/health/form";
 
 export default {
   name: "Ophthalmic",
@@ -185,10 +185,12 @@ export default {
       title: "",
       // 是否显示弹出层
       openDept: false,
-      studentId:'',
-      diagnosisTime:'',
-      dept_name: '',
-      dept_nameOptions: [{
+      formData:{
+        studentId:'',
+        diagnosisTime:'',
+        deptName: '',
+      },
+      deptNameOptions: [{
         "label": "眼科",
         "value": 101
       }, {
@@ -310,7 +312,12 @@ export default {
     },
     /** 提交按钮 */
     submitForm() {
-      this.$refs["form"].validate(valid => {
+      editDepartment(this.formData).then(response => {
+        this.msgSuccess("修改成功");
+        this.open = false;
+        this.getList();
+      });
+      /*this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.studentId != null) {
             updateOphthalmic(this.form).then(response => {
@@ -326,27 +333,17 @@ export default {
             });
           }
         }
-      });
+      });*/
     },
     /** 驳回按钮操作 */
     handleBack(row) {
-      const studentIds = row.studentId || this.ids;
-      this.openDept = true;
-      getTable(row.studentId).then(response => {
+      this.formData.studentId = row.id;
+      this.formData.diagnosisTime = row.submitTimeLeader;
+      this.formData.openDept = true;
+      getTable(row.id).then(response => {
         this.openDept = true;
         this.title = "选择驳回部门";
       })
-      //   this.$confirm('是否确认删除眼科编号为"' + studentIds + '"的数据项?', "警告", {
-      //     confirmButtonText: "确定",
-      //     cancelButtonText: "取消",
-      //     type: "warning"
-      //   }).then(function() {
-      //     return delOphthalmic(studentIds);
-      //   }).then(() => {
-      //     this.getList();
-      //     this.msgSuccess("删除成功");
-      //   }).catch(() => {});
-      // },
     }
   }
 };
