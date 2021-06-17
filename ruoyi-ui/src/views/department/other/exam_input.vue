@@ -1,12 +1,12 @@
 <template>
   <div>
     <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="100px">
-      <el-form-item label="其它检查" prop="field103">
-        <el-input v-model="formData.field103" type="textarea" placeholder="请输入其它检查"
+      <el-form-item label="其它检查" prop="otherExamination">
+        <el-input v-model="formData.otherExamination" type="textarea" placeholder="请输入其它检查"
                   :autosize="{minRows: 4, maxRows: 4}" :style="{width: '100%'}"></el-input>
       </el-form-item>
-      <el-form-item label="医生意见" prop="field104">
-        <el-input v-model="formData.field104" type="textarea" placeholder="请输入医生意见"
+      <el-form-item label="医生意见" prop="doctorOpinion">
+        <el-input v-model="formData.doctorOpinion" type="textarea" placeholder="请输入医生意见"
                   :autosize="{minRows: 4, maxRows: 4}" :style="{width: '100%'}"></el-input>
       </el-form-item>
       <el-form-item size="large">
@@ -23,16 +23,16 @@ export default {
   data() {
     return {
       formData: {
-        field103: '无',
-        field104: '无',
+        otherExamination: '无',
+        doctorOpinion: '无',
       },
       rules: {
-        field103: [{
+        otherExamination: [{
           required: true,
           message: '请输入其它检查',
           trigger: 'blur'
         }],
-        field104: [{
+        doctorOpinion: [{
           required: true,
           message: '请输入医生意见',
           trigger: 'blur'

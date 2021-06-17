@@ -2,12 +2,12 @@
   <div>
     <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="100px"
              label-position="left">
-      <el-form-item label="化验检查" prop="field103">
-        <el-input v-model="formData.field103" type="textarea" placeholder="请输入化验检查"
+      <el-form-item label="化验检查" prop="laboratoryExamination">
+        <el-input v-model="formData.laboratoryExamination" type="textarea" placeholder="请输入化验检查"
                   :autosize="{minRows: 4, maxRows: 4}" :style="{width: '100%'}"></el-input>
       </el-form-item>
-      <el-form-item label="医生意见" prop="field104">
-        <el-input v-model="formData.field104" type="textarea" placeholder="请输入医生意见"
+      <el-form-item label="医生意见" prop="doctorOpinion">
+        <el-input v-model="formData.doctorOpinion" type="textarea" placeholder="请输入医生意见"
                   :autosize="{minRows: 4, maxRows: 4}" :style="{width: '100%'}"></el-input>
       </el-form-item>
       <el-form-item size="large">
@@ -24,16 +24,16 @@ export default {
   data() {
     return {
       formData: {
-        field103: '肝功（ALT、AKP、TB、DB），血常规主要指标检测值在正常范围',
-        field104: '正常',
+        laboratoryExamination: '肝功（ALT、AKP、TB、DB），血常规主要指标检测值在正常范围',
+        doctorOpinion: '正常',
       },
       rules: {
-        field103: [{
+        laboratoryExamination: [{
           required: true,
           message: '请输入化验检查',
           trigger: 'blur'
         }],
-        field104: [{
+        doctorOpinion: [{
           required: true,
           message: '请输入医生意见',
           trigger: 'blur'

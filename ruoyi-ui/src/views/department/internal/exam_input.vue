@@ -4,50 +4,50 @@
       <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="100px"
                label-position="left">
         <el-col :span="12">
-          <el-form-item label="发育营养" prop="field101">
-            <el-input v-model="formData.field101" placeholder="请输入发育营养" clearable :style="{width: '100%'}">
+          <el-form-item label="发育营养" prop="developmentalNutrition">
+            <el-input v-model="formData.developmentalNutrition" placeholder="请输入发育营养" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="神经及精神" prop="field102">
-            <el-input v-model="formData.field102" placeholder="请输入神经及精神" clearable :style="{width: '100%'}">
+          <el-form-item label="神经及精神" prop="nervesAndSpirits">
+            <el-input v-model="formData.nervesAndSpirits" placeholder="请输入神经及精神" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="肺及呼吸道" prop="field103">
-            <el-input v-model="formData.field103" placeholder="请输入肺及呼吸道" clearable :style="{width: '100%'}">
+          <el-form-item label="肺及呼吸道" prop="lungAndRespiratoryTract">
+            <el-input v-model="formData.lungAndRespiratoryTract" placeholder="请输入肺及呼吸道" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="心脏及血管" prop="field104">
-            <el-input v-model="formData.field104" placeholder="请输入心脏及血管" clearable :style="{width: '100%'}">
+          <el-form-item label="心脏及血管" prop="heartAndBloodVessels">
+            <el-input v-model="formData.heartAndBloodVessels" placeholder="请输入心脏及血管" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="肝" prop="field105">
-            <el-input v-model="formData.field105" placeholder="请输入肝" clearable :style="{width: '100%'}">
+          <el-form-item label="肝" prop="liver">
+            <el-input v-model="formData.liver" placeholder="请输入肝" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="脾" prop="field106">
-            <el-input v-model="formData.field106" placeholder="请输入脾" clearable :style="{width: '100%'}">
+          <el-form-item label="脾" prop="spleen">
+            <el-input v-model="formData.spleen" placeholder="请输入脾" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="其它" prop="field107">
-            <el-input v-model="formData.field107" placeholder="请输入其它" clearable :style="{width: '100%'}">
+          <el-form-item label="其它" prop="other">
+            <el-input v-model="formData.other" placeholder="请输入其它" clearable :style="{width: '100%'}">
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="13">
-          <el-form-item label="医生意见" prop="field108">
-            <el-input v-model="formData.field108" type="textarea" placeholder="请输入医生意见"
+          <el-form-item label="医生意见" prop="doctorOpinion">
+            <el-input v-model="formData.doctorOpinion" type="textarea" placeholder="请输入医生意见"
                       :autosize="{minRows: 4, maxRows: 4}" :style="{width: '100%'}"></el-input>
           </el-form-item>
         </el-col>
@@ -68,52 +68,52 @@ export default {
   data() {
     return {
       formData: {
-        field101: '正常',
-        field102: '正常',
-        field103: '正常',
-        field104: '正常',
-        field105: '正常',
-        field106: '正常',
-        field107: '无特殊',
-        field108: '正常',
+        developmentalNutrition: '正常',
+        nervesAndSpirits: '正常',
+        lungAndRespiratoryTract: '正常',
+        heartAndBloodVessels: '正常',
+        liver: '正常',
+        spleen: '正常',
+        other: '无特殊',
+        doctorOpinion: '正常',
       },
       rules: {
-        field101: [{
+        developmentalNutrition: [{
           required: true,
           message: '请输入发育营养',
           trigger: 'blur'
         }],
-        field102: [{
+        nervesAndSpirits: [{
           required: true,
           message: '请输入神经及精神',
           trigger: 'blur'
         }],
-        field103: [{
+        lungAndRespiratoryTract: [{
           required: true,
           message: '请输入肺及呼吸道',
           trigger: 'blur'
         }],
-        field104: [{
+        heartAndBloodVessels: [{
           required: true,
           message: '请输入心脏及血管',
           trigger: 'blur'
         }],
-        field105: [{
+        liver: [{
           required: true,
           message: '请输入肝',
           trigger: 'blur'
         }],
-        field106: [{
+        spleen: [{
           required: true,
           message: '请输入脾',
           trigger: 'blur'
         }],
-        field107: [{
+        other: [{
           required: true,
           message: '请输入其它',
           trigger: 'blur'
         }],
-        field108: [{
+        doctorOpinion: [{
           required: true,
           message: '请输入医生意见',
           trigger: 'blur'
