@@ -1,5 +1,6 @@
 package com.ruoyi.department.mapper;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.department.domain.Laboratory;
 
@@ -58,4 +59,6 @@ public interface LaboratoryMapper
      * @return 结果
      */
     public int deleteLaboratoryByIds(String[] studentIds);
+
+    public int updateLaboratoryDoctorAudit(Laboratory laboratory);
 }
