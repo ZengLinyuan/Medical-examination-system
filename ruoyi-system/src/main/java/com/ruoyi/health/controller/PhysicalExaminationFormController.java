@@ -9,6 +9,7 @@ import java.util.List;
 import com.ruoyi.department.domain.ChestRadiology;
 import com.ruoyi.department.service.*;
 import com.ruoyi.eye.service.IOphthalmicService;
+import com.ruoyi.health.domain.Reject;
 import com.ruoyi.health.domain.StuPhyForm;
 import com.ruoyi.student.domain.Student;
 import com.ruoyi.student.service.IStudentService;
@@ -118,6 +119,7 @@ public class PhysicalExaminationFormController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody PhysicalExaminationForm physicalExaminationForm)
     {
+        System.out.println(1);
         return toAjax(physicalExaminationFormService.insertPhysicalExaminationForm(physicalExaminationForm));
     }
 
@@ -180,15 +182,12 @@ public class PhysicalExaminationFormController extends BaseController
     /**
      * 修改各科
      */
-    @PreAuthorize("@ss.hasPermi('health:form:editDepart')")
-    @Log(title = "各科表", businessType = BusinessType.UPDATE)
-    @PutMapping(value = "/editDepartment")
-    public AjaxResult editDepartment(@PathVariable("studentId") String studentId,
-                                     @PathVariable("diagnosisTime") String diagnosisTime,
-                                     @PathVariable("deptName") int department)
+    @PreAuthorize("@ss.hasPermi('health:form:editDepartment')")
+    @GetMapping("/editDepartment")
+    public AjaxResult editDepartment(@RequestBody Reject reject)
     {
         System.out.println("进入驳回操作");
-        switch(department){
+        switch(reject.getDeptName()){
 //            case 101:
 //                ophthalmicService.updateOphthalmic();
 //                break;
@@ -212,11 +211,11 @@ public class PhysicalExaminationFormController extends BaseController
 //                break;
             case 108:
                 ChestRadiology chestRadiology = new ChestRadiology();
-                chestRadiology.setStudentId(studentId);
+                chestRadiology.setStudentId(reject.getStundetId());
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date newTime = null;
                 try {
-                    newTime = format.parse(diagnosisTime);
+                    newTime = format.parse(reject.getDiagnosisTime());
                     System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
                 } catch (ParseException e) {
                     e.printStackTrace();

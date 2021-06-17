@@ -312,7 +312,7 @@ export default {
     },
     /** 提交按钮 */
     submitForm() {
-      editDepartment(this.formData).then(response => {
+      editDepartment(this.formData.studentId).then(response => {
         this.msgSuccess("驳回成功");
         this.openDept = false;
         this.getList();
