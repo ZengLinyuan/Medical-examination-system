@@ -76,7 +76,7 @@ public class DentalDepartmentController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('department:dental:add')")
     @Log(title = "牙科", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping(value = "/add")
     public AjaxResult add(@RequestBody DentalDepartment dentalDepartment)
     {
         Date date = new Date();//获取当前日期时间

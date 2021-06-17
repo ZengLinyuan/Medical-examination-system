@@ -76,7 +76,7 @@ public class DepartmentOfBloodPressureAndPulseController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('department:pulse:add')")
     @Log(title = "血压脉搏科", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping(value = "/add")
     public AjaxResult add(@RequestBody DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse)
     {
         Date date = new Date();//获取当前日期时间

@@ -47,3 +47,35 @@ export function commitOtherForm(data) {
     data: data
   })
 }
+
+export function commitEntForm(data) {
+  return request({
+    url: '/department/ent/add',
+    method: 'post',
+    data: data
+  })
+}
+
+export function commitPulseForm(data) {
+  return request({
+    url: '/department/pulse/add',
+    method: 'post',
+    data: data
+  })
+}
+
+export function commitSurgeryForm(data) {
+  return request({
+    url: '/department/surgery/add',
+    method: 'post',
+    data: data
+  })
+}
+
+export function commitDentalForm(data) {
+  return request({
+    url: '/department/dental/add',
+    method: 'post',
+    data: data
+  })
+}
