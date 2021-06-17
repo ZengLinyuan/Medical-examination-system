@@ -91,6 +91,8 @@ public class LaboratoryController extends BaseController
         }
         laboratory.setSubmitTime(date);
         laboratory.setDiagnosisTime(date);
+        laboratory.setDoctorAudit("审核中");
+        laboratory.setLeaderAudit("审核中");
         return toAjax(laboratoryService.insertLaboratory(laboratory));
     }
 
