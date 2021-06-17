@@ -1,5 +1,8 @@
 package com.ruoyi.department.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +79,20 @@ public class DentalDepartmentController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody DentalDepartment dentalDepartment)
     {
+        Date date = new Date();//获取当前日期时间
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String now = df.format(date);//以格式处理date
+        System.err.println(now);//打印处理的结果
+        date = null;//清空date对象
+        try {
+            date = df.parse(now);//按格式逆转化now
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        dentalDepartment.setSubmitTime(date);
+        dentalDepartment.setDiagnosisTime(date);
+        dentalDepartment.setDoctorAudit("审核中");
+        dentalDepartment.setLeaderAudit("审核中");
         return toAjax(dentalDepartmentService.insertDentalDepartment(dentalDepartment));
     }
 

@@ -58,4 +58,6 @@ public interface PhysicalExaminationFormMapper
      * @return 结果
      */
     public int deletePhysicalExaminationFormByIds(String[] studentIds);
+
+    public List<PhysicalExaminationForm> selectAllPhysicalExaminationFormList();
 }

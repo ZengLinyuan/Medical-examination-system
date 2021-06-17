@@ -58,4 +58,6 @@ public interface IPhysicalExaminationFormService
      * @return 结果
      */
     public int deletePhysicalExaminationFormById(String studentId);
+
+    public List<PhysicalExaminationForm> selectAllPhysicalExaminationFormList();
 }

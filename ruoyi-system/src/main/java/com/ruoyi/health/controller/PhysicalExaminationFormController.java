@@ -1,6 +1,12 @@
 package com.ruoyi.health.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.health.domain.StuPhyForm;
+import com.ruoyi.student.domain.Student;
+import com.ruoyi.student.service.IStudentService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +38,9 @@ public class PhysicalExaminationFormController extends BaseController
 {
     @Autowired
     private IPhysicalExaminationFormService physicalExaminationFormService;
+
+    @Autowired
+    private IStudentService studentService;
 
     /**
      * 查询体检总列表
@@ -99,5 +108,33 @@ public class PhysicalExaminationFormController extends BaseController
     public AjaxResult remove(@PathVariable String[] studentIds)
     {
         return toAjax(physicalExaminationFormService.deletePhysicalExaminationFormByIds(studentIds));
+    }
+
+    /**
+     * 查询体检总列表
+     */
+    @PreAuthorize("@ss.hasPermi('health:form:list')")
+    @GetMapping("/stuList")
+    public TableDataInfo stuList()
+    {
+        startPage();
+        List<PhysicalExaminationForm> phyList = physicalExaminationFormService.selectAllPhysicalExaminationFormList();
+        List<Student> stuList = studentService.selectAllStudentList();
+        List<StuPhyForm> stuPhyList = new ArrayList<StuPhyForm>();
+        for(PhysicalExaminationForm physicalExaminationForm : phyList){
+            for(Student student : stuList){
+                if(physicalExaminationForm.getStudentId().equals(student.getStudentId())){
+                    StuPhyForm stuPhyForm = new StuPhyForm();
+                    stuPhyForm.setId(student.getId());
+                    stuPhyForm.setName(student.getName());
+                    stuPhyForm.setCollege(student.getCollege());
+                    stuPhyForm.setMajor(student.getMajor());
+                    stuPhyForm.setDoctorAudit(physicalExaminationForm.getDoctorAudit());
+                    stuPhyForm.setLeaderAudit(physicalExaminationForm.getLeaderAudit());
+                    stuPhyForm.setSubmitTimeLeader(new Date());
+                }
+            }
+        }
+        return getDataTable(stuPhyList);
     }
 }
