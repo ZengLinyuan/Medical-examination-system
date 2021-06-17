@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="100px">
-      <el-form-item label="胸部放射检查" prop="field101">
+      <el-form-item label="胸部放射检查" prop="chestRadiography">
         <el-input v-model="formData.field101" type="textarea" placeholder="请输入胸部放射检查"
                   :autosize="{minRows: 4, maxRows: 4}" :style="{width: '100%'}"></el-input>
       </el-form-item>
-      <el-form-item label="医生意见" prop="field102">
+      <el-form-item label="医生意见" prop="doctorOpinion">
         <el-input v-model="formData.field102" type="textarea" placeholder="请输入医生意见"
                   :autosize="{minRows: 4, maxRows: 4}" :style="{width: '100%'}"></el-input>
       </el-form-item>
@@ -23,16 +23,16 @@ export default {
   data() {
     return {
       formData: {
-        field101: '胸部未见活动性结核病灶，肺未见重要发现',
-        field102: '正常',
+        chestRadiography: '胸部未见活动性结核病灶，肺未见重要发现',
+        doctorOpinion: '正常',
       },
       rules: {
-        field101: [{
+        chestRadiography: [{
           required: true,
           message: '请输入胸部放射检查',
           trigger: 'blur'
         }],
-        field102: [{
+        doctorOpinion: [{
           required: true,
           message: '请输入医生意见',
           trigger: 'blur'
