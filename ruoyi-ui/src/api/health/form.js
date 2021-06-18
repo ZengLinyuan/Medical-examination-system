@@ -61,3 +61,20 @@ export function getStuForm(query){
     })
 }
 
+/*export function getDetailData(studentId,diagnosisTime) {
+  return request({
+    url: "/health/form/details?studentId=" + studentId + '&' + 'diagnosisTime=' + diagnosisTime,
+    method: 'get'
+  })
+}*/
+
+export function getDetailData(query) {
+  return request({
+    url: '/health/form/details',
+    method: 'get',
+    params: query
+  })
+}
+
+
+

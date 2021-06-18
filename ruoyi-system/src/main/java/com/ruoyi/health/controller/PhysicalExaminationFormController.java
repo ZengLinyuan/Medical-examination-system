@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.ruoyi.department.domain.ChestRadiology;
+import com.ruoyi.department.domain.*;
 import com.ruoyi.department.service.*;
+import com.ruoyi.eye.domain.Ophthalmic;
 import com.ruoyi.eye.service.IOphthalmicService;
 import com.ruoyi.health.domain.Reject;
 import com.ruoyi.health.domain.StuPhyForm;
@@ -35,7 +36,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 体检总Controller
- * 
+ *
  * @author qpg
  * @date 2021-06-10
  */
@@ -230,5 +231,95 @@ public class PhysicalExaminationFormController extends BaseController
 //                break;
         }
         return null;
+    }
+
+    /**
+     * 获取体检表详细信息
+     */
+    @PreAuthorize("@ss.hasPermi('health:form:getDetails')")
+   /* @GetMapping(value = "/details?studentId={studentId}&diagnosisTime={diagnosisTime}")*/
+    @GetMapping("/details")
+    public AjaxResult getDetails(Reject reject)
+    {
+        System.out.println("进入体检信息查找");
+        AjaxResult ajax = AjaxResult.success();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date newTime = null;
+        try {
+            newTime = format.parse(reject.getDiagnosisTime());
+            System.out.println("获取体检表转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String studentId = reject.getStudentId();
+
+        Student student = new Student();
+        student.setId(studentId);
+        Student list0 = studentService.selectStudentList(student).get(0);
+        ajax.put("Student",list0);
+
+        Ophthalmic ophthalmic = new Ophthalmic();
+        ophthalmic.setStudentId(studentId);
+        ophthalmic.setDiagnosisTime(newTime);
+        System.out.println("进行眼科查询");
+        Ophthalmic list1 = ophthalmicService.selectOphthalmicList(ophthalmic).get(0);
+        ajax.put("ophthalmic",list1);
+
+        EntDepartment entDepartment = new EntDepartment();
+        entDepartment.setStudentId(studentId);
+        entDepartment.setDiagnosisTime(newTime);
+        EntDepartment list2 = entDepartmentService.selectEntDepartmentList(entDepartment).get(0);
+        ajax.put("entDepartment",list2);
+
+        DentalDepartment dentalDepartment = new DentalDepartment();
+        dentalDepartment.setStudentId(studentId);
+        dentalDepartment.setDiagnosisTime(newTime);
+        DentalDepartment list3 = dentalDepartmentService.selectDentalDepartmentList(dentalDepartment).get(0);
+        ajax.put("dentalDepartment",list3);
+
+        Surgery surgery = new Surgery();
+        surgery.setStudentId(studentId);
+        surgery.setDiagnosisTime(newTime);
+        Surgery list4 = surgeryService.selectSurgeryList(surgery).get(0);
+        ajax.put("surgery",list4);
+
+        DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse = new DepartmentOfBloodPressureAndPulse();
+        departmentOfBloodPressureAndPulse.setStudentId(studentId);
+        departmentOfBloodPressureAndPulse.setDiagnosisTime(newTime);
+        DepartmentOfBloodPressureAndPulse list5 = departmentOfBloodPressureAndPulseService.selectDepartmentOfBloodPressureAndPulseList(departmentOfBloodPressureAndPulse).get(0);
+        ajax.put("bloodPressureAndPulse",list5);
+
+        InternalMedicine internalMedicine = new InternalMedicine();
+        internalMedicine.setStudentId(studentId);
+        internalMedicine.setDiagnosisTime(newTime);
+        InternalMedicine list6 = internalMedicineService.selectInternalMedicineList(internalMedicine).get(0);
+        ajax.put("internalMedicine",list6);
+
+        Laboratory laboratory = new Laboratory();
+        laboratory.setStudentId(studentId);
+        laboratory.setDiagnosisTime(newTime);
+        Laboratory list7 = laboratoryService.selectLaboratoryList(laboratory).get(0);
+        ajax.put("laboratory",list7);
+
+        ChestRadiology chestRadiology = new ChestRadiology();
+        chestRadiology.setStudentId(studentId);
+        chestRadiology.setDiagnosisTime(newTime);
+        ChestRadiology list8 = chestRadiologyService.selectChestRadiologyList(chestRadiology).get(0);
+        ajax.put("chestRadiology",list8);
+
+        Other other = new Other();
+        other.setStudentId(studentId);
+        other.setDiagnosisTime(newTime);
+        Other list9 = otherService.selectOtherList(other).get(0);
+        ajax.put("other",list9);
+
+        PhysicalExaminationForm physicalExaminationForm = new PhysicalExaminationForm();
+        physicalExaminationForm.setStudentId(studentId);
+        physicalExaminationForm.setInspectorTime(newTime);
+        PhysicalExaminationForm list10 = physicalExaminationFormService.selectPhysicalExaminationFormList(physicalExaminationForm).get(0);
+        ajax.put("physicalExaminationForm",list10);
+
+        return ajax;
     }
 }

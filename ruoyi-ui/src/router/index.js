@@ -316,7 +316,20 @@ export const constantRoutes = [
         meta: { title: '审查', icon: '' }
       }
     ]
-  }
+  },
+{
+  path: '/leader',
+    component: Layout,
+  hidden: true,
+  children: [
+  {
+    path: 'leader-detail',
+    component: (resolve) => require(['@/views/leader/leader/leader-detail'], resolve),
+  name: 'Detail',
+  meta: { title: '体检信息', icon: '' }
+}
+]
+}
 ]
 
 export default new Router({
