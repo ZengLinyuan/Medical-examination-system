@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 血压脉搏科Controller
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 @RestController
 @RequestMapping("/department/pulse")

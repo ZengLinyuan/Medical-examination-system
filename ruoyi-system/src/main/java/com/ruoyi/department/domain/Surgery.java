@@ -12,7 +12,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 外科对象 surgery
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 public class Surgery extends BaseEntity
 {
@@ -64,6 +64,7 @@ public class Surgery extends BaseEntity
     private String doctorOpinion;
 
     /** 医生编号 */
+    @Excel(name = "医生编号")
     private String doctorId;
 
     /** 医生审查 */

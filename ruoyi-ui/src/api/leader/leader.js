@@ -36,10 +36,10 @@ export function delForm(studentId) {
 
 
 //驳回体检信息
-export function editDepartment(data){
+export function editDepartment(formdata){
   return request({
     url: '/health/form/editDepartment',
-    method: 'put',
-    params:data
+    method: 'post',
+    data:formdata
   })
 }

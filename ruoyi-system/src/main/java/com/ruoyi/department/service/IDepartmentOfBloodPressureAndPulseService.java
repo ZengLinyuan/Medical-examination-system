@@ -7,7 +7,7 @@ import com.ruoyi.department.domain.DepartmentOfBloodPressureAndPulse;
  * 血压脉搏科Service接口
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 public interface IDepartmentOfBloodPressureAndPulseService 
 {

@@ -33,7 +33,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectSurgeryVo"/>
         <where>  
             <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
-            <if test="diagnosisTime != null "> and diagnosis_time = #{diagnosisTime}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
@@ -45,9 +44,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where student_ID = #{studentId}
     </select>
         
-    <insert id="insertSurgery" parameterType="Surgery" useGeneratedKeys="true" keyProperty="studentId">
+    <insert id="insertSurgery" parameterType="Surgery">
         insert into surgery
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null and studentId != ''">student_ID,</if>
             <if test="diagnosisTime != null">diagnosis_time,</if>
             <if test="height != null">height,</if>
             <if test="waist != null">waist,</if>
@@ -67,6 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="submitTime != null">submit_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null and studentId != ''">#{studentId},</if>
             <if test="diagnosisTime != null">#{diagnosisTime},</if>
             <if test="height != null">#{height},</if>
             <if test="waist != null">#{waist},</if>

@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 耳鼻喉科Controller
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 @RestController
 @RequestMapping("/department/ent")

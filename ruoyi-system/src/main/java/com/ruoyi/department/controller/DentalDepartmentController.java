@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 牙科Controller
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 @RestController
 @RequestMapping("/department/dental")
@@ -66,7 +66,7 @@ public class DentalDepartmentController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('department:dental:query')")
     @GetMapping(value = "/{studentId}")
-    public AjaxResult getInfo(@PathVariable("studentId") Long studentId)
+    public AjaxResult getInfo(@PathVariable("studentId") String studentId)
     {
         return AjaxResult.success(dentalDepartmentService.selectDentalDepartmentById(studentId));
     }
@@ -113,7 +113,7 @@ public class DentalDepartmentController extends BaseController
     @PreAuthorize("@ss.hasPermi('department:dental:remove')")
     @Log(title = "牙科", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{studentIds}")
-    public AjaxResult remove(@PathVariable Long[] studentIds)
+    public AjaxResult remove(@PathVariable String[] studentIds)
     {
         return toAjax(dentalDepartmentService.deleteDentalDepartmentByIds(studentIds));
     }
