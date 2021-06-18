@@ -310,7 +310,7 @@
         </el-col>
         <el-col :span="24">
           <el-form-item label="医生意见" prop="doctor_opinion">
-            <el-input v-model="formData.chest_radiography_doctor_opinion" placeholder="请输入医生意见" readonly
+            <el-input v-model="formData.chest_doctor_opinion" placeholder="请输入医生意见" readonly
               :style="{width: '100%'}">
               <template slot="append">胸部放射科</template>
             </el-input>
@@ -398,7 +398,7 @@ export default {
         limb: undefined,
         joint: undefined,
         flat_feet: undefined,
-        surger_other: undefined,
+        surgery_other: undefined,
         surgery_doctor_opinion: undefined,
         blood_pressure_high: undefined,
         blood_pressure_low: undefined,
@@ -410,12 +410,12 @@ export default {
         heart_and_blood_vessels: undefined,
         liver: undefined,
         spleen: undefined,
-        other: undefined,
+        internal_other: undefined,
         internal_doctor_opinion: undefined,
         laboratory_examination: undefined,
         laboratory_doctor_opinion: undefined,
         chest_radiography: undefined,
-        chest_radiography_doctor_opinion: undefined,
+        chest_doctor_opinion: undefined,
         other_examination: undefined,
         other_doctor_opinion: undefined,
         conclusions: '',
