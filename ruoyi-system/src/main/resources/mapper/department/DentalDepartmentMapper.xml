@@ -25,22 +25,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectDentalDepartmentList" parameterType="DentalDepartment" resultMap="DentalDepartmentResult">
         <include refid="selectDentalDepartmentVo"/>
         <where>  
-            <if test="studentId != null "> and student_ID = #{studentId}</if>
-            <if test="diagnosisTime != null "> and diagnosis_time = #{diagnosisTime}</if>
+            <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
         </where>
     </select>
     
-    <select id="selectDentalDepartmentById" parameterType="Long" resultMap="DentalDepartmentResult">
+    <select id="selectDentalDepartmentById" parameterType="String" resultMap="DentalDepartmentResult">
         <include refid="selectDentalDepartmentVo"/>
         where student_ID = #{studentId}
     </select>
         
-    <insert id="insertDentalDepartment" parameterType="DentalDepartment" useGeneratedKeys="true" keyProperty="studentId">
+    <insert id="insertDentalDepartment" parameterType="DentalDepartment">
         insert into dental_department
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null and studentId != ''">student_ID,</if>
             <if test="diagnosisTime != null">diagnosis_time,</if>
             <if test="dentalCaries != null">dental_caries,</if>
             <if test="missingTeeth != null">missing_teeth,</if>
@@ -53,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="submitTime != null">submit_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null and studentId != ''">#{studentId},</if>
             <if test="diagnosisTime != null">#{diagnosisTime},</if>
             <if test="dentalCaries != null">#{dentalCaries},</if>
             <if test="missingTeeth != null">#{missingTeeth},</if>
@@ -83,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where student_ID = #{studentId}
     </update>
 
-    <delete id="deleteDentalDepartmentById" parameterType="Long">
+    <delete id="deleteDentalDepartmentById" parameterType="String">
         delete from dental_department where student_ID = #{studentId}
     </delete>
 

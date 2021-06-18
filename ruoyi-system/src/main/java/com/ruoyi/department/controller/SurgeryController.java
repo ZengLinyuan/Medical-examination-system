@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 外科Controller
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 @RestController
 @RequestMapping("/department/surgery")

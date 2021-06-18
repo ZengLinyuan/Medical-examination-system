@@ -11,7 +11,7 @@ import com.ruoyi.department.service.IEntDepartmentService;
  * 耳鼻喉科Service业务层处理
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 @Service
 public class EntDepartmentServiceImpl implements IEntDepartmentService 

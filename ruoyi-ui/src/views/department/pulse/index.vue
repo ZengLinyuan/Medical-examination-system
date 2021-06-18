@@ -10,14 +10,6 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="诊断时间" prop="diagnosisTime">
-        <el-date-picker clearable size="small"
-          v-model="queryParams.diagnosisTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择诊断时间">
-        </el-date-picker>
-      </el-form-item>
       <el-form-item label="医生审查" prop="doctorAudit">
         <el-input
           v-model="queryParams.doctorAudit"
@@ -105,6 +97,7 @@
           <span>{{ parseTime(scope.row.diagnosisTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="医生编号" align="center" prop="doctorId" />
       <el-table-column label="医生审查" align="center" prop="doctorAudit" />
       <el-table-column label="领导审查" align="center" prop="leaderAudit" />
       <el-table-column label="提交时间" align="center" prop="submitTime" width="180">
@@ -131,7 +124,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -143,6 +136,9 @@
     <!-- 添加或修改血压脉搏科对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="学号" prop="studentId">
+          <el-input v-model="form.studentId" placeholder="请输入学号" />
+        </el-form-item>
         <el-form-item label="诊断时间" prop="diagnosisTime">
           <el-date-picker clearable size="small"
             v-model="form.diagnosisTime"
@@ -223,7 +219,6 @@ export default {
         pageNum: 1,
         pageSize: 10,
         studentId: null,
-        diagnosisTime: null,
         doctorAudit: null,
         leaderAudit: null,
         submitTime: null
@@ -232,6 +227,9 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        studentId: [
+          { required: true, message: "学号不能为空", trigger: "blur" }
+        ],
         diagnosisTime: [
           { required: true, message: "诊断时间不能为空", trigger: "blur" }
         ],

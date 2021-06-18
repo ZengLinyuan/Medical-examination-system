@@ -12,7 +12,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 血压脉搏科对象 department_of_blood_pressure_and_pulse
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 public class DepartmentOfBloodPressureAndPulse extends BaseEntity
 {
@@ -40,6 +40,7 @@ public class DepartmentOfBloodPressureAndPulse extends BaseEntity
     private String doctorOpinion;
 
     /** 医生编号 */
+    @Excel(name = "医生编号")
     private String doctorId;
 
     /** 医生审查 */

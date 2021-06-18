@@ -91,7 +91,6 @@
 <script>
 import {commitSurgeryForm} from "@/api/exam/input";
 import Cookies from "js-cookie";
-
 export default {
   components: {},
   props: [],
@@ -203,7 +202,6 @@ export default {
     },
   }
 }
-
 </script>
 <style>
 </style>

@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 牙科对象 dental_department
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 public class DentalDepartment extends BaseEntity
 {
@@ -42,6 +42,7 @@ public class DentalDepartment extends BaseEntity
     private String doctorOpinion;
 
     /** 医生编号 */
+    @Excel(name = "医生编号")
     private String doctorId;
 
     /** 医生审查 */
@@ -57,12 +58,12 @@ public class DentalDepartment extends BaseEntity
     @Excel(name = "提交时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date submitTime;
 
-    public void setStudentId(String studentId)
+    public void setStudentId(String studentId) 
     {
         this.studentId = studentId;
     }
 
-    public String getStudentId()
+    public String getStudentId() 
     {
         return studentId;
     }

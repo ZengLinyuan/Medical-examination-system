@@ -21,7 +21,6 @@
 import Cookies from "js-cookie";
 import {getStudent} from "@/api/exam/input";
 import {encrypt} from "@/utils/jsencrypt";
-
 export default {
   components: {},
   props: [],
@@ -67,7 +66,6 @@ export default {
     },
   }
 }
-
 </script>
 <style>
 </style>
