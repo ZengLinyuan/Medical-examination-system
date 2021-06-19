@@ -105,6 +105,7 @@ public class PhysicalExaminationFormController extends BaseController
     /**
      * 获取体检总详细信息
      */
+    
     @PreAuthorize("@ss.hasPermi('health:form:query')")
     @GetMapping(value = "/{studentId}")
     public AjaxResult getInfo(@PathVariable("studentId") String studentId)

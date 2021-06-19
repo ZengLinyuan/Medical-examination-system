@@ -57,23 +57,23 @@ public class StuPhyForm {
     private String id;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "学院", readConverterExp = "$column.readConverterExp()")
     private String college;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "专业", readConverterExp = "$column.readConverterExp()")
     private String major;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "姓名", readConverterExp = "$column.readConverterExp()")
     private String name;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "医生审查", readConverterExp = "$column.readConverterExp()")
     private String doctorAudit;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "院长审查", readConverterExp = "$column.readConverterExp()")
     private String leaderAudit;
 
     public void setSubmitTimeLeader(String submitTimeLeader) {

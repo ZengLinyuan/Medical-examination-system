@@ -21,63 +21,63 @@ public class Student extends BaseEntity
     private String id;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "学院", readConverterExp = "学院.readConverterExp()")
     private String college;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "专业", readConverterExp = "专业.readConverterExp()")
     private String major;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "班级", readConverterExp = "班级.readConverterExp()")
     private String classroom;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "学号", readConverterExp = "学号.readConverterExp()")
     private Long studentId;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "姓名", readConverterExp = "姓名.readConverterExp()")
     private String name;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "性别", readConverterExp = "性别.readConverterExp()")
     private String gender;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "出生日期", readConverterExp = "出生日期.readConverterExp()")
     private Date birthDate;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "年龄", readConverterExp = "年龄.readConverterExp()")
     private Long age;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "文化程度", readConverterExp = "文化程度.readConverterExp()")
     private String degreeOfEducation;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "民族", readConverterExp = "民族.readConverterExp()")
     private String nation;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "职业", readConverterExp = "职业.readConverterExp()")
     private String occupation;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "籍贯", readConverterExp = "籍贯.readConverterExp()")
     private String nativePlace;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "地址", readConverterExp = "地址.readConverterExp()")
     private String address;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "毕业学校或工作单位", readConverterExp = "毕业学校或工作单位.readConverterExp()")
     private String draduationSchoolOrWorkUnit;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "既往病史", readConverterExp = "既往病史.readConverterExp()")
     private String pastMedicalHistory;
 
     public void setId(String id) 
