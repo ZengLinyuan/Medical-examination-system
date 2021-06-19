@@ -376,16 +376,18 @@ public class PhysicalExaminationFormController extends BaseController
         System.out.println("进入驳回操作");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date newTime = null;
+        java.util.Date date3 = null;
+        try {
+            date3 = format.parse(reject.getDiagnosisTime());
+            newTime = new java.sql.Date(date3.getTime());
+            System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         switch(reject.getDeptName()){
             case 100:
                 Ophthalmic ophthalmic1 = new Ophthalmic();
                 ophthalmic1.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 ophthalmic1.setDiagnosisTime(newTime);
                 ophthalmic1.setDoctorAudit("通过");
                 ophthalmicService.updateOphthalmicLeaderAudit(ophthalmic1);
@@ -402,78 +404,36 @@ public class PhysicalExaminationFormController extends BaseController
                 laboratoryService.updateLaboratoryLeaderAudit(laboratory1);
                 EntDepartment entDepartment1 = new EntDepartment();
                 entDepartment1.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 entDepartment1.setDiagnosisTime(newTime);
                 entDepartment1.setDoctorAudit("通过");
                 entDepartmentService.updateEntDepartmentDoctorAudit(entDepartment1);
                 Surgery surgery1 = new Surgery();
                 surgery1.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 surgery1.setDiagnosisTime(newTime);
                 surgery1.setDoctorAudit("通过");
                 surgeryService.updateSurgeryLeaderAudit(surgery1);
                 DentalDepartment dentalDepartment1 = new DentalDepartment();
                 dentalDepartment1.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 dentalDepartment1.setDiagnosisTime(newTime);
                 dentalDepartment1.setDoctorAudit("通过");
                 dentalDepartmentService.updateDentalDepartmentLeaderAudit(dentalDepartment1);
                 InternalMedicine internalMedicine1 = new InternalMedicine();
                 internalMedicine1.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 internalMedicine1.setDiagnosisTime(newTime);
                 internalMedicine1.setDoctorAudit("通过");
                 internalMedicineService.updateInternalMedicineLeaderAudit(internalMedicine1);
                 DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse1 = new DepartmentOfBloodPressureAndPulse();
                 departmentOfBloodPressureAndPulse1.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 departmentOfBloodPressureAndPulse1.setDiagnosisTime(newTime);
                 departmentOfBloodPressureAndPulse1.setDoctorAudit("通过");
                 departmentOfBloodPressureAndPulseService.updateDepartmentOfBloodPressureAndPulseLeaderAudit(departmentOfBloodPressureAndPulse1);
                 ChestRadiology chestRadiology1 = new ChestRadiology();
                 chestRadiology1.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 chestRadiology1.setDiagnosisTime(newTime);
                 chestRadiology1.setDoctorAudit("通过");
                 chestRadiologyService.updateChestRadiologyLeaderAudit(chestRadiology1);
                 Other other1 = new Other();
                 other1.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 other1.setDiagnosisTime(newTime);
                 other1.setDoctorAudit("通过");
                 otherService.updateOtherDoctorAudit(other1);
@@ -485,12 +445,6 @@ public class PhysicalExaminationFormController extends BaseController
             case 101:
                 Ophthalmic ophthalmic = new Ophthalmic();
                 ophthalmic.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 ophthalmic.setDiagnosisTime(newTime);
                 ophthalmic.setDoctorOpinion(reject.getOpinion());
                 ophthalmic.setDoctorAudit("驳回");
@@ -502,12 +456,6 @@ public class PhysicalExaminationFormController extends BaseController
             case 102:
                 Laboratory laboratory = new Laboratory();
                 laboratory.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 laboratory.setDiagnosisTime(newTime);
                 laboratory.setDoctorOpinion(reject.getOpinion());
                 laboratory.setDoctorAudit("驳回");
@@ -519,12 +467,6 @@ public class PhysicalExaminationFormController extends BaseController
             case 103:
                 EntDepartment entDepartment = new EntDepartment();
                 entDepartment.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 entDepartment.setDiagnosisTime(newTime);
                 entDepartment.setDoctorOpinion(reject.getOpinion());
                 entDepartment.setDoctorAudit("驳回");
@@ -536,12 +478,6 @@ public class PhysicalExaminationFormController extends BaseController
             case 104:
                 Surgery surgery = new Surgery();
                 surgery.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 surgery.setDiagnosisTime(newTime);
                 surgery.setDoctorOpinion(reject.getOpinion());
                 surgery.setDoctorAudit("驳回");
@@ -553,12 +489,6 @@ public class PhysicalExaminationFormController extends BaseController
             case 105:
                 DentalDepartment dentalDepartment = new DentalDepartment();
                 dentalDepartment.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 dentalDepartment.setDiagnosisTime(newTime);
                 dentalDepartment.setDoctorOpinion(reject.getOpinion());
                 dentalDepartment.setDoctorAudit("驳回");
@@ -570,12 +500,6 @@ public class PhysicalExaminationFormController extends BaseController
             case 106:
                 InternalMedicine internalMedicine = new InternalMedicine();
                 internalMedicine.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 internalMedicine.setDiagnosisTime(newTime);
                 internalMedicine.setDoctorOpinion(reject.getOpinion());
                 internalMedicine.setDoctorAudit("驳回");
@@ -587,12 +511,6 @@ public class PhysicalExaminationFormController extends BaseController
             case 107:
                 DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse = new DepartmentOfBloodPressureAndPulse();
                 departmentOfBloodPressureAndPulse.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 departmentOfBloodPressureAndPulse.setDiagnosisTime(newTime);
                 departmentOfBloodPressureAndPulse.setDoctorOpinion(reject.getOpinion());
                 departmentOfBloodPressureAndPulse.setDoctorAudit("驳回");
@@ -604,12 +522,6 @@ public class PhysicalExaminationFormController extends BaseController
             case 108:
                 ChestRadiology chestRadiology = new ChestRadiology();
                 chestRadiology.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 chestRadiology.setDiagnosisTime(newTime);
                 chestRadiology.setDoctorOpinion(reject.getOpinion());
                 chestRadiology.setDoctorAudit("驳回");
@@ -622,12 +534,6 @@ public class PhysicalExaminationFormController extends BaseController
             case 109:
                 Other other = new Other();
                 other.setStudentId(reject.getStudentId());
-                try {
-                    newTime = format.parse(reject.getDiagnosisTime());
-                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
                 other.setDiagnosisTime(newTime);
                 other.setDoctorOpinion(reject.getOpinion());
                 other.setDoctorAudit("驳回");
