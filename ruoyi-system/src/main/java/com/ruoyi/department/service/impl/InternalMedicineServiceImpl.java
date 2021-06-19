@@ -1,6 +1,9 @@
 package com.ruoyi.department.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.health.domain.PhysicalExaminationForm;
+import com.ruoyi.health.service.IPhysicalExaminationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.department.mapper.InternalMedicineMapper;
@@ -19,6 +22,8 @@ public class InternalMedicineServiceImpl implements IInternalMedicineService
     @Autowired
     private InternalMedicineMapper internalMedicineMapper;
 
+    @Autowired
+    private IPhysicalExaminationFormService physicalExaminationFormService;
     /**
      * 查询内科
      * 
@@ -64,6 +69,11 @@ public class InternalMedicineServiceImpl implements IInternalMedicineService
     @Override
     public int updateInternalMedicine(InternalMedicine internalMedicine)
     {
+        PhysicalExaminationForm physicalExaminationForm = new PhysicalExaminationForm();
+        physicalExaminationForm.setStudentId(internalMedicine.getStudentId());
+        physicalExaminationForm.setDoctorAudit("未审核");
+        physicalExaminationForm.setLeaderAudit("未审核");
+        physicalExaminationFormService.updatePhysicalExaminationFormAudit(physicalExaminationForm);
         return internalMedicineMapper.updateInternalMedicine(internalMedicine);
     }
 
