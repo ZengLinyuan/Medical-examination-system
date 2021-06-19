@@ -33,5 +33,23 @@ public class Reject {
 
     private int deptName;
 
+    public String getOpinion() {
+        return opinion;
+    }
 
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
+    }
+
+    public String getAudit() {
+        return audit;
+    }
+
+    public void setAudit(String audit) {
+        this.audit = audit;
+    }
+
+    private String opinion;
+
+    private String audit;
 }
