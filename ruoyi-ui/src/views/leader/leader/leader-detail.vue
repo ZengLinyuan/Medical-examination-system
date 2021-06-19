@@ -363,8 +363,9 @@
 <script>
   import {getData} from "@/api/system/dict/data";
   import {getDetailData} from "../../../api/health/form";
+  import {editDepartment} from "../../../api/leader/leader"
 
-export default {
+  export default {
   name: "Detail",
   components: {},
   props: [],
@@ -458,8 +459,11 @@ export default {
       },
 
       formData: {
+        studentId:null,
+        diagnosisTime:null,
         conclusions: '', //负责医生意见
-        leaderAudit: ["通过"],
+        leaderAudit: '',
+        deptName: '',
         hospitalOpinion: '体检结果符合相关健康要求', //医院领导意见
       },
       rules: {
@@ -553,39 +557,39 @@ export default {
         "children": [{
           "label": "眼科",
           "value": "眼科",
-          "id": 102
+          "id": 101
         }, {
           "label": "化验科",
           "value": "化验科",
-          "id": 103
+          "id": 102
         }, {
           "label": "耳鼻喉",
           "value": "耳鼻喉",
-          "id": 105
+          "id": 103
         }, {
           "label": "口腔科",
           "value": "口腔科",
-          "id": 106
+          "id": 105
         }, {
           "label": "外科",
           "value": "外科",
-          "id": 107
+          "id": 104
         }, {
           "label": "内科",
           "value": "内科",
-          "id": 108
+          "id": 106
         }, {
           "label": "血压脉搏科",
           "value": "血压脉搏科",
-          "id": 109
+          "id": 107
         }, {
           "label": "胸部放射科",
           "value": "胸部放射科",
-          "id": 110
+          "id": 108
         }, {
           "label": "其他科",
           "value": "其他科",
-          "id": 111
+          "id": 109
         }]
       }],
       leaderAuditProps: {
@@ -594,8 +598,6 @@ export default {
     }
   },
   created:function () {
-    console.log('a is: ')
-    this.msgSuccess("驳回成功");
     this.inforData.studentId = this.$route.query.studentId;
     this.inforData.diagnosisTime = this.$route.query.diagnosisTime;
     console.log(this.inforData.studentId)
@@ -632,11 +634,13 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$refs['elForm'].validate(valid => {
-        if (!valid) return
-        // TODO 提交表单
-      })
-      this.$router.push({ path: "/leader/index" || "/" }).catch(()=>{});
+      this.formData.studentId = this.inforData.studentId;
+      this.formData.diagnosisTime = this.inforData.diagnosisTime;
+      this.formData.deptName = this.leaderAudit;
+      editDepartment(this.formData).then(response => {
+        this.msgSuccess("提交成功");
+        this.$router.push({ path: "/leader/index" || "/" }).catch(()=>{});
+      });
     },
     resetForm() {
       this.$refs['elForm'].resetFields()

@@ -5,15 +5,15 @@ import com.ruoyi.department.domain.DentalDepartment;
 
 /**
  * 牙科Service接口
- * 
+ *
  * @author ruoyi
  * @date 2021-06-17
  */
-public interface IDentalDepartmentService 
+public interface IDentalDepartmentService
 {
     /**
      * 查询牙科
-     * 
+     *
      * @param studentId 牙科ID
      * @return 牙科
      */
@@ -21,7 +21,7 @@ public interface IDentalDepartmentService
 
     /**
      * 查询牙科列表
-     * 
+     *
      * @param dentalDepartment 牙科
      * @return 牙科集合
      */
@@ -29,7 +29,7 @@ public interface IDentalDepartmentService
 
     /**
      * 新增牙科
-     * 
+     *
      * @param dentalDepartment 牙科
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface IDentalDepartmentService
 
     /**
      * 修改牙科
-     * 
+     *
      * @param dentalDepartment 牙科
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface IDentalDepartmentService
 
     /**
      * 批量删除牙科
-     * 
+     *
      * @param studentIds 需要删除的牙科ID
      * @return 结果
      */
@@ -53,7 +53,7 @@ public interface IDentalDepartmentService
 
     /**
      * 删除牙科信息
-     * 
+     *
      * @param studentId 牙科ID
      * @return 结果
      */
