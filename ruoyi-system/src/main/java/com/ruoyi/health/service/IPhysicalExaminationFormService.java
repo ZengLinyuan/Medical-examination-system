@@ -60,4 +60,8 @@ public interface IPhysicalExaminationFormService
     public int deletePhysicalExaminationFormById(String studentId);
 
     public List<PhysicalExaminationForm> selectAllPhysicalExaminationFormList();
+
+    public int updatePhysicalExaminationFormAudit(PhysicalExaminationForm physicalExaminationForm);
+
+
 }

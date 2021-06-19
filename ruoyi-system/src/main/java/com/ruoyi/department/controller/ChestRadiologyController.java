@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.health.domain.PhysicalExaminationForm;
+import com.ruoyi.health.service.IPhysicalExaminationFormService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +38,11 @@ public class ChestRadiologyController extends BaseController
 {
     @Autowired
     private IChestRadiologyService chestRadiologyService;
+
+    @Autowired
+    private IPhysicalExaminationFormService physicalExaminationFormService;
+
+
 
     /**
      * 查询胸部放射检查列表
@@ -104,6 +112,11 @@ public class ChestRadiologyController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody ChestRadiology chestRadiology)
     {
+        PhysicalExaminationForm physicalExaminationForm = new PhysicalExaminationForm();
+        physicalExaminationForm.setStudentId(chestRadiology.getStudentId());
+        physicalExaminationForm.setDoctorAudit("未审核");
+        physicalExaminationForm.setLeaderAudit("未审核");
+        physicalExaminationFormService.updatePhysicalExaminationFormAudit(physicalExaminationForm);
         return toAjax(chestRadiologyService.updateChestRadiology(chestRadiology));
     }
 
@@ -115,6 +128,9 @@ public class ChestRadiologyController extends BaseController
 	@DeleteMapping("/{studentIds}")
     public AjaxResult remove(@PathVariable String[] studentIds)
     {
+
         return toAjax(chestRadiologyService.deleteChestRadiologyByIds(studentIds));
     }
+
+
 }

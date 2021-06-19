@@ -97,4 +97,10 @@ public class PhysicalExaminationFormServiceImpl implements IPhysicalExaminationF
     {
         return physicalExaminationFormMapper.selectAllPhysicalExaminationFormList();
     }
+
+    public int updatePhysicalExaminationFormAudit(PhysicalExaminationForm physicalExaminationForm)
+    {
+        return physicalExaminationFormMapper.updatePhysicalExaminationFormAudit(physicalExaminationForm);
+    }
+
 }

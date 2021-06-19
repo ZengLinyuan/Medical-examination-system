@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.health.domain.PhysicalExaminationForm;
+import com.ruoyi.health.service.IPhysicalExaminationFormService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +39,8 @@ public class DepartmentOfBloodPressureAndPulseController extends BaseController
     @Autowired
     private IDepartmentOfBloodPressureAndPulseService departmentOfBloodPressureAndPulseService;
 
+    @Autowired
+    private IPhysicalExaminationFormService physicalExaminationFormService;
     /**
      * 查询血压脉搏科列表
      */
@@ -68,6 +73,7 @@ public class DepartmentOfBloodPressureAndPulseController extends BaseController
     @GetMapping(value = "/{studentId}")
     public AjaxResult getInfo(@PathVariable("studentId") String studentId)
     {
+
         return AjaxResult.success(departmentOfBloodPressureAndPulseService.selectDepartmentOfBloodPressureAndPulseById(studentId));
     }
 
@@ -104,6 +110,11 @@ public class DepartmentOfBloodPressureAndPulseController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse)
     {
+        PhysicalExaminationForm physicalExaminationForm = new PhysicalExaminationForm();
+        physicalExaminationForm.setStudentId(departmentOfBloodPressureAndPulse.getStudentId());
+        physicalExaminationForm.setDoctorAudit("未审核");
+        physicalExaminationForm.setLeaderAudit("未审核");
+        physicalExaminationFormService.updatePhysicalExaminationFormAudit(physicalExaminationForm);
         return toAjax(departmentOfBloodPressureAndPulseService.updateDepartmentOfBloodPressureAndPulse(departmentOfBloodPressureAndPulse));
     }
 

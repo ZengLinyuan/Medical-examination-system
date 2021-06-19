@@ -60,4 +60,6 @@ public interface PhysicalExaminationFormMapper
     public int deletePhysicalExaminationFormByIds(String[] studentIds);
 
     public List<PhysicalExaminationForm> selectAllPhysicalExaminationFormList();
+
+    public int updatePhysicalExaminationFormAudit(PhysicalExaminationForm physicalExaminationForm);
 }

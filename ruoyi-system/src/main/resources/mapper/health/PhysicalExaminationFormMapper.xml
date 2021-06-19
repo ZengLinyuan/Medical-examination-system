@@ -94,4 +94,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectAllPhysicalExaminationFormList" parameterType="String" resultMap="PhysicalExaminationFormResult">
         <include refid="selectPhysicalExaminationFormVo"/>
     </select>
+
+    <update id="updatePhysicalExaminationFormDoctorAudit" parameterType="PhysicalExaminationForm">
+        update physical_examination_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
+
+    <update id="updatePhysicalExaminationFormLeaderAudit" parameterType="PhysicalExaminationForm">
+        update physical_examination_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit}</if>
+        </trim>
+        where student_ID = #{studentId}
+    </update>
 </mapper>
