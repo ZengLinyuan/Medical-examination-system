@@ -160,8 +160,7 @@ public class PhysicalExaminationFormController extends BaseController
         List<StuPhyForm> stuPhyList = new ArrayList<StuPhyForm>();
         for(PhysicalExaminationForm physicalExaminationForm : phyList){
             for(Student student : stuList){ ;
-                if(physicalExaminationForm.getStudentId().equals(student.getId()) &&
-                physicalExaminationForm.getDoctorAudit().equals("通过")
+                if(physicalExaminationForm.getStudentId().equals(student.getId())
                 && physicalExaminationForm.getLeaderAudit().equals("未审核")
                 ){
                     StuPhyForm tempstuPhyForm = new StuPhyForm();
@@ -181,6 +180,38 @@ public class PhysicalExaminationFormController extends BaseController
         return getDataTable(stuPhyList);
     }
 
+    /**
+     * 查询审核总列表
+     */
+    @PreAuthorize("@ss.hasPermi('health:form:stuList')")
+    @GetMapping("/stuDoctorList")
+    public TableDataInfo stuLeaderList(StuPhyForm stuPhyForm)
+    {
+        startPage();
+        List<PhysicalExaminationForm> phyList = physicalExaminationFormService.selectAllPhysicalExaminationFormList();
+        List<Student> stuList = studentService.selectAllStudentList();
+        List<StuPhyForm> stuPhyList = new ArrayList<StuPhyForm>();
+        for(PhysicalExaminationForm physicalExaminationForm : phyList){
+            for(Student student : stuList){ ;
+                if(physicalExaminationForm.getStudentId().equals(student.getId()) &&
+                        physicalExaminationForm.getDoctorAudit().equals("未审核")
+                ){
+                    StuPhyForm tempstuPhyForm = new StuPhyForm();
+                    tempstuPhyForm.setId(student.getId());
+                    tempstuPhyForm.setName(student.getName());
+                    tempstuPhyForm.setCollege(student.getCollege());
+                    tempstuPhyForm.setMajor(student.getMajor());
+                    tempstuPhyForm.setDoctorAudit(physicalExaminationForm.getDoctorAudit());
+                    tempstuPhyForm.setLeaderAudit(physicalExaminationForm.getLeaderAudit());
+                    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                    String time = sdf.format(physicalExaminationForm.getInspectorTime());
+                    tempstuPhyForm.setSubmitTimeLeader(time);
+                    stuPhyList.add(tempstuPhyForm);
+                }
+            }
+        }
+        return getDataTable(stuPhyList);
+    }
     /**
      * 修改各科
      */
