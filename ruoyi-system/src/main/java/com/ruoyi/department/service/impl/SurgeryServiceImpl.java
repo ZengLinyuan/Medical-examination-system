@@ -11,7 +11,7 @@ import com.ruoyi.department.service.ISurgeryService;
  * 外科Service业务层处理
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 @Service
 public class SurgeryServiceImpl implements ISurgeryService 
@@ -89,5 +89,15 @@ public class SurgeryServiceImpl implements ISurgeryService
     public int deleteSurgeryById(String studentId)
     {
         return surgeryMapper.deleteSurgeryById(studentId);
+    }
+
+    public int updateSurgeryLeaderAudit(Surgery surgery)
+    {
+        return surgeryMapper.updateSurgeryLeaderAudit(surgery);
+    }
+
+    public int updateSurgeryDoctorAudit(Surgery surgery)
+    {
+        return surgeryMapper.updateSurgeryDoctorAudit(surgery);
     }
 }

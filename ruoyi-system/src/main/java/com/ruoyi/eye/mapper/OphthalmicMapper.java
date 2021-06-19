@@ -58,4 +58,8 @@ public interface OphthalmicMapper
      * @return 结果
      */
     public int deleteOphthalmicByIds(String[] studentIds);
+
+    public int updateOphthalmicLeaderAudit(Ophthalmic ophthalmic);
+
+    public int updateOphthalmicDoctorAudit(Ophthalmic ophthalmic);
 }

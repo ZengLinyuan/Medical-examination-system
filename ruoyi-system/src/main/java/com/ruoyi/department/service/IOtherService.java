@@ -58,4 +58,8 @@ public interface IOtherService
      * @return 结果
      */
     public int deleteOtherById(String studentId);
+
+    public int updateOtherLeaderAudit(Other other);
+
+    public int updateOtherDoctorAudit(Other other);
 }

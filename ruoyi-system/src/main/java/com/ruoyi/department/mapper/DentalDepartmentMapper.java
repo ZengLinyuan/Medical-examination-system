@@ -58,4 +58,8 @@ public interface DentalDepartmentMapper
      * @return 结果
      */
     public int deleteDentalDepartmentByIds(Long[] studentIds);
+
+    public int updateDentalDepartmentLeaderAudit(DentalDepartment dentalDepartment);
+
+    public int updateDentalDepartmentDoctorAudit(DentalDepartment dentalDepartment);
 }

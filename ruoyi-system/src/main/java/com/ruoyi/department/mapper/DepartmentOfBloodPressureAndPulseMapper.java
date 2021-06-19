@@ -7,7 +7,7 @@ import com.ruoyi.department.domain.DepartmentOfBloodPressureAndPulse;
  * 血压脉搏科Mapper接口
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 public interface DepartmentOfBloodPressureAndPulseMapper 
 {
@@ -58,4 +58,8 @@ public interface DepartmentOfBloodPressureAndPulseMapper
      * @return 结果
      */
     public int deleteDepartmentOfBloodPressureAndPulseByIds(String[] studentIds);
+
+    public int updateDepartmentOfBloodPressureAndPulseLeaderAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse);
+
+    public int updateDepartmentOfBloodPressureAndPulseDoctorAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse);
 }

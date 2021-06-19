@@ -90,4 +90,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{studentId}
         </foreach>
     </delete>
+
+    <select id="selectAllPhysicalExaminationFormList" parameterType="String" resultMap="PhysicalExaminationFormResult">
+        <include refid="selectPhysicalExaminationFormVo"/>
+    </select>
 </mapper>

@@ -11,7 +11,7 @@ import com.ruoyi.department.service.IDepartmentOfBloodPressureAndPulseService;
  * 血压脉搏科Service业务层处理
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 @Service
 public class DepartmentOfBloodPressureAndPulseServiceImpl implements IDepartmentOfBloodPressureAndPulseService 
@@ -89,5 +89,15 @@ public class DepartmentOfBloodPressureAndPulseServiceImpl implements IDepartment
     public int deleteDepartmentOfBloodPressureAndPulseById(String studentId)
     {
         return departmentOfBloodPressureAndPulseMapper.deleteDepartmentOfBloodPressureAndPulseById(studentId);
+    }
+
+    public int updateDepartmentOfBloodPressureAndPulseLeaderAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse)
+    {
+        return departmentOfBloodPressureAndPulseMapper.updateDepartmentOfBloodPressureAndPulseLeaderAudit(departmentOfBloodPressureAndPulse);
+    }
+
+    public int updateDepartmentOfBloodPressureAndPulseDoctorAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse)
+    {
+        return departmentOfBloodPressureAndPulseMapper.updateDepartmentOfBloodPressureAndPulseDoctorAudit(departmentOfBloodPressureAndPulse);
     }
 }

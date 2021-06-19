@@ -58,4 +58,8 @@ public interface IOphthalmicService
      * @return 结果
      */
     public int deleteOphthalmicById(String studentId);
+
+    public int updateOphthalmicLeaderAudit(Ophthalmic ophthalmic);
+
+    public int updateOphthalmicDoctorAudit(Ophthalmic ophthalmic);
 }

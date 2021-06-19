@@ -7,7 +7,7 @@ import com.ruoyi.department.domain.EntDepartment;
  * 耳鼻喉科Mapper接口
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 public interface EntDepartmentMapper 
 {
@@ -58,4 +58,8 @@ public interface EntDepartmentMapper
      * @return 结果
      */
     public int deleteEntDepartmentByIds(String[] studentIds);
+
+    public int updateEntDepartmentLeaderAudit(EntDepartment entDepartment);
+
+    public int updateEntDepartmentDoctorAudit(EntDepartment entDepartment);
 }

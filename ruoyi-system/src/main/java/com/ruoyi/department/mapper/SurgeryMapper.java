@@ -7,7 +7,7 @@ import com.ruoyi.department.domain.Surgery;
  * 外科Mapper接口
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 public interface SurgeryMapper 
 {
@@ -58,4 +58,8 @@ public interface SurgeryMapper
      * @return 结果
      */
     public int deleteSurgeryByIds(String[] studentIds);
+
+    public int updateSurgeryLeaderAudit(Surgery surgery);
+
+    public int updateSurgeryDoctorAudit(Surgery surgery);
 }

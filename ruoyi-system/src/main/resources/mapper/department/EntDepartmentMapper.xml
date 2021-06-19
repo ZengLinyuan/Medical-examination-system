@@ -29,7 +29,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectEntDepartmentVo"/>
         <where>  
             <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
-            <if test="diagnosisTime != null "> and diagnosis_time = #{diagnosisTime}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
@@ -41,9 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where student_ID = #{studentId}
     </select>
         
-    <insert id="insertEntDepartment" parameterType="EntDepartment" useGeneratedKeys="true" keyProperty="studentId">
+    <insert id="insertEntDepartment" parameterType="EntDepartment">
         insert into ent_department
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null and studentId != ''">student_ID,</if>
             <if test="diagnosisTime != null">diagnosis_time,</if>
             <if test="hearingLeft != null">hearing_left,</if>
             <if test="hearingRight != null">hearing_right,</if>
@@ -59,6 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="submitTime != null">submit_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null and studentId != ''">#{studentId},</if>
             <if test="diagnosisTime != null">#{diagnosisTime},</if>
             <if test="hearingLeft != null">#{hearingLeft},</if>
             <if test="hearingRight != null">#{hearingRight},</if>
@@ -105,4 +106,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{studentId}
         </foreach>
     </delete>
+
+    <update id="updateEntDepartmentLeaderAudit" parameterType="EntDepartment">
+        update ent_department
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+        </trim>
+        where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
+    </update>
+
+    <update id="updateEntDepartmentDoctorAudit" parameterType="EntDepartment">
+        update ent_department
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+        </trim>
+        where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
+    </update>
 </mapper>

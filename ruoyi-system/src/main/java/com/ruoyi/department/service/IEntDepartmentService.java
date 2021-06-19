@@ -7,7 +7,7 @@ import com.ruoyi.department.domain.EntDepartment;
  * 耳鼻喉科Service接口
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 public interface IEntDepartmentService 
 {
@@ -58,4 +58,8 @@ public interface IEntDepartmentService
      * @return 结果
      */
     public int deleteEntDepartmentById(String studentId);
+
+    public int updateEntDepartmentLeaderAudit(EntDepartment entDepartment);
+
+    public int updateEntDepartmentDoctorAudit(EntDepartment entDepartment);
 }

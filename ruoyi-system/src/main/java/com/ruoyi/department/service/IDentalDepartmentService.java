@@ -58,4 +58,8 @@ public interface IDentalDepartmentService
      * @return 结果
      */
     public int deleteDentalDepartmentById(Long studentId);
+
+    public int updateDentalDepartmentLeaderAudit(DentalDepartment dentalDepartment);
+
+    public int updateDentalDepartmentDoctorAudit(DentalDepartment dentalDepartment);
 }

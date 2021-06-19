@@ -25,7 +25,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDepartmentOfBloodPressureAndPulseVo"/>
         <where>  
             <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
-            <if test="diagnosisTime != null "> and diagnosis_time = #{diagnosisTime}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
@@ -37,9 +36,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where student_ID = #{studentId}
     </select>
         
-    <insert id="insertDepartmentOfBloodPressureAndPulse" parameterType="DepartmentOfBloodPressureAndPulse" useGeneratedKeys="true" keyProperty="studentId">
+    <insert id="insertDepartmentOfBloodPressureAndPulse" parameterType="DepartmentOfBloodPressureAndPulse">
         insert into department_of_blood_pressure_and_pulse
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null and studentId != ''">student_ID,</if>
             <if test="diagnosisTime != null">diagnosis_time,</if>
             <if test="bloodPressureHigh != null">blood_pressure_high,</if>
             <if test="bloodPressureLow != null">blood_pressure_low,</if>
@@ -51,6 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="submitTime != null">submit_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null and studentId != ''">#{studentId},</if>
             <if test="diagnosisTime != null">#{diagnosisTime},</if>
             <if test="bloodPressureHigh != null">#{bloodPressureHigh},</if>
             <if test="bloodPressureLow != null">#{bloodPressureLow},</if>
@@ -89,4 +90,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{studentId}
         </foreach>
     </delete>
+
+    <update id="updateDepartmentOfBloodPressureAndPulseLeaderAudit" parameterType="DepartmentOfBloodPressureAndPulse">
+        update department_of_blood_pressure_and_pulse
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
+        </trim>
+        where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
+    </update>
+
+    <update id="updateDepartmentOfBloodPressureAndPulseDoctorAudit" parameterType="DepartmentOfBloodPressureAndPulse">
+        update department_of_blood_pressure_and_pulse
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+        </trim>
+        where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
+    </update>
 </mapper>

@@ -90,4 +90,14 @@ public class OtherServiceImpl implements IOtherService
     {
         return otherMapper.deleteOtherById(studentId);
     }
+
+    public int updateOtherLeaderAudit(Other other)
+    {
+        return otherMapper.updateOtherLeaderAudit(other);
+    }
+
+    public int updateOtherDoctorAudit(Other other)
+    {
+        return otherMapper.updateOtherDoctorAudit(other);
+    }
 }

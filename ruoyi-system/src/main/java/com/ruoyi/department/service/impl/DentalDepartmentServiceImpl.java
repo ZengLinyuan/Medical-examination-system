@@ -11,7 +11,7 @@ import com.ruoyi.department.service.IDentalDepartmentService;
  * 牙科Service业务层处理
  * 
  * @author ruoyi
- * @date 2021-06-17
+ * @date 2021-06-18
  */
 @Service
 public class DentalDepartmentServiceImpl implements IDentalDepartmentService 
@@ -26,7 +26,7 @@ public class DentalDepartmentServiceImpl implements IDentalDepartmentService
      * @return 牙科
      */
     @Override
-    public DentalDepartment selectDentalDepartmentById(Long studentId)
+    public DentalDepartment selectDentalDepartmentById(String studentId)
     {
         return dentalDepartmentMapper.selectDentalDepartmentById(studentId);
     }
@@ -74,7 +74,7 @@ public class DentalDepartmentServiceImpl implements IDentalDepartmentService
      * @return 结果
      */
     @Override
-    public int deleteDentalDepartmentByIds(Long[] studentIds)
+    public int deleteDentalDepartmentByIds(String[] studentIds)
     {
         return dentalDepartmentMapper.deleteDentalDepartmentByIds(studentIds);
     }
@@ -86,8 +86,18 @@ public class DentalDepartmentServiceImpl implements IDentalDepartmentService
      * @return 结果
      */
     @Override
-    public int deleteDentalDepartmentById(Long studentId)
+    public int deleteDentalDepartmentById(String studentId)
     {
         return dentalDepartmentMapper.deleteDentalDepartmentById(studentId);
+    }
+
+    public int updateDentalDepartmentLeaderAudit(DentalDepartment dentalDepartment)
+    {
+        return dentalDepartmentMapper.updateDentalDepartmentLeaderAudit(dentalDepartment);
+    }
+
+    public int updateDentalDepartmentDoctorAudit(DentalDepartment dentalDepartment)
+    {
+        return dentalDepartmentMapper.updateDentalDepartmentDoctorAudit(dentalDepartment);
     }
 }
