@@ -62,17 +62,17 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-<!--      <router-link :to="'/leader/form/detail/' + scope.row.studentId">-->
-       <el-col :span="1.5">
-          <el-button
-            type="primary"
-            plain
-            icon="el-icon-edit"
-            size="mini"
-            @click="handleUpdate"
-            v-hasPermi="['eye:ophthalmic:edit']"
-          >查看</el-button>
-        </el-col>
+      <!--      <router-link :to="'/leader/form/detail/' + scope.row.studentId">-->
+      <el-col :span="1.5">
+        <el-button
+          type="primary"
+          plain
+          icon="el-icon-edit"
+          size="mini"
+          @click="handleUpdate"
+          v-hasPermi="['eye:ophthalmic:edit']"
+        >查看</el-button>
+      </el-col>
       <el-col :span="1.5">
         <el-button
           type="danger"
@@ -95,9 +95,10 @@
       <el-table-column label="学院" align="center" prop="college" />
       <el-table-column label="专业" align="center" prop="major" />
       <el-table-column label="负责医生审查" align="center" prop="doctorAudit" />
+      <el-table-column label="院长审查" align="center" prop="leaderAudit" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-        <el-button
+          <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
@@ -124,223 +125,223 @@
     />
 
     <!-- 添加或修改眼科对话框 -->
-<!--    <el-dialog   >-->
-      <el-dialog :title="title" :visible.sync="openDept"  width="500px" append-to-body >
-        <el-row :gutter="15">
-          <el-form ref="elForm"  :rules="rules" size="medium" label-width="100px">
-            <el-col :span="12">
-              <el-form-item label="科室" prop="dept_name">
-                <el-select v-model="formData.deptName" placeholder="请选择科室" clearable :style="{width: '100%'}">
-                  <el-option v-for="(item, index) in deptNameOptions" :key="index" :label="item.label"
-                             :value="item.value" :disabled="item.disabled"></el-option>
-                </el-select>
-              </el-form-item>
-            </el-col>
-          </el-form>
-        </el-row>
-        <div slot="footer">
-          <el-button @click="cancel">取消</el-button>
-          <el-button type="primary" @click="submitForm">确定</el-button>
-        </div>
-      </el-dialog>
+    <!--    <el-dialog   >-->
+    <el-dialog :title="title" :visible.sync="openDept"  width="500px" append-to-body >
+      <el-row :gutter="15">
+        <el-form ref="elForm"  :rules="rules" size="medium" label-width="100px">
+          <el-col :span="12">
+            <el-form-item label="科室" prop="dept_name">
+              <el-select v-model="formData.deptName" placeholder="请选择科室" clearable :style="{width: '100%'}">
+                <el-option v-for="(item, index) in deptNameOptions" :key="index" :label="item.label"
+                           :value="item.value" :disabled="item.disabled"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-form>
+      </el-row>
+      <div slot="footer">
+        <el-button @click="cancel">取消</el-button>
+        <el-button type="primary" @click="submitForm">确定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 
 
 <script>
-import {
-  listOphthalmic,
-  getOphthalmic,
-  delOphthalmic,
-  addOphthalmic,
-  updateOphthalmic,
-} from "@/api/eye/ophthalmic";
-import {getRole} from "@/api/system/role";
-import {backStuForm, getStuForm} from "@/api/health/form";
+  import {
+    listOphthalmic,
+    getOphthalmic,
+    delOphthalmic,
+    addOphthalmic,
+    updateOphthalmic,
+  } from "@/api/eye/ophthalmic";
+  import {getRole} from "@/api/system/role";
+  import {backStuForm, getStuForm} from "@/api/health/form";
+  import {editDepartmentDoctorAudit} from "../../../api/leader/leader";
 
-export default {
-  name: "Ophthalmic",
-  components: {},
-  data() {
-    return {
-      // 遮罩层
-      loading: true,
-      // 导出遮罩层
-      exportLoading: false,
-      // 选中数组
-      ids: [],
-      // 非单个禁用
-      single: true,
-      // 非多个禁用
-      multiple: true,
-      // 显示搜索条件
-      showSearch: true,
-      // 总条数
-      total: 0,
-      // 眼科表格数据
-      ophthalmicList: [],
-      // 弹出层标题
-      title: "",
-      // 是否显示弹出层
-      openDept: false,
-      formData:{
-        studentId:'',
-        diagnosisTime:'',
-        deptName: '',
-      },
-      deptNameOptions: [{
-        "label": "眼科",
-        "value": 101
-      }, {
-        "label": "耳鼻喉科",
-        "value": 103
-      }, {
-        "label": "口腔科",
-        "value": 105
-      }, {
-        "label": "外科",
-        "value": 104
-      }, {
-        "label": "血压脉搏科",
-        "value": 107
-      }, {
-        "label": "内科",
-        "value": 106
-      }, {
-        "label": "化验科",
-        "value": 102
-      }, {
-        "label": "胸部放射科",
-        "value": 108
-      }, {
-        "label": "其他科",
-        "value": 109
-      }],
+  export default {
+    name: "Ophthalmic",
+    components: {},
+    data() {
+      return {
+        // 遮罩层
+        loading: true,
+        // 导出遮罩层
+        exportLoading: false,
+        // 选中数组
+        ids: [],
+        // 非单个禁用
+        single: true,
+        // 非多个禁用
+        multiple: true,
+        // 显示搜索条件
+        showSearch: true,
+        // 总条数
+        total: 0,
+        // 眼科表格数据
+        ophthalmicList: [],
+        // 弹出层标题
+        title: "",
+        // 是否显示弹出层
+        openDept: false,
+        formData:{
+          studentId:'',
+          diagnosisTime:'',
+          deptName: '',
+        },
+        deptNameOptions: [{
+          "label": "眼科",
+          "value": 101
+        }, {
+          "label": "耳鼻喉科",
+          "value": 103
+        }, {
+          "label": "口腔科",
+          "value": 105
+        }, {
+          "label": "外科",
+          "value": 104
+        }, {
+          "label": "血压脉搏科",
+          "value": 107
+        }, {
+          "label": "内科",
+          "value": 106
+        }, {
+          "label": "化验科",
+          "value": 102
+        }, {
+          "label": "胸部放射科",
+          "value": 108
+        }, {
+          "label": "其他科",
+          "value": 109
+        }],
 
-      // 查询参数
-      queryParams: {
-        pageNum: 1,
-        pageSize: 10,
-        id: null,
-        submitTimeLeader: null,
-        name:null,
-        college:null,
-        major:null,
-        doctorAudit: null,
-        leaderAudit: null,
-      },
+        // 查询参数
+        queryParams: {
+          pageNum: 1,
+          pageSize: 10,
+          id: null,
+          submitTimeLeader: null,
+          name:null,
+          college:null,
+          major:null,
+          doctorAudit: null,
+          leaderAudit: null,
+        },
 
-      // 表单参数
-      form: {},
-      // 表单校验
-      rules: {}
-    };
-  },
-  created() {
-    this.getList();
-  },
-  methods: {
-    /** 查询眼科列表 */
-    getList() {
-      this.loading = true;
-      getStuForm(this.queryParams).then(response => {
-        this.ophthalmicList = response.rows;
-        this.total = response.total;
-        this.loading = false;
-      });
-    },
-    // 取消按钮
-    cancel() {
-      this.openDept = false;
-      this.reset();
-    },
-    // 表单重置
-    reset() {
-      this.form = {
-        studentId: null,
-        diagnosisTime: null,
-        sightLeftNoglasses: null,
-        sightRightNoglasses: null,
-        sightLeftWithglasses: null,
-        sightRightWithglasses: null,
-        eyeIllness: null,
-        colorVisionRed: null,
-        colorVisionGreen: null,
-        colorVisionPurple: null,
-        colorVisionBlue: null,
-        colorVisionYellow: null,
-        doctorOpinion: null,
-        doctorId: null,
-        doctorAudit: null,
-        leaderAudit: null,
-        submitTime: null
+        // 表单参数
+        form: {},
+        // 表单校验
+        rules: {}
       };
-      this.resetForm("form");
     },
-    /** 搜索按钮操作 */
-    handleQuery() {
-      this.queryParams.pageNum = 1;
+    created() {
       this.getList();
     },
-    /** 重置按钮操作 */
-    resetQuery() {
-      this.resetForm("queryForm");
-      this.handleQuery();
-    },
-    // 多选框选中数据
-    handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.studentId)
-      this.single = selection.length !== 1
-      this.multiple = !selection.length
-    },
-    /** 查看按钮操作 */
-    handleUpdate(row) {
-      this.reset();
-      const studentId = row.id || this.ids
-      getOphthalmic(studentId).then(response => {
+    methods: {
+      /** 查询眼科列表 */
+      getList() {
+        this.loading = true;
+        getStuForm(this.queryParams).then(response => {
+          this.ophthalmicList = response.rows;
+          this.total = response.total;
+          this.loading = false;
+        });
+      },
+      // 取消按钮
+      cancel() {
+        this.openDept = false;
+        this.reset();
+      },
+      // 表单重置
+      reset() {
+        this.form = {
+          studentId: null,
+          diagnosisTime: null,
+          sightLeftNoglasses: null,
+          sightRightNoglasses: null,
+          sightLeftWithglasses: null,
+          sightRightWithglasses: null,
+          eyeIllness: null,
+          colorVisionRed: null,
+          colorVisionGreen: null,
+          colorVisionPurple: null,
+          colorVisionBlue: null,
+          colorVisionYellow: null,
+          doctorOpinion: null,
+          doctorId: null,
+          doctorAudit: null,
+          leaderAudit: null,
+          submitTime: null
+        };
+        this.resetForm("form");
+      },
+      /** 搜索按钮操作 */
+      handleQuery() {
+        this.queryParams.pageNum = 1;
+        this.getList();
+      },
+      /** 重置按钮操作 */
+      resetQuery() {
+        this.resetForm("queryForm");
+        this.handleQuery();
+      },
+      // 多选框选中数据
+      handleSelectionChange(selection) {
+        this.ids = selection.map(item => item.studentId)
+        this.single = selection.length !== 1
+        this.multiple = !selection.length
+      },
+      /** 查看按钮操作 */
+      handleUpdate(row) {
+        this.reset();
+        const studentId = row.id || this.ids
+        const submitTimeLeader = row.submitTimeLeader || this.ids
         this.$router.push({
-          path: '/doctor/doc-detail',
-          name: "Detail",
-          params: {
+          path: '/leader/leader-detail',
+          query: {
             studentId: studentId,
+            diagnosisTime: submitTimeLeader,
           }
         }).catch(() => {
         });
-      })
-    },
-    /** 提交按钮 */
-    submitForm() {
-      editDepartment(this.formData).then(response => {
-        this.msgSuccess("驳回成功");
-        this.openDept = false;
-        this.getList();
-      });
-      /*this.$refs["form"].validate(valid => {
-        if (valid) {
-          if (this.form.studentId != null) {
-            updateOphthalmic(this.form).then(response => {
-              this.msgSuccess("修改成功");
-              this.open = false;
-              this.getList();
-            });
-          } else {
-            addOphthalmic(this.form).then(response => {
-              this.msgSuccess("新增成功");
-              this.open = false;
-              this.getList();
-            });
+      },
+      /** 提交按钮 */
+      submitForm() {
+        editDepartmentDoctorAudit(this.formData).then(response => {
+          this.msgSuccess("驳回成功");
+          this.openDept = false;
+          this.getList();
+        });
+        /*this.$refs["form"].validate(valid => {
+          if (valid) {
+            if (this.form.studentId != null) {
+              updateOphthalmic(this.form).then(response => {
+                this.msgSuccess("修改成功");
+                this.open = false;
+                this.getList();
+              });
+            } else {
+              addOphthalmic(this.form).then(response => {
+                this.msgSuccess("新增成功");
+                this.open = false;
+                this.getList();
+              });
+            }
           }
-        }
-      });*/
-    },
-    /** 驳回按钮操作 */
-    handleBack(row) {
-      this.formData.studentId = row.id;
-      this.formData.diagnosisTime = row.submitTimeLeader;
-      this.openDept = true;
-      this.title = "选择驳回部门";
+        });*/
+      },
+      /** 驳回按钮操作 */
+      handleBack(row) {
+        this.formData.studentId = row.id;
+        this.formData.diagnosisTime = row.submitTimeLeader;
+        this.openDept = true;
+        this.title = "选择驳回部门";
+      }
     }
-  }
-};
+  };
 </script>

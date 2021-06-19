@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.health.mapper.PhysicalExaminationFormMapper">
-    
+
     <resultMap type="PhysicalExaminationForm" id="PhysicalExaminationFormResult">
         <result property="studentId"    column="student_ID"    />
         <result property="inspectorTime"    column="inspector_time"    />
@@ -23,19 +23,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectPhysicalExaminationFormList" parameterType="PhysicalExaminationForm" resultMap="PhysicalExaminationFormResult">
         <include refid="selectPhysicalExaminationFormVo"/>
-        <where>  
+        <where>
             <if test="doctorId != null  and doctorId != ''"> and doctor_ID = #{doctorId}</if>
             <if test="submitTimeDoctor != null "> and submit_time_doctor = #{submitTimeDoctor}</if>
             <if test="leaderId != null  and leaderId != ''"> and leader_ID = #{leaderId}</if>
             <if test="submitTimeLeader != null "> and submit_time_leader = #{submitTimeLeader}</if>
         </where>
     </select>
-    
+
     <select id="selectPhysicalExaminationFormById" parameterType="String" resultMap="PhysicalExaminationFormResult">
         <include refid="selectPhysicalExaminationFormVo"/>
         where student_ID = #{studentId}
     </select>
-        
+
     <insert id="insertPhysicalExaminationForm" parameterType="PhysicalExaminationForm">
         insert into physical_examination_form
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deletePhysicalExaminationFormByIds" parameterType="String">
-        delete from physical_examination_form where student_ID in 
+        delete from physical_examination_form where student_ID in
         <foreach item="studentId" collection="array" open="(" separator="," close=")">
             #{studentId}
         </foreach>
@@ -95,15 +95,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectPhysicalExaminationFormVo"/>
     </select>
 
-    <update id="updatePhysicalExaminationFormDoctorAudit" parameterType="PhysicalExaminationForm">
-        update physical_examination_form
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
-        </trim>
-        where student_ID = #{studentId}
-    </update>
 
-    <update id="updatePhysicalExaminationFormLeaderAudit" parameterType="PhysicalExaminationForm">
+    <update id="updatePhysicalExaminationFormAudit" parameterType="PhysicalExaminationForm">
         update physical_examination_form
         <trim prefix="SET" suffixOverrides=",">
             <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>

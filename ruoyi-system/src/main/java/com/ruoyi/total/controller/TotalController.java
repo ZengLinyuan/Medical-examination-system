@@ -14,7 +14,6 @@ import com.ruoyi.student.domain.Student;
 import com.ruoyi.student.service.IStudentService;
 import com.ruoyi.total.domain.Total;
 import com.ruoyi.total.domain.BasisData;
-import com.ruoyi.total.service.ITotalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
