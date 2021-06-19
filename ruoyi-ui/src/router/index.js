@@ -63,7 +63,7 @@ export const constantRoutes = [
         path: 'index',
         component: (resolve) => require(['@/views/index'], resolve),
         name: '首页',
-        meta: { title: '首页', icon: 'dashboard', noCache: true, affix: true }
+        meta: {title: '首页', icon: 'dashboard', noCache: true, affix: true}
       }
     ]
   },
@@ -77,7 +77,7 @@ export const constantRoutes = [
         path: 'profile',
         component: (resolve) => require(['@/views/system/user/profile/index'], resolve),
         name: 'Profile',
-        meta: { title: '个人中心', icon: 'user' }
+        meta: {title: '个人中心', icon: 'user'}
       }
     ]
   },
@@ -90,7 +90,7 @@ export const constantRoutes = [
         path: 'type/data/:dictId(\\d+)',
         component: (resolve) => require(['@/views/system/dict/data'], resolve),
         name: 'Data',
-        meta: { title: '字典数据', icon: '' }
+        meta: {title: '字典数据', icon: ''}
       }
     ]
   },
@@ -103,7 +103,7 @@ export const constantRoutes = [
         path: 'log',
         component: (resolve) => require(['@/views/monitor/job/log'], resolve),
         name: 'JobLog',
-        meta: { title: '调度日志' }
+        meta: {title: '调度日志'}
       }
     ]
   },
@@ -116,7 +116,7 @@ export const constantRoutes = [
         path: 'edit/:tableId(\\d+)',
         component: (resolve) => require(['@/views/tool/gen/editTable'], resolve),
         name: 'GenEdit',
-        meta: { title: '修改生成配置' }
+        meta: {title: '修改生成配置'}
       }
     ]
   },
@@ -129,7 +129,7 @@ export const constantRoutes = [
         path: 'leader-detail/:studentId(\\d+)',
         component: (resolve) => require(['@/views/leader/leader/leader-detail'], resolve),
         name: 'Detail',
-        meta: { title: '体检详情', icon: '' }
+        meta: {title: '体检详情', icon: ''}
       }
     ]
   },
@@ -142,13 +142,13 @@ export const constantRoutes = [
         path: 'exam_input',
         component: (resolve) => require(['@/views/department/ophthalmic/exam_input'], resolve),
         name: 'exam_input',
-        meta: { title: '信息录入', icon: '' }
+        meta: {title: '信息录入', icon: ''}
       },
       {
         path: 'input',
         component: (resolve) => require(['@/views/department/ophthalmic/input'], resolve),
         name: 'input',
-        meta: { title: '学生信息录入', icon: '' }
+        meta: {title: '学生信息录入', icon: ''}
       }
     ]
   },
@@ -161,13 +161,13 @@ export const constantRoutes = [
         path: 'exam_input',
         component: (resolve) => require(['@/views/department/ent/exam_input'], resolve),
         name: 'exam_input',
-        meta: { title: '信息录入', icon: '' }
+        meta: {title: '信息录入', icon: ''}
       },
       {
         path: 'input',
         component: (resolve) => require(['@/views/department/ent/input'], resolve),
         name: 'input',
-        meta: { title: '学生信息录入', icon: '' }
+        meta: {title: '学生信息录入', icon: ''}
       }
     ]
   },
@@ -180,13 +180,13 @@ export const constantRoutes = [
         path: 'exam_input',
         component: (resolve) => require(['@/views/department/dental/exam_input'], resolve),
         name: 'exam_input',
-        meta: { title: '信息录入', icon: '' }
+        meta: {title: '信息录入', icon: ''}
       },
       {
         path: 'input',
         component: (resolve) => require(['@/views/department/dental/input'], resolve),
         name: 'input',
-        meta: { title: '学生信息录入', icon: '' }
+        meta: {title: '学生信息录入', icon: ''}
       }
     ]
   },
@@ -199,13 +199,13 @@ export const constantRoutes = [
         path: 'exam_input',
         component: (resolve) => require(['@/views/department/surgery/exam_input'], resolve),
         name: 'exam_input',
-        meta: { title: '信息录入', icon: '' }
+        meta: {title: '信息录入', icon: ''}
       },
       {
         path: 'input',
         component: (resolve) => require(['@/views/department/surgery/input'], resolve),
         name: 'input',
-        meta: { title: '学生信息录入', icon: '' }
+        meta: {title: '学生信息录入', icon: ''}
       }
     ]
   },
@@ -218,13 +218,13 @@ export const constantRoutes = [
         path: 'exam_input',
         component: (resolve) => require(['@/views/department/pulse/exam_input'], resolve),
         name: 'exam_input',
-        meta: { title: '信息录入', icon: '' }
+        meta: {title: '信息录入', icon: ''}
       },
       {
         path: 'input',
         component: (resolve) => require(['@/views/department/pulse/input'], resolve),
         name: 'input',
-        meta: { title: '学生信息录入', icon: '' }
+        meta: {title: '学生信息录入', icon: ''}
       }
     ]
   },
@@ -237,13 +237,13 @@ export const constantRoutes = [
         path: 'exam_input',
         component: (resolve) => require(['@/views/department/internal/exam_input'], resolve),
         name: 'exam_input',
-        meta: { title: '信息录入', icon: '' }
+        meta: {title: '信息录入', icon: ''}
       },
       {
         path: 'input',
         component: (resolve) => require(['@/views/department/internal/input'], resolve),
         name: 'input',
-        meta: { title: '学生信息录入', icon: '' }
+        meta: {title: '学生信息录入', icon: ''}
       }
     ]
   },
@@ -256,13 +256,13 @@ export const constantRoutes = [
         path: 'exam_input',
         component: (resolve) => require(['@/views/department/laboratory/exam_input'], resolve),
         name: 'exam_input',
-        meta: { title: '信息录入', icon: '' }
+        meta: {title: '信息录入', icon: ''}
       },
       {
         path: 'input',
         component: (resolve) => require(['@/views/department/laboratory/input'], resolve),
         name: 'input',
-        meta: { title: '学生信息录入', icon: '' }
+        meta: {title: '学生信息录入', icon: ''}
       }
     ]
   },
@@ -275,13 +275,13 @@ export const constantRoutes = [
         path: 'exam_input',
         component: (resolve) => require(['@/views/department/chest/exam_input'], resolve),
         name: 'exam_input',
-        meta: { title: '信息录入', icon: '' }
+        meta: {title: '信息录入', icon: ''}
       },
       {
         path: 'input',
         component: (resolve) => require(['@/views/department/chest/input'], resolve),
         name: 'input',
-        meta: { title: '学生信息录入', icon: '' }
+        meta: {title: '学生信息录入', icon: ''}
       }
     ]
   },
@@ -294,13 +294,13 @@ export const constantRoutes = [
         path: 'exam_input',
         component: (resolve) => require(['@/views/department/other/exam_input'], resolve),
         name: 'exam_input',
-        meta: { title: '信息录入', icon: '' }
+        meta: {title: '信息录入', icon: ''}
       },
       {
         path: 'input',
         component: (resolve) => require(['@/views/department/other/input'], resolve),
         name: 'input',
-        meta: { title: '学生信息录入', icon: '' }
+        meta: {title: '学生信息录入', icon: ''}
       }
     ]
   },
@@ -313,27 +313,53 @@ export const constantRoutes = [
         path: 'index',
         component: (resolve) => require(['@/views/leader/leader/index'], resolve),
         name: 'Detail',
-        meta: { title: '审查', icon: '' }
+        meta: {title: '审查', icon: ''}
       }
     ]
   },
-{
-  path: '/leader',
-    component: Layout,
-  hidden: true,
-  children: [
   {
-    path: 'leader-detail',
-    component: (resolve) => require(['@/views/leader/leader/leader-detail'], resolve),
-  name: 'Detail',
-  meta: { title: '体检信息', icon: '' }
-}
-]
-}
+    path: '/leader',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'leader-detail',
+        component: (resolve) => require(['@/views/leader/leader/leader-detail'], resolve),
+        name: 'Detail',
+        meta: {title: '体检信息', icon: ''}
+      }
+    ]
+  },
+  {
+    path: '/check',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        component: (resolve) => require(['@/views/check/check/index'], resolve),
+        name: 'Detail',
+        meta: {title: '审查', icon: ''}
+      }
+    ]
+  },
+  {
+    path: '/check',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'detail',
+        component: (resolve) => require(['@/views/check/check/detail'], resolve),
+        name: 'Detail',
+        meta: {title: '体检信息', icon: ''}
+      }
+    ]
+  }
 ]
 
 export default new Router({
   mode: 'history', // 去掉url中的#
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
