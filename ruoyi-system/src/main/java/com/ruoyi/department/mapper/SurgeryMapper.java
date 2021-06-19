@@ -58,4 +58,8 @@ public interface SurgeryMapper
      * @return 结果
      */
     public int deleteSurgeryByIds(String[] studentIds);
+
+    public int updateSurgeryLeaderAudit(Surgery surgery);
+
+    public int updateSurgeryDoctorAudit(Surgery surgery);
 }

@@ -58,4 +58,8 @@ public interface ISurgeryService
      * @return 结果
      */
     public int deleteSurgeryById(String studentId);
+
+    public int updateSurgeryLeaderAudit(Surgery surgery);
+
+    public int updateSurgeryDoctorAudit(Surgery surgery);
 }

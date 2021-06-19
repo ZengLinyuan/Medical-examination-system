@@ -90,4 +90,14 @@ public class DepartmentOfBloodPressureAndPulseServiceImpl implements IDepartment
     {
         return departmentOfBloodPressureAndPulseMapper.deleteDepartmentOfBloodPressureAndPulseById(studentId);
     }
+
+    public int updateDepartmentOfBloodPressureAndPulseLeaderAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse)
+    {
+        return departmentOfBloodPressureAndPulseMapper.updateDepartmentOfBloodPressureAndPulseLeaderAudit(departmentOfBloodPressureAndPulse);
+    }
+
+    public int updateDepartmentOfBloodPressureAndPulseDoctorAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse)
+    {
+        return departmentOfBloodPressureAndPulseMapper.updateDepartmentOfBloodPressureAndPulseDoctorAudit(departmentOfBloodPressureAndPulse);
+    }
 }

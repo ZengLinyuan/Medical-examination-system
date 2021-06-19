@@ -35,7 +35,7 @@ export function delForm(studentId) {
 }
 
 
-//驳回体检信息
+//领导驳回体检信息
 export function editDepartment(formdata){
   return request({
     url: '/health/form/editDepartment',
@@ -43,3 +43,12 @@ export function editDepartment(formdata){
     data:formdata
   })
 }
+
+export function editDepartmentDoctorAudit(formdata){
+  return request({
+    url: 'health/form/editDepartmentDoctorAudit',
+    method: 'post',
+    data: formdata
+  })
+}
+

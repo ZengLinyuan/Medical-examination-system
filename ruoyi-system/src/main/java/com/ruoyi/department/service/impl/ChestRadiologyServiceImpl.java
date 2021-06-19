@@ -96,4 +96,9 @@ public class ChestRadiologyServiceImpl implements IChestRadiologyService
     {
         return chestRadiologyMapper.updateChestRadiologyLeaderAudit(chestRadiology);
     }
+
+    public int updateChestRadiologyDoctorAudit(ChestRadiology chestRadiology)
+    {
+        return chestRadiologyMapper.updateChestRadiologyDoctorAudit(chestRadiology);
+    }
 }

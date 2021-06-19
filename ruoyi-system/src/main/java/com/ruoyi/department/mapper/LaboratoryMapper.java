@@ -60,4 +60,7 @@ public interface LaboratoryMapper
      */
     public int deleteLaboratoryByIds(String[] studentIds);
 
+    public int updateLaboratoryLeaderAudit(Laboratory laboratory);
+
+    public int updateLaboratoryDoctorAudit(Laboratory laboratory);
 }

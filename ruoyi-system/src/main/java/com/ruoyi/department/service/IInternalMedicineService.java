@@ -58,4 +58,8 @@ public interface IInternalMedicineService
      * @return 结果
      */
     public int deleteInternalMedicineById(String studentId);
+
+    public int updateInternalMedicineLeaderAudit(InternalMedicine internalMedicine);
+
+    public int updateInternalMedicineDoctorAudit(InternalMedicine internalMedicine);
 }
