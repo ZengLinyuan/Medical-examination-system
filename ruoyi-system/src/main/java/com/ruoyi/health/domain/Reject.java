@@ -41,15 +41,6 @@ public class Reject {
         this.opinion = opinion;
     }
 
-    public String getAudit() {
-        return audit;
-    }
-
-    public void setAudit(String audit) {
-        this.audit = audit;
-    }
-
     private String opinion;
 
-    private String audit;
 }

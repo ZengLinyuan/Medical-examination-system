@@ -192,6 +192,107 @@ public class PhysicalExaminationFormController extends BaseController
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date newTime = null;
         switch(reject.getDeptName()){
+            case 100:
+                Ophthalmic ophthalmic1 = new Ophthalmic();
+                ophthalmic1.setStudentId(reject.getStudentId());
+                try {
+                    newTime = format.parse(reject.getDiagnosisTime());
+                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                ophthalmic1.setDiagnosisTime(newTime);
+                ophthalmic1.setLeaderAudit("驳回");
+                ophthalmicService.updateOphthalmicLeaderAudit(ophthalmic1);
+                Laboratory laboratory1 = new Laboratory();
+                laboratory1.setStudentId(reject.getStudentId());
+                try {
+                    newTime = format.parse(reject.getDiagnosisTime());
+                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                laboratory1.setDiagnosisTime(newTime);
+                laboratory1.setLeaderAudit("驳回");
+                laboratoryService.updateLaboratoryLeaderAudit(laboratory1);
+                EntDepartment entDepartment1 = new EntDepartment();
+                entDepartment1.setStudentId(reject.getStudentId());
+                try {
+                    newTime = format.parse(reject.getDiagnosisTime());
+                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                entDepartment1.setDiagnosisTime(newTime);
+                entDepartment1.setLeaderAudit("驳回");
+                entDepartmentService.updateEntDepartmentDoctorAudit(entDepartment1);
+                Surgery surgery1 = new Surgery();
+                surgery1.setStudentId(reject.getStudentId());
+                try {
+                    newTime = format.parse(reject.getDiagnosisTime());
+                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                surgery1.setDiagnosisTime(newTime);
+                surgery1.setLeaderAudit("驳回");
+                surgeryService.updateSurgeryLeaderAudit(surgery1);
+                DentalDepartment dentalDepartment1 = new DentalDepartment();
+                dentalDepartment1.setStudentId(reject.getStudentId());
+                try {
+                    newTime = format.parse(reject.getDiagnosisTime());
+                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                dentalDepartment1.setDiagnosisTime(newTime);
+                dentalDepartment1.setLeaderAudit("驳回");
+                dentalDepartmentService.updateDentalDepartmentLeaderAudit(dentalDepartment1);
+                InternalMedicine internalMedicine1 = new InternalMedicine();
+                internalMedicine1.setStudentId(reject.getStudentId());
+                try {
+                    newTime = format.parse(reject.getDiagnosisTime());
+                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                internalMedicine1.setDiagnosisTime(newTime);
+                internalMedicine1.setLeaderAudit("驳回");
+                internalMedicineService.updateInternalMedicineLeaderAudit(internalMedicine1);
+                DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse1 = new DepartmentOfBloodPressureAndPulse();
+                departmentOfBloodPressureAndPulse1.setStudentId(reject.getStudentId());
+                try {
+                    newTime = format.parse(reject.getDiagnosisTime());
+                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                departmentOfBloodPressureAndPulse1.setDiagnosisTime(newTime);
+                departmentOfBloodPressureAndPulse1.setLeaderAudit("驳回");
+                departmentOfBloodPressureAndPulseService.updateDepartmentOfBloodPressureAndPulseLeaderAudit(departmentOfBloodPressureAndPulse1);
+                ChestRadiology chestRadiology1 = new ChestRadiology();
+                chestRadiology1.setStudentId(reject.getStudentId());
+                try {
+                    newTime = format.parse(reject.getDiagnosisTime());
+                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                chestRadiology1.setDiagnosisTime(newTime);
+                chestRadiology1.setLeaderAudit("驳回");
+                chestRadiologyService.updateChestRadiologyLeaderAudit(chestRadiology1);
+                Other other1 = new Other();
+                other1.setStudentId(reject.getStudentId());
+                try {
+                    newTime = format.parse(reject.getDiagnosisTime());
+                    System.out.println("转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                other1.setDiagnosisTime(newTime);
+                other1.setLeaderAudit("驳回");
+                otherService.updateOtherDoctorAudit(other1);
+                break;
             case 101:
                 Ophthalmic ophthalmic = new Ophthalmic();
                 ophthalmic.setStudentId(reject.getStudentId());
@@ -202,7 +303,7 @@ public class PhysicalExaminationFormController extends BaseController
                     e.printStackTrace();
                 }
                 ophthalmic.setDiagnosisTime(newTime);
-                ophthalmic.setLeaderAudit(reject.getAudit());
+                ophthalmic.setLeaderAudit("驳回");
                 return toAjax(ophthalmicService.updateOphthalmicLeaderAudit(ophthalmic));
             case 102:
                 Laboratory laboratory = new Laboratory();
@@ -226,7 +327,7 @@ public class PhysicalExaminationFormController extends BaseController
                     e.printStackTrace();
                 }
                 entDepartment.setDiagnosisTime(newTime);
-                entDepartment.setLeaderAudit(reject.getAudit());
+                entDepartment.setLeaderAudit("驳回");
                 return toAjax(entDepartmentService.updateEntDepartmentLeaderAudit(entDepartment));
             case 104:
                 Surgery surgery = new Surgery();
@@ -250,7 +351,7 @@ public class PhysicalExaminationFormController extends BaseController
                     e.printStackTrace();
                 }
                 dentalDepartment.setDiagnosisTime(newTime);
-                dentalDepartment.setLeaderAudit(reject.getAudit());
+                dentalDepartment.setLeaderAudit("驳回");
                 return toAjax(dentalDepartmentService.updateDentalDepartmentLeaderAudit(dentalDepartment));
             case 106:
                 InternalMedicine internalMedicine = new InternalMedicine();
@@ -262,7 +363,7 @@ public class PhysicalExaminationFormController extends BaseController
                     e.printStackTrace();
                 }
                 internalMedicine.setDiagnosisTime(newTime);
-                internalMedicine.setLeaderAudit(reject.getAudit());
+                internalMedicine.setLeaderAudit("驳回");
                 return toAjax(internalMedicineService.updateInternalMedicineLeaderAudit(internalMedicine));
             case 107:
                 DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse = new DepartmentOfBloodPressureAndPulse();
@@ -274,7 +375,7 @@ public class PhysicalExaminationFormController extends BaseController
                     e.printStackTrace();
                 }
                 departmentOfBloodPressureAndPulse.setDiagnosisTime(newTime);
-                departmentOfBloodPressureAndPulse.setLeaderAudit(reject.getAudit());
+                departmentOfBloodPressureAndPulse.setLeaderAudit("驳回");
                 return toAjax(departmentOfBloodPressureAndPulseService.updateDepartmentOfBloodPressureAndPulseLeaderAudit(departmentOfBloodPressureAndPulse));
             case 108:
                 ChestRadiology chestRadiology = new ChestRadiology();
@@ -286,7 +387,7 @@ public class PhysicalExaminationFormController extends BaseController
                     e.printStackTrace();
                 }
                 chestRadiology.setDiagnosisTime(newTime);
-                chestRadiology.setLeaderAudit(reject.getAudit());
+                chestRadiology.setLeaderAudit("驳回");
                 return toAjax(chestRadiologyService.updateChestRadiologyLeaderAudit(chestRadiology));
 
             case 109:
@@ -299,7 +400,7 @@ public class PhysicalExaminationFormController extends BaseController
                     e.printStackTrace();
                 }
                 other.setDiagnosisTime(newTime);
-                other.setLeaderAudit(reject.getAudit());
+                other.setLeaderAudit("驳回");
                 return toAjax(otherService.updateOtherLeaderAudit(other));
         }
         return null;
@@ -328,7 +429,7 @@ public class PhysicalExaminationFormController extends BaseController
                 }
                 ophthalmic.setDiagnosisTime(newTime);
                 ophthalmic.setDoctorOpinion(reject.getOpinion());
-                ophthalmic.setDoctorAudit(reject.getAudit());
+                ophthalmic.setDoctorAudit("驳回");
                 return toAjax(ophthalmicService.updateOphthalmicDoctorAudit(ophthalmic));
             case 102:
                 Laboratory laboratory = new Laboratory();
@@ -341,7 +442,7 @@ public class PhysicalExaminationFormController extends BaseController
                 }
                 laboratory.setDiagnosisTime(newTime);
                 laboratory.setDoctorOpinion(reject.getOpinion());
-                laboratory.setDoctorAudit(reject.getAudit());
+                laboratory.setDoctorAudit("驳回");
                 return toAjax(laboratoryService.updateLaboratoryDoctorAudit(laboratory));
             case 103:
                 EntDepartment entDepartment = new EntDepartment();
@@ -354,7 +455,7 @@ public class PhysicalExaminationFormController extends BaseController
                 }
                 entDepartment.setDiagnosisTime(newTime);
                 entDepartment.setDoctorOpinion(reject.getOpinion());
-                entDepartment.setDoctorAudit(reject.getAudit());
+                entDepartment.setDoctorAudit("驳回");
                 return toAjax(entDepartmentService.updateEntDepartmentDoctorAudit(entDepartment));
             case 104:
                 Surgery surgery = new Surgery();
@@ -367,7 +468,7 @@ public class PhysicalExaminationFormController extends BaseController
                 }
                 surgery.setDiagnosisTime(newTime);
                 surgery.setDoctorOpinion(reject.getOpinion());
-                surgery.setDoctorAudit(reject.getAudit());
+                surgery.setDoctorAudit("驳回");
                 return toAjax(surgeryService.updateSurgeryDoctorAudit(surgery));
             case 105:
                 DentalDepartment dentalDepartment = new DentalDepartment();
@@ -380,7 +481,7 @@ public class PhysicalExaminationFormController extends BaseController
                 }
                 dentalDepartment.setDiagnosisTime(newTime);
                 dentalDepartment.setDoctorOpinion(reject.getOpinion());
-                dentalDepartment.setDoctorAudit(reject.getAudit());
+                dentalDepartment.setDoctorAudit("驳回");
                 return toAjax(dentalDepartmentService.updateDentalDepartmentDoctorAudit(dentalDepartment));
             case 106:
                 InternalMedicine internalMedicine = new InternalMedicine();
@@ -393,7 +494,7 @@ public class PhysicalExaminationFormController extends BaseController
                 }
                 internalMedicine.setDiagnosisTime(newTime);
                 internalMedicine.setDoctorOpinion(reject.getOpinion());
-                internalMedicine.setDoctorAudit(reject.getAudit());
+                internalMedicine.setDoctorAudit("驳回");
                 return toAjax(internalMedicineService.updateInternalMedicineDoctorAudit(internalMedicine));
             case 107:
                 DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse = new DepartmentOfBloodPressureAndPulse();
@@ -406,7 +507,7 @@ public class PhysicalExaminationFormController extends BaseController
                 }
                 departmentOfBloodPressureAndPulse.setDiagnosisTime(newTime);
                 departmentOfBloodPressureAndPulse.setDoctorOpinion(reject.getOpinion());
-                departmentOfBloodPressureAndPulse.setDoctorAudit(reject.getAudit());
+                departmentOfBloodPressureAndPulse.setDoctorAudit("驳回");
                 return toAjax(departmentOfBloodPressureAndPulseService.updateDepartmentOfBloodPressureAndPulseDoctorAudit(departmentOfBloodPressureAndPulse));
             case 108:
                 ChestRadiology chestRadiology = new ChestRadiology();
@@ -419,7 +520,7 @@ public class PhysicalExaminationFormController extends BaseController
                 }
                 chestRadiology.setDiagnosisTime(newTime);
                 chestRadiology.setDoctorOpinion(reject.getOpinion());
-                chestRadiology.setDoctorAudit(reject.getAudit());
+                chestRadiology.setDoctorAudit("驳回");
                 return toAjax(chestRadiologyService.updateChestRadiologyDoctorAudit(chestRadiology));
 
             case 109:
@@ -433,7 +534,7 @@ public class PhysicalExaminationFormController extends BaseController
                 }
                 other.setDiagnosisTime(newTime);
                 other.setDoctorOpinion(reject.getOpinion());
-                other.setDoctorAudit(reject.getAudit());
+                other.setDoctorAudit("驳回");
                 return toAjax(otherService.updateOtherDoctorAudit(other));
         }
         return null;
