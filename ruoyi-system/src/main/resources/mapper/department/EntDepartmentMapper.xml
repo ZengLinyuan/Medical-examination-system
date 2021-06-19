@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.department.mapper.EntDepartmentMapper">
-    
+
     <resultMap type="EntDepartment" id="EntDepartmentResult">
         <result property="studentId"    column="student_ID"    />
         <result property="diagnosisTime"    column="diagnosis_time"    />
@@ -27,19 +27,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectEntDepartmentList" parameterType="EntDepartment" resultMap="EntDepartmentResult">
         <include refid="selectEntDepartmentVo"/>
-        <where>  
+        <where>
             <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
         </where>
     </select>
-    
+
     <select id="selectEntDepartmentById" parameterType="String" resultMap="EntDepartmentResult">
         <include refid="selectEntDepartmentVo"/>
         where student_ID = #{studentId}
     </select>
-        
+
     <insert id="insertEntDepartment" parameterType="EntDepartment">
         insert into ent_department
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -93,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
             <if test="submitTime != null">submit_time = #{submitTime},</if>
         </trim>
-        where student_ID = #{studentId}
+        where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
     </update>
 
     <delete id="deleteEntDepartmentById" parameterType="String">
@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteEntDepartmentByIds" parameterType="String">
-        delete from ent_department where student_ID in 
+        delete from ent_department where student_ID in
         <foreach item="studentId" collection="array" open="(" separator="," close=")">
             #{studentId}
         </foreach>

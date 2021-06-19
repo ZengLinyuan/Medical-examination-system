@@ -374,6 +374,8 @@
       inforData:{
         studentId:null,
         diagnosisTime:null,
+        deptName:null,
+        opinion:null,
       },
       ophthalmic:{
         sightLeftNoglasses:undefined,
@@ -462,7 +464,7 @@
         studentId:null,
         diagnosisTime:null,
         conclusions: '', //负责医生意见
-        leaderAudit: '',
+        leaderAudit: [],
         deptName: '',
         hospitalOpinion: '体检结果符合相关健康要求', //医院领导意见
       },
@@ -548,48 +550,37 @@
       }],
       leaderAuditOptions: [{
         "label": "通过",
-        "value": "通过",
-        "id": 100
+        "value": 100,
       }, {
         "label": "驳回",
-        "value": "眼科",
-        "id": 101,
+        "value": 101,
         "children": [{
           "label": "眼科",
-          "value": "眼科",
-          "id": 101
+          "value": 101,
         }, {
           "label": "化验科",
-          "value": "化验科",
-          "id": 102
+          "value": 102,
         }, {
           "label": "耳鼻喉",
-          "value": "耳鼻喉",
-          "id": 103
+          "value": 103,
         }, {
           "label": "口腔科",
-          "value": "口腔科",
-          "id": 105
+          "value": 105,
         }, {
           "label": "外科",
-          "value": "外科",
-          "id": 104
+          "value": 104,
         }, {
           "label": "内科",
-          "value": "内科",
-          "id": 106
+          "value": 106,
         }, {
           "label": "血压脉搏科",
-          "value": "血压脉搏科",
-          "id": 107
+          "value": 107,
         }, {
           "label": "胸部放射科",
-          "value": "胸部放射科",
-          "id": 108
+          "value": 108,
         }, {
           "label": "其他科",
-          "value": "其他科",
-          "id": 109
+          "value": 109,
         }]
       }],
       leaderAuditProps: {
@@ -636,7 +627,14 @@
     submitForm() {
       this.formData.studentId = this.inforData.studentId;
       this.formData.diagnosisTime = this.inforData.diagnosisTime;
-      this.formData.deptName = this.leaderAudit;
+      if(this.formData.leaderAudit[0] == 100){
+        this.formData.deptName = this.formData.leaderAudit[0]
+      }
+      if(this.formData.leaderAudit[0] == 101){
+        this.formData.deptName = this.formData.leaderAudit[1]
+      }
+      //this.formData.deptName = this.formData.leaderAudit;
+      //this.msgSuccess("科室："+ this.formData.deptName);
       editDepartment(this.formData).then(response => {
         this.msgSuccess("提交成功");
         this.$router.push({ path: "/leader/index" || "/" }).catch(()=>{});
