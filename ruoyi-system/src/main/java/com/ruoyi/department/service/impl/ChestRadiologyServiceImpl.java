@@ -58,6 +58,7 @@ public class ChestRadiologyServiceImpl implements IChestRadiologyService
     @Override
     public int insertChestRadiology(ChestRadiology chestRadiology)
     {
+
         return chestRadiologyMapper.insertChestRadiology(chestRadiology);
     }
 

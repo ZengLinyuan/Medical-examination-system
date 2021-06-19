@@ -2,11 +2,14 @@ package com.ruoyi.department.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import com.ruoyi.health.domain.PhysicalExaminationForm;
 import com.ruoyi.health.service.IPhysicalExaminationFormService;
+import com.sun.corba.se.spi.ior.IdentifiableContainerBase;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +53,15 @@ public class InternalMedicineController extends BaseController
     {
         startPage();
         List<InternalMedicine> list = internalMedicineService.selectInternalMedicineList(internalMedicine);
-        return getDataTable(list);
+        Iterator<InternalMedicine> it = list.iterator();
+        List<InternalMedicine> target = new ArrayList<InternalMedicine>();
+        while(it.hasNext()){
+            InternalMedicine entDepartment1 = it.next();
+            if(entDepartment1.getDoctorAudit().equals("驳回") || entDepartment1.getLeaderAudit().equals("驳回")){
+                target.add(entDepartment1);
+            }
+        }
+        return getDataTable(target);
     }
 
     /**

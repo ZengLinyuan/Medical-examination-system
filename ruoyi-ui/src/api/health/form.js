@@ -61,7 +61,7 @@ export function getStuForm(query){
     })
 }
 
-export function getStuForm(query){
+export function getStuDoctorForm(query){
   return request({
     url: '/health/form/stuDoctorList',
     method: 'get',

@@ -2,9 +2,12 @@ package com.ruoyi.department.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import com.ruoyi.department.domain.ChestRadiology;
 import com.ruoyi.health.domain.PhysicalExaminationForm;
 import com.ruoyi.health.service.IPhysicalExaminationFormService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -50,7 +53,15 @@ public class LaboratoryController extends BaseController
     {
         startPage();
         List<Laboratory> list = laboratoryService.selectLaboratoryList(laboratory);
-        return getDataTable(list);
+        Iterator<Laboratory> it = list.iterator();
+        List<Laboratory> target = new ArrayList<Laboratory>();
+        while(it.hasNext()){
+            Laboratory entDepartment1 = it.next();
+            if(entDepartment1.getDoctorAudit().equals("驳回") || entDepartment1.getLeaderAudit().equals("驳回")){
+                target.add(entDepartment1);
+            }
+        }
+        return getDataTable(target);
     }
 
     /**

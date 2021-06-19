@@ -2,7 +2,9 @@ package com.ruoyi.department.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import com.ruoyi.health.domain.PhysicalExaminationForm;
@@ -51,7 +53,15 @@ public class DentalDepartmentController extends BaseController
     {
         startPage();
         List<DentalDepartment> list = dentalDepartmentService.selectDentalDepartmentList(dentalDepartment);
-        return getDataTable(list);
+        Iterator<DentalDepartment> it = list.iterator();
+        List<DentalDepartment> target = new ArrayList<DentalDepartment>();
+        while(it.hasNext()){
+            DentalDepartment entDepartment1 = it.next();
+            if(entDepartment1.getDoctorAudit().equals("驳回") || entDepartment1.getLeaderAudit().equals("驳回")){
+                target.add(entDepartment1);
+            }
+        }
+        return getDataTable(target);
     }
 
     /**

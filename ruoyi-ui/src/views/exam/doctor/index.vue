@@ -158,7 +158,7 @@
     updateOphthalmic,
   } from "@/api/eye/ophthalmic";
   import {getRole} from "@/api/system/role";
-  import {backStuForm, getStuForm} from "@/api/health/form";
+  import {backStuForm, getStuDoctorForm} from "@/api/health/form";
   import {editDepartmentDoctorAudit} from "../../../api/leader/leader";
 
   export default {
@@ -246,7 +246,7 @@
       /** 查询眼科列表 */
       getList() {
         this.loading = true;
-        getStuForm(this.queryParams).then(response => {
+        getStuDoctorForm(this.queryParams).then(response => {
           this.ophthalmicList = response.rows;
           this.total = response.total;
           this.loading = false;

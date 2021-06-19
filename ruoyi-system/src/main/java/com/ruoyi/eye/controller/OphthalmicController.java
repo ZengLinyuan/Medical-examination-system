@@ -53,7 +53,15 @@ public class OphthalmicController extends BaseController
     {
         startPage();
         List<Ophthalmic> list = ophthalmicService.selectOphthalmicList(ophthalmic);
-        return getDataTable(list);
+        Iterator<Ophthalmic> it = list.iterator();
+        List<Ophthalmic> target = new ArrayList<Ophthalmic>();
+        while(it.hasNext()){
+            Ophthalmic entDepartment1 = it.next();
+            if(entDepartment1.getDoctorAudit().equals("驳回") || entDepartment1.getLeaderAudit().equals("驳回")){
+                target.add(entDepartment1);
+            }
+        }
+        return getDataTable(target);
     }
 
     /**
@@ -76,6 +84,7 @@ public class OphthalmicController extends BaseController
     @GetMapping(value = "/{studentId}")
     public AjaxResult getInfo(@PathVariable("studentId") String studentId)
     {
+
         return AjaxResult.success(ophthalmicService.selectOphthalmicById(studentId));
     }
 

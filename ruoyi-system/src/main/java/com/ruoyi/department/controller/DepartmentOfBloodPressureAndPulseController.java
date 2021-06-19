@@ -2,7 +2,9 @@ package com.ruoyi.department.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import com.ruoyi.health.domain.PhysicalExaminationForm;
@@ -50,7 +52,15 @@ public class DepartmentOfBloodPressureAndPulseController extends BaseController
     {
         startPage();
         List<DepartmentOfBloodPressureAndPulse> list = departmentOfBloodPressureAndPulseService.selectDepartmentOfBloodPressureAndPulseList(departmentOfBloodPressureAndPulse);
-        return getDataTable(list);
+        Iterator<DepartmentOfBloodPressureAndPulse> it = list.iterator();
+        List<DepartmentOfBloodPressureAndPulse> target = new ArrayList<DepartmentOfBloodPressureAndPulse>();
+        while(it.hasNext()){
+            DepartmentOfBloodPressureAndPulse entDepartment1 = it.next();
+            if(entDepartment1.getDoctorAudit().equals("驳回") || entDepartment1.getLeaderAudit().equals("驳回")){
+                target.add(entDepartment1);
+            }
+        }
+        return getDataTable(target);
     }
 
     /**
