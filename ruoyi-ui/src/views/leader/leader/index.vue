@@ -300,15 +300,17 @@ export default {
     handleUpdate(row) {
       this.reset();
       const studentId = row.id || this.ids
-      getOphthalmic(studentId).then(response => {
-        this.$router.push({
-          path: '/leader/leader-detail',
-          name: "Detail",
-          params: {
-            studentId: studentId,
-          }
-        }).catch(() => {
-        });
+      const submitTimeLeader = row.submitTimeLeader || this.ids
+      this.$router.push({
+        path: '/leader/leader-detail',
+        query: {
+          studentId: studentId,
+          diagnosisTime: submitTimeLeader,
+        }
+      }).catch(() => {
+      });
+      getOphthalmic(studentId,submitTimeLeader).then(response => {
+
       })
     },
     /** 提交按钮 */

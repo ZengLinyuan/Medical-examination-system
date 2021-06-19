@@ -317,35 +317,20 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/doctor',
+{
+  path: '/leader',
     component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        component: (resolve) => require(['@/views/exam/doctor/index'], resolve),
-        name: 'Detail',
-        meta: { title: '审查', icon: '' }
-      }
-    ]
-  },
+  hidden: true,
+  children: [
   {
-    path: '/doctor',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'doc-detail/:studentId(\\d+)',
-        component: (resolve) => require(['@/views/exam/doctor/doc-detail'], resolve),
-        name: 'Detail',
-        meta: { title: '体检详情', icon: '' }
-      }
-    ]
-  },
+    path: 'leader-detail',
+    component: (resolve) => require(['@/views/leader/leader/leader-detail'], resolve),
+  name: 'Detail',
+  meta: { title: '体检信息', icon: '' }
+}
 ]
-
-
+}
+]
 
 export default new Router({
   mode: 'history', // 去掉url中的#

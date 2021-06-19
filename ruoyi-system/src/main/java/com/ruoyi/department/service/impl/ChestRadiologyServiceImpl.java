@@ -2,6 +2,9 @@ package com.ruoyi.department.service.impl;
 
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.health.domain.PhysicalExaminationForm;
+import com.ruoyi.health.service.IPhysicalExaminationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.department.mapper.ChestRadiologyMapper;
@@ -20,6 +23,8 @@ public class ChestRadiologyServiceImpl implements IChestRadiologyService
     @Autowired
     private ChestRadiologyMapper chestRadiologyMapper;
 
+    @Autowired
+    private IPhysicalExaminationFormService physicalExaminationFormService;
     /**
      * 查询胸部放射检查
      * 
@@ -65,6 +70,11 @@ public class ChestRadiologyServiceImpl implements IChestRadiologyService
     @Override
     public int updateChestRadiology(ChestRadiology chestRadiology)
     {
+        PhysicalExaminationForm physicalExaminationForm = new PhysicalExaminationForm();
+        physicalExaminationForm.setStudentId(chestRadiology.getStudentId());
+        physicalExaminationForm.setDoctorAudit("未审核");
+        physicalExaminationForm.setLeaderAudit("未审核");
+        physicalExaminationFormService.updatePhysicalExaminationFormAudit(physicalExaminationForm);
         return chestRadiologyMapper.updateChestRadiology(chestRadiology);
     }
 

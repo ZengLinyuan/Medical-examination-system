@@ -119,6 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update internal_medicine
         <trim prefix="SET" suffixOverrides=",">
             <if test="doctorAudit != null">doctor_audit = #{doctorAudit},</if>
+            <if test="doctorOpinion != null">doctor_opinion = #{doctorOpinion},</if>
         </trim>
         where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
     </update>

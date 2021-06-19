@@ -17,7 +17,7 @@ public interface IDentalDepartmentService
      * @param studentId 牙科ID
      * @return 牙科
      */
-    public DentalDepartment selectDentalDepartmentById(Long studentId);
+    public DentalDepartment selectDentalDepartmentById(String studentId);
 
     /**
      * 查询牙科列表
@@ -49,7 +49,7 @@ public interface IDentalDepartmentService
      * @param studentIds 需要删除的牙科ID
      * @return 结果
      */
-    public int deleteDentalDepartmentByIds(Long[] studentIds);
+    public int deleteDentalDepartmentByIds(String[] studentIds);
 
     /**
      * 删除牙科信息
@@ -57,7 +57,7 @@ public interface IDentalDepartmentService
      * @param studentId 牙科ID
      * @return 结果
      */
-    public int deleteDentalDepartmentById(Long studentId);
+    public int deleteDentalDepartmentById(String studentId);
 
     public int updateDentalDepartmentLeaderAudit(DentalDepartment dentalDepartment);
 

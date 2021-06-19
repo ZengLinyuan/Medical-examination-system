@@ -2,6 +2,9 @@ package com.ruoyi.department.service.impl;
 
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.health.domain.PhysicalExaminationForm;
+import com.ruoyi.health.service.IPhysicalExaminationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.department.mapper.LaboratoryMapper;
@@ -20,6 +23,8 @@ public class LaboratoryServiceImpl implements ILaboratoryService
     @Autowired
     private LaboratoryMapper laboratoryMapper;
 
+    @Autowired
+    private IPhysicalExaminationFormService physicalExaminationFormService;
     /**
      * 查询化验科
      * 
@@ -65,6 +70,12 @@ public class LaboratoryServiceImpl implements ILaboratoryService
     @Override
     public int updateLaboratory(Laboratory laboratory)
     {
+        PhysicalExaminationForm physicalExaminationForm = new PhysicalExaminationForm();
+        physicalExaminationForm.setStudentId(laboratory.getStudentId());
+        physicalExaminationForm.setDoctorAudit("未审核");
+        physicalExaminationForm.setLeaderAudit("未审核");
+        physicalExaminationFormService.updatePhysicalExaminationFormAudit(physicalExaminationForm);
+
         return laboratoryMapper.updateLaboratory(laboratory);
     }
 

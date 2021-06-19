@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.health.domain.PhysicalExaminationForm;
+import com.ruoyi.health.service.IPhysicalExaminationFormService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +39,8 @@ public class EntDepartmentController extends BaseController
     @Autowired
     private IEntDepartmentService entDepartmentService;
 
+    @Autowired
+    private IPhysicalExaminationFormService physicalExaminationFormService;
     /**
      * 查询耳鼻喉科列表
      */
@@ -104,6 +109,11 @@ public class EntDepartmentController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody EntDepartment entDepartment)
     {
+        PhysicalExaminationForm physicalExaminationForm = new PhysicalExaminationForm();
+        physicalExaminationForm.setStudentId(entDepartment.getStudentId());
+        physicalExaminationForm.setDoctorAudit("未审核");
+        physicalExaminationForm.setLeaderAudit("未审核");
+        physicalExaminationFormService.updatePhysicalExaminationFormAudit(physicalExaminationForm);
         return toAjax(entDepartmentService.updateEntDepartment(entDepartment));
     }
 
