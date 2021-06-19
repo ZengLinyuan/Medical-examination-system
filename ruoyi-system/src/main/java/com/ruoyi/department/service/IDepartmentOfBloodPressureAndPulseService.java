@@ -58,4 +58,8 @@ public interface IDepartmentOfBloodPressureAndPulseService
      * @return 结果
      */
     public int deleteDepartmentOfBloodPressureAndPulseById(String studentId);
+
+    public int updateDepartmentOfBloodPressureAndPulseLeaderAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse);
+
+    public int updateDepartmentOfBloodPressureAndPulseDoctorAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse);
 }

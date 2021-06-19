@@ -61,4 +61,6 @@ public interface ChestRadiologyMapper
     public int deleteChestRadiologyByIds(String[] studentIds);
 
     public int updateChestRadiologyLeaderAudit(ChestRadiology chestRadiology);
+
+    public int updateChestRadiologyDoctorAudit(ChestRadiology chestRadiology);
 }

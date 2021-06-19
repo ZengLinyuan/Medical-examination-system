@@ -58,4 +58,8 @@ public interface IEntDepartmentService
      * @return 结果
      */
     public int deleteEntDepartmentById(String studentId);
+
+    public int updateEntDepartmentLeaderAudit(EntDepartment entDepartment);
+
+    public int updateEntDepartmentDoctorAudit(EntDepartment entDepartment);
 }

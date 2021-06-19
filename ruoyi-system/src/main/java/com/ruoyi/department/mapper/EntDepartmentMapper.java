@@ -58,4 +58,8 @@ public interface EntDepartmentMapper
      * @return 结果
      */
     public int deleteEntDepartmentByIds(String[] studentIds);
+
+    public int updateEntDepartmentLeaderAudit(EntDepartment entDepartment);
+
+    public int updateEntDepartmentDoctorAudit(EntDepartment entDepartment);
 }

@@ -61,4 +61,6 @@ public interface IChestRadiologyService
     public int deleteChestRadiologyById(String studentId);
 
     public int updateChestRadiologyLeaderAudit(ChestRadiology chestRadiology);
+
+    public int updateChestRadiologyDoctorAudit(ChestRadiology chestRadiology);
 }

@@ -90,4 +90,14 @@ public class EntDepartmentServiceImpl implements IEntDepartmentService
     {
         return entDepartmentMapper.deleteEntDepartmentById(studentId);
     }
+
+    public int updateEntDepartmentLeaderAudit(EntDepartment entDepartment)
+    {
+        return entDepartmentMapper.updateEntDepartmentLeaderAudit(entDepartment);
+    }
+
+    public int updateEntDepartmentDoctorAudit(EntDepartment entDepartment)
+    {
+        return entDepartmentMapper.updateEntDepartmentDoctorAudit(entDepartment);
+    }
 }

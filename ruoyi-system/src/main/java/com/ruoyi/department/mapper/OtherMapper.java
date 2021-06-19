@@ -58,4 +58,8 @@ public interface OtherMapper
      * @return 结果
      */
     public int deleteOtherByIds(String[] studentIds);
+
+    public int updateOtherLeaderAudit(Other other);
+
+    public int updateOtherDoctorAudit(Other other);
 }

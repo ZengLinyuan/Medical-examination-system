@@ -90,4 +90,14 @@ public class DentalDepartmentServiceImpl implements IDentalDepartmentService
     {
         return dentalDepartmentMapper.deleteDentalDepartmentById(studentId);
     }
+
+    public int updateDentalDepartmentLeaderAudit(DentalDepartment dentalDepartment)
+    {
+        return dentalDepartmentMapper.updateDentalDepartmentLeaderAudit(dentalDepartment);
+    }
+
+    public int updateDentalDepartmentDoctorAudit(DentalDepartment dentalDepartment)
+    {
+        return dentalDepartmentMapper.updateDentalDepartmentDoctorAudit(dentalDepartment);
+    }
 }

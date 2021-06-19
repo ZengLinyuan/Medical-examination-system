@@ -7,7 +7,7 @@ import com.ruoyi.department.domain.DentalDepartment;
  * 牙科Service接口
  * 
  * @author ruoyi
- * @date 2021-06-18
+ * @date 2021-06-17
  */
 public interface IDentalDepartmentService 
 {
@@ -17,7 +17,7 @@ public interface IDentalDepartmentService
      * @param studentId 牙科ID
      * @return 牙科
      */
-    public DentalDepartment selectDentalDepartmentById(String studentId);
+    public DentalDepartment selectDentalDepartmentById(Long studentId);
 
     /**
      * 查询牙科列表
@@ -49,7 +49,7 @@ public interface IDentalDepartmentService
      * @param studentIds 需要删除的牙科ID
      * @return 结果
      */
-    public int deleteDentalDepartmentByIds(String[] studentIds);
+    public int deleteDentalDepartmentByIds(Long[] studentIds);
 
     /**
      * 删除牙科信息
@@ -57,5 +57,9 @@ public interface IDentalDepartmentService
      * @param studentId 牙科ID
      * @return 结果
      */
-    public int deleteDentalDepartmentById(String studentId);
+    public int deleteDentalDepartmentById(Long studentId);
+
+    public int updateDentalDepartmentLeaderAudit(DentalDepartment dentalDepartment);
+
+    public int updateDentalDepartmentDoctorAudit(DentalDepartment dentalDepartment);
 }

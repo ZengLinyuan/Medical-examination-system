@@ -90,4 +90,14 @@ public class OphthalmicServiceImpl implements IOphthalmicService
     {
         return ophthalmicMapper.deleteOphthalmicById(studentId);
     }
+
+    public int updateOphthalmicLeaderAudit(Ophthalmic ophthalmic)
+    {
+        return ophthalmicMapper.updateOphthalmicLeaderAudit(ophthalmic);
+    }
+
+    public int updateOphthalmicDoctorAudit(Ophthalmic ophthalmic)
+    {
+        return ophthalmicMapper.updateOphthalmicDoctorAudit(ophthalmic);
+    }
 }

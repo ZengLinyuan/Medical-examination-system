@@ -90,4 +90,14 @@ public class InternalMedicineServiceImpl implements IInternalMedicineService
     {
         return internalMedicineMapper.deleteInternalMedicineById(studentId);
     }
+
+    public int updateInternalMedicineLeaderAudit(InternalMedicine internalMedicine)
+    {
+        return internalMedicineMapper.updateInternalMedicineLeaderAudit(internalMedicine);
+    }
+
+    public int updateInternalMedicineDoctorAudit(InternalMedicine internalMedicine)
+    {
+        return internalMedicineMapper.updateInternalMedicineDoctorAudit(internalMedicine);
+    }
 }

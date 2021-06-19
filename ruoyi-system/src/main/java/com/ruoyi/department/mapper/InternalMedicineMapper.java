@@ -58,4 +58,8 @@ public interface InternalMedicineMapper
      * @return 结果
      */
     public int deleteInternalMedicineByIds(String[] studentIds);
+
+    public int updateInternalMedicineLeaderAudit(InternalMedicine internalMedicine);
+
+    public int updateInternalMedicineDoctorAudit(InternalMedicine internalMedicine);
 }

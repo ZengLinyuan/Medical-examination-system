@@ -60,4 +60,7 @@ public interface ILaboratoryService
      */
     public int deleteLaboratoryById(String studentId);
 
+    public int updateLaboratoryLeaderAudit(Laboratory laboratory);
+
+    public int updateLaboratoryDoctorAudit(Laboratory laboratory);
 }

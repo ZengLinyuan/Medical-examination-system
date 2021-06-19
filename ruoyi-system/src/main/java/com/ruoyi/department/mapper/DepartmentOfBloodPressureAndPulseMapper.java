@@ -58,4 +58,8 @@ public interface DepartmentOfBloodPressureAndPulseMapper
      * @return 结果
      */
     public int deleteDepartmentOfBloodPressureAndPulseByIds(String[] studentIds);
+
+    public int updateDepartmentOfBloodPressureAndPulseLeaderAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse);
+
+    public int updateDepartmentOfBloodPressureAndPulseDoctorAudit(DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse);
 }

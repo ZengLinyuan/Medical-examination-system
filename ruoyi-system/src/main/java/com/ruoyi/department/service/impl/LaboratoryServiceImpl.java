@@ -92,5 +92,13 @@ public class LaboratoryServiceImpl implements ILaboratoryService
         return laboratoryMapper.deleteLaboratoryById(studentId);
     }
 
+    public int updateLaboratoryLeaderAudit(Laboratory laboratory)
+    {
+        return laboratoryMapper.updateLaboratoryLeaderAudit(laboratory);
+    }
 
+    public int updateLaboratoryDoctorAudit(Laboratory laboratory)
+    {
+        return laboratoryMapper.updateLaboratoryDoctorAudit(laboratory);
+    }
 }

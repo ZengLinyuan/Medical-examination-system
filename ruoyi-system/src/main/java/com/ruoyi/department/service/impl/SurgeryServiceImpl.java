@@ -90,4 +90,14 @@ public class SurgeryServiceImpl implements ISurgeryService
     {
         return surgeryMapper.deleteSurgeryById(studentId);
     }
+
+    public int updateSurgeryLeaderAudit(Surgery surgery)
+    {
+        return surgeryMapper.updateSurgeryLeaderAudit(surgery);
+    }
+
+    public int updateSurgeryDoctorAudit(Surgery surgery)
+    {
+        return surgeryMapper.updateSurgeryDoctorAudit(surgery);
+    }
 }
