@@ -1,6 +1,9 @@
 package com.ruoyi.department.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.health.domain.PhysicalExaminationForm;
+import com.ruoyi.health.service.IPhysicalExaminationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.department.mapper.OtherMapper;
@@ -19,6 +22,8 @@ public class OtherServiceImpl implements IOtherService
     @Autowired
     private OtherMapper otherMapper;
 
+    @Autowired
+    private IPhysicalExaminationFormService physicalExaminationFormService;
     /**
      * 查询其他科
      * 
@@ -64,6 +69,11 @@ public class OtherServiceImpl implements IOtherService
     @Override
     public int updateOther(Other other)
     {
+        PhysicalExaminationForm physicalExaminationForm = new PhysicalExaminationForm();
+        physicalExaminationForm.setStudentId(other.getStudentId());
+        physicalExaminationForm.setDoctorAudit("未审核");
+        physicalExaminationForm.setLeaderAudit("未审核");
+        physicalExaminationFormService.updatePhysicalExaminationFormAudit(physicalExaminationForm);
         return otherMapper.updateOther(other);
     }
 
