@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.department.mapper.SurgeryMapper">
-    
+
     <resultMap type="Surgery" id="SurgeryResult">
         <result property="studentId"    column="student_ID"    />
         <result property="diagnosisTime"    column="diagnosis_time"    />
@@ -31,19 +31,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectSurgeryList" parameterType="Surgery" resultMap="SurgeryResult">
         <include refid="selectSurgeryVo"/>
-        <where>  
+        <where>
             <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
         </where>
     </select>
-    
+
     <select id="selectSurgeryById" parameterType="String" resultMap="SurgeryResult">
         <include refid="selectSurgeryVo"/>
         where student_ID = #{studentId}
     </select>
-        
+
     <insert id="insertSurgery" parameterType="Surgery">
         insert into surgery
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
             <if test="submitTime != null">submit_time = #{submitTime},</if>
         </trim>
-        where student_ID = #{studentId}
+        where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
     </update>
 
     <delete id="deleteSurgeryById" parameterType="String">
@@ -117,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSurgeryByIds" parameterType="String">
-        delete from surgery where student_ID in 
+        delete from surgery where student_ID in
         <foreach item="studentId" collection="array" open="(" separator="," close=")">
             #{studentId}
         </foreach>

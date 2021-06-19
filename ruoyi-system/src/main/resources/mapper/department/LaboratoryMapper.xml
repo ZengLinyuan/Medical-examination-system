@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.department.mapper.LaboratoryMapper">
-    
+
     <resultMap type="Laboratory" id="LaboratoryResult">
         <result property="studentId"    column="student_ID"    />
         <result property="diagnosisTime"    column="diagnosis_time"    />
@@ -21,19 +21,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectLaboratoryList" parameterType="Laboratory" resultMap="LaboratoryResult">
         <include refid="selectLaboratoryVo"/>
-        <where>  
+        <where>
             <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
         </where>
     </select>
-    
+
     <select id="selectLaboratoryById" parameterType="String" resultMap="LaboratoryResult">
         <include refid="selectLaboratoryVo"/>
         where student_ID = #{studentId}
     </select>
-        
+
     <insert id="insertLaboratory" parameterType="Laboratory">
         insert into laboratory
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
             <if test="submitTime != null">submit_time = #{submitTime},</if>
         </trim>
-        where student_ID = #{studentId}
+        where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
     </update>
 
     <delete id="deleteLaboratoryById" parameterType="String">
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLaboratoryByIds" parameterType="String">
-        delete from laboratory where student_ID in 
+        delete from laboratory where student_ID in
         <foreach item="studentId" collection="array" open="(" separator="," close=")">
             #{studentId}
         </foreach>

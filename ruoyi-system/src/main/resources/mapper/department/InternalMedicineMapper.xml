@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.department.mapper.InternalMedicineMapper">
-    
+
     <resultMap type="InternalMedicine" id="InternalMedicineResult">
         <result property="studentId"    column="student_ID"    />
         <result property="diagnosisTime"    column="diagnosis_time"    />
@@ -27,19 +27,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectInternalMedicineList" parameterType="InternalMedicine" resultMap="InternalMedicineResult">
         <include refid="selectInternalMedicineVo"/>
-        <where>  
+        <where>
             <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
         </where>
     </select>
-    
+
     <select id="selectInternalMedicineById" parameterType="String" resultMap="InternalMedicineResult">
         <include refid="selectInternalMedicineVo"/>
         where student_ID = #{studentId}
     </select>
-        
+
     <insert id="insertInternalMedicine" parameterType="InternalMedicine">
         insert into internal_medicine
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -93,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
             <if test="submitTime != null">submit_time = #{submitTime},</if>
         </trim>
-        where student_ID = #{studentId}
+        where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
     </update>
 
     <delete id="deleteInternalMedicineById" parameterType="String">
@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteInternalMedicineByIds" parameterType="String">
-        delete from internal_medicine where student_ID in 
+        delete from internal_medicine where student_ID in
         <foreach item="studentId" collection="array" open="(" separator="," close=")">
             #{studentId}
         </foreach>

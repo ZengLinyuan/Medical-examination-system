@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.department.mapper.DepartmentOfBloodPressureAndPulseMapper">
-    
+
     <resultMap type="DepartmentOfBloodPressureAndPulse" id="DepartmentOfBloodPressureAndPulseResult">
         <result property="studentId"    column="student_ID"    />
         <result property="diagnosisTime"    column="diagnosis_time"    />
@@ -23,19 +23,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectDepartmentOfBloodPressureAndPulseList" parameterType="DepartmentOfBloodPressureAndPulse" resultMap="DepartmentOfBloodPressureAndPulseResult">
         <include refid="selectDepartmentOfBloodPressureAndPulseVo"/>
-        <where>  
+        <where>
             <if test="studentId != null  and studentId != ''"> and student_ID = #{studentId}</if>
             <if test="doctorAudit != null  and doctorAudit != ''"> and doctor_audit = #{doctorAudit}</if>
             <if test="leaderAudit != null  and leaderAudit != ''"> and leader_audit = #{leaderAudit}</if>
             <if test="submitTime != null "> and submit_time = #{submitTime}</if>
         </where>
     </select>
-    
+
     <select id="selectDepartmentOfBloodPressureAndPulseById" parameterType="String" resultMap="DepartmentOfBloodPressureAndPulseResult">
         <include refid="selectDepartmentOfBloodPressureAndPulseVo"/>
         where student_ID = #{studentId}
     </select>
-        
+
     <insert id="insertDepartmentOfBloodPressureAndPulse" parameterType="DepartmentOfBloodPressureAndPulse">
         insert into department_of_blood_pressure_and_pulse
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="leaderAudit != null">leader_audit = #{leaderAudit},</if>
             <if test="submitTime != null">submit_time = #{submitTime},</if>
         </trim>
-        where student_ID = #{studentId}
+        where student_ID = #{studentId} and diagnosis_time = #{diagnosisTime}
     </update>
 
     <delete id="deleteDepartmentOfBloodPressureAndPulseById" parameterType="String">
@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteDepartmentOfBloodPressureAndPulseByIds" parameterType="String">
-        delete from department_of_blood_pressure_and_pulse where student_ID in 
+        delete from department_of_blood_pressure_and_pulse where student_ID in
         <foreach item="studentId" collection="array" open="(" separator="," close=")">
             #{studentId}
         </foreach>
