@@ -77,41 +77,37 @@ public class TotalController {
         Date newTime = null;
         try {
             newTime = format.parse(reject.getDiagnosisTime());
-            System.out.println("获取体检表转换以后的时间：："+newTime);//Sun Feb 02 02:02:02 CST 2020
         } catch (ParseException e) {
             e.printStackTrace();
         }
         String studentId = reject.getStudentId();
-
-        System.out.println("导出体检表学生学号ID：" + studentId);
-
         Student student = new Student();
         student.setId(studentId);
         Student list0 = studentService.selectStudentList(student).get(0);
 
-        total.setStudentId(studentId);
-        total.setId(studentId);
-        System.out.println("屁股后立即打印：" + total.getStudentId());
-        total.setCollege(student.getCollege());
-        total.setMajor(student.getMajor());
-        total.setClassroom(student.getClassroom());
-        total.setName(student.getName());
-        total.setGender(student.getGender());
-        total.setBirthDate(student.getBirthDate());
-        total.setAge(student.getAge());
-        total.setDegreeOfEducation(student.getDegreeOfEducation());
-        total.setNation(student.getNation());
-        total.setOccupation(student.getOccupation());
-        total.setNativePlace(student.getNativePlace());
-        total.setAddress(student.getAddress());
-        total.setDraduationSchoolOrWorkUnit(student.getDraduationSchoolOrWorkUnit());
-        total.setPastMedicalHistory(student.getPastMedicalHistory());
+        total.setStudentId(list0.getStudentId().toString());
+        total.setId(list0.getId());
+        total.setCollege(list0.getCollege());
+        total.setMajor(list0.getMajor());
+        total.setClassroom(list0.getClassroom());
+        total.setName(list0.getName());
+        total.setGender(list0.getGender());
+        total.setBirthDate(list0.getBirthDate());
+        total.setAge(list0.getAge());
+        total.setDegreeOfEducation(list0.getDegreeOfEducation());
+        total.setNation(list0.getNation());
+        total.setOccupation(list0.getOccupation());
+        total.setNativePlace(list0.getNativePlace());
+        total.setAddress(list0.getAddress());
+        total.setDraduationSchoolOrWorkUnit(list0.getDraduationSchoolOrWorkUnit());
+        total.setPastMedicalHistory(list0.getPastMedicalHistory());
+        System.out.println("学生籍贯：" + list0.getAddress());
+        System.out.println("体检表籍贯：" + total.getAddress());
 
         Ophthalmic ophthalmic = new Ophthalmic();
         ophthalmic.setStudentId(studentId);
         ophthalmic.setDiagnosisTime(newTime);
         Ophthalmic list1 = ophthalmicService.selectOphthalmicList(ophthalmic).get(0);
-        System.out.println("查询眼科视力：" + list1.getColorVisionBlue());
         total.setSightLeftNoglasses(list1.getSightLeftNoglasses());
         total.setSightRightNoglasses(list1.getSightRightNoglasses());
         total.setSightLeftWithglasses(list1.getSightLeftWithglasses());
@@ -123,103 +119,100 @@ public class TotalController {
         total.setColorVisionBlue(list1.getColorVisionBlue());
         total.setColorVisionYellow(list1.getColorVisionYellow());
         total.setEye_doctorOpinion(list1.getDoctorOpinion());
-        System.out.println("眼科视力：" + total.getColorVisionBlue());
 
         EntDepartment entDepartment = new EntDepartment();
         entDepartment.setStudentId(studentId);
         entDepartment.setDiagnosisTime(newTime);
         EntDepartment list2 = entDepartmentService.selectEntDepartmentList(entDepartment).get(0);
-        total.setHearingLeft(entDepartment.getHearingLeft());
-        total.setHearingRight(entDepartment.getHearingRight());
-        total.setEarIllness(entDepartment.getEarIllness());
-        total.setSmellSense(entDepartment.getSmellSense());
-        total.setNoseIllness(entDepartment.getNoseIllness());
-        total.setThroat(entDepartment.getThroat());
-        total.setStutter(entDepartment.getStutter());
-        total.setEnt_doctorOpinion(entDepartment.getDoctorOpinion());
+        total.setHearingLeft(list2.getHearingLeft());
+        total.setHearingRight(list2.getHearingRight());
+        total.setEarIllness(list2.getEarIllness());
+        total.setSmellSense(list2.getSmellSense());
+        total.setNoseIllness(list2.getNoseIllness());
+        total.setThroat(list2.getThroat());
+        total.setStutter(list2.getStutter());
+        total.setEnt_doctorOpinion(list2.getDoctorOpinion());
 
         DentalDepartment dentalDepartment = new DentalDepartment();
         dentalDepartment.setStudentId(studentId);
         dentalDepartment.setDiagnosisTime(newTime);
         DentalDepartment list3 = dentalDepartmentService.selectDentalDepartmentList(dentalDepartment).get(0);
-        total.setDentalCaries(dentalDepartment.getDentalCaries());
-        total.setMissingTeeth(dentalDepartment.getMissingTeeth());
-        total.setAlveolar(dentalDepartment.getAlveolar());
-        total.setOther(dentalDepartment.getOther());
-        total.setDental_doctorOpinion(dentalDepartment.getDoctorOpinion());
+        total.setDentalCaries(list3.getDentalCaries());
+        total.setMissingTeeth(list3.getMissingTeeth());
+        total.setAlveolar(list3.getAlveolar());
+        total.setOther(list3.getOther());
+        total.setDental_doctorOpinion(list3.getDoctorOpinion());
 
         Surgery surgery = new Surgery();
         surgery.setStudentId(studentId);
         surgery.setDiagnosisTime(newTime);
         Surgery list4 = surgeryService.selectSurgeryList(surgery).get(0);
-        total.setHeight(surgery.getHeight());
-        total.setWaist(surgery.getWaist());
-        total.setWeight(surgery.getWeight());
-        total.setSkin(surgery.getSkin());
-        total.setLymph(surgery.getLymph());
-        total.setThyroid(surgery.getThyroid());
-        total.setSpine(surgery.getSpine());
-        total.setLimb(surgery.getLimb());
-        total.setJoint(surgery.getJoint());
-        total.setFlatFeet(surgery.getFlatFeet());
-        total.setSurgery_other(surgery.getOther());
-        total.setSurgery_doctorOpinion(surgery.getDoctorOpinion());
+        total.setHeight(list4.getHeight());
+        total.setWaist(list4.getWaist());
+        total.setWeight(list4.getWeight());
+        total.setSkin(list4.getSkin());
+        total.setLymph(list4.getLymph());
+        total.setThyroid(list4.getThyroid());
+        total.setSpine(list4.getSpine());
+        total.setLimb(list4.getLimb());
+        total.setJoint(list4.getJoint());
+        total.setFlatFeet(list4.getFlatFeet());
+        total.setSurgery_other(list4.getOther());
+        total.setSurgery_doctorOpinion(list4.getDoctorOpinion());
 
         DepartmentOfBloodPressureAndPulse departmentOfBloodPressureAndPulse = new DepartmentOfBloodPressureAndPulse();
         departmentOfBloodPressureAndPulse.setStudentId(studentId);
         departmentOfBloodPressureAndPulse.setDiagnosisTime(newTime);
         DepartmentOfBloodPressureAndPulse list5 = departmentOfBloodPressureAndPulseService.selectDepartmentOfBloodPressureAndPulseList(departmentOfBloodPressureAndPulse).get(0);
-        total.setBloodPressureHigh(departmentOfBloodPressureAndPulse.getBloodPressureHigh());
-        total.setBloodPressureLow(departmentOfBloodPressureAndPulse.getBloodPressureLow());
-        total.setPulse(departmentOfBloodPressureAndPulse.getPulse());
-        total.setPulse_doctorOpinion(departmentOfBloodPressureAndPulse.getDoctorOpinion());
+        total.setBloodPressureHigh(list5.getBloodPressureHigh());
+        total.setBloodPressureLow(list5.getBloodPressureLow());
+        total.setPulse(list5.getPulse());
+        total.setPulse_doctorOpinion(list5.getDoctorOpinion());
 
         InternalMedicine internalMedicine = new InternalMedicine();
         internalMedicine.setStudentId(studentId);
         internalMedicine.setDiagnosisTime(newTime);
         InternalMedicine list6 = internalMedicineService.selectInternalMedicineList(internalMedicine).get(0);
-        total.setNervesAndSpirits(internalMedicine.getNervesAndSpirits());
-        total.setLungAndRespiratoryTract(internalMedicine.getLungAndRespiratoryTract());
-        total.setHeartAndBloodVessels(internalMedicine.getHeartAndBloodVessels());
-        total.setLiver(internalMedicine.getLiver());
-        total.setSpine(internalMedicine.getSpleen());
-        total.setInternal_doctorOpinion(internalMedicine.getDoctorOpinion());
+        total.setDevelopmentalNutrition(list6.getDevelopmentalNutrition());
+        total.setNervesAndSpirits(list6.getNervesAndSpirits());
+        total.setLungAndRespiratoryTract(list6.getLungAndRespiratoryTract());
+        total.setHeartAndBloodVessels(list6.getHeartAndBloodVessels());
+        total.setLiver(list6.getLiver());
+        total.setSpleen(list6.getSpleen());
+        total.setInternal_other(list6.getOther());
+        total.setInternal_doctorOpinion(list6.getDoctorOpinion());
 
         Laboratory laboratory = new Laboratory();
         laboratory.setStudentId(studentId);
         laboratory.setDiagnosisTime(newTime);
         Laboratory list7 = laboratoryService.selectLaboratoryList(laboratory).get(0);
-        total.setLaboratoryExamination(laboratory.getLaboratoryExamination());
-        total.setLaboratory_doctorOpinion(laboratory.getDoctorOpinion());
+        total.setLaboratoryExamination(list7.getLaboratoryExamination());
+        total.setLaboratory_doctorOpinion(list7.getDoctorOpinion());
 
         ChestRadiology chestRadiology = new ChestRadiology();
         chestRadiology.setStudentId(studentId);
         chestRadiology.setDiagnosisTime(newTime);
         ChestRadiology list8 = chestRadiologyService.selectChestRadiologyList(chestRadiology).get(0);
-        total.setChestRadiography(chestRadiology.getChestRadiography());
-        total.setChest_doctorOpinion(chestRadiology.getDoctorOpinion());
+        total.setChestRadiography(list8.getChestRadiography());
+        total.setChest_doctorOpinion(list8.getDoctorOpinion());
 
         Other other = new Other();
         other.setStudentId(studentId);
         other.setDiagnosisTime(newTime);
         Other list9 = otherService.selectOtherList(other).get(0);
-        total.setOtherExamination(other.getOtherExamination());
-        total.setOther_doctorOpinion(other.getDoctorOpinion());
+        total.setOtherExamination(list9.getOtherExamination());
+        total.setOther_doctorOpinion(list9.getDoctorOpinion());
 
         PhysicalExaminationForm physicalExaminationForm = new PhysicalExaminationForm();
         physicalExaminationForm.setStudentId(studentId);
         physicalExaminationForm.setInspectorTime(newTime);
         PhysicalExaminationForm list10 = physicalExaminationFormService.selectPhysicalExaminationFormList(physicalExaminationForm).get(0);
-        total.setConclusions(physicalExaminationForm.getConclusions());
-        total.setHospitalOpinion(physicalExaminationForm.getHospitalOpinion());
-        total.setSubmitTimeLeader(physicalExaminationForm.getSubmitTimeLeader());
+        total.setConclusions(list10.getConclusions());
+        total.setHospitalOpinion(list10.getHospitalOpinion());
+        total.setSubmitTimeLeader(list10.getSubmitTimeLeader());
 
         ArrayList<Total> list = new ArrayList<>();
-        System.out.println("体检信息表：" + total.getStudentId());
         list.add(total);
-        System.out.println("导出体检表：" + list.get(0).getStudentId());
-        System.out.println("导出其它信息：" + list.get(0).getChest_doctorOpinion());
-        System.out.println("导出其它信息：" + total.getChest_doctorOpinion());
         ExcelUtil<Total> util = new ExcelUtil<Total>(Total.class);
         return util.exportExcel(list, "体检数据");
     }

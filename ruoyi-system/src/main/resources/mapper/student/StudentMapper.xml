@@ -29,7 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectStudentList" parameterType="Student" resultMap="StudentResult">
         <include refid="selectStudentVo"/>
-        <where>  
+        <where>
+            <if test="id != null  and id != ''"> and ID = #{id}</if>
             <if test="college != null  and college != ''"> and college = #{college}</if>
             <if test="major != null  and major != ''"> and major = #{major}</if>
             <if test="classroom != null  and classroom != ''"> and classroom = #{classroom}</if>
